@@ -1,6 +1,7 @@
 """Interactive Clinical Decision Support RAG CLI."""
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -16,10 +17,11 @@ from langchain_ollama import OllamaEmbeddings
 
 
 def display_answer(answer: GeneratedAnswer) -> None:
-    """Format and display a GeneratedAnswer according to hackathon specifications."""
-    print("\n" + "=" * 80)
+    """Format and display a GeneratedAnswer according to calibrated hackathon specifications."""
+    divider = "=" * 70
+    print("\n" + divider)
     print(f"CLINICAL QUESTION: {answer.query}")
-    print("=" * 80)
+    print(divider)
 
     if answer.refused:
         print("\n1. RECOMMENDATION:")
@@ -34,7 +36,7 @@ def display_answer(answer: GeneratedAnswer) -> None:
         print("\n4. CONFIDENCE & SAFETY:")
         print(f"   Confidence: {answer.confidence}")
         print(f"   Safety Disclaimer: {answer.refusal_reason}")
-        print("\n" + "=" * 80 + "\n")
+        print("\n" + divider + "\n")
         return
 
     # 1. RECOMMENDATION
@@ -46,7 +48,13 @@ def display_answer(answer: GeneratedAnswer) -> None:
     ev_text = str(answer.supporting_evidence).strip() if answer.supporting_evidence else ""
     if ev_text:
         for line in ev_text.splitlines():
-            line_str = line.replace("•", "-")
+            line_str = line.strip()
+            if not line_str:
+                continue
+            if line_str.startswith("•"):
+                line_str = "- " + line_str[1:].strip()
+            elif not line_str.startswith("-"):
+                line_str = "- " + line_str
             print(f"   {line_str}")
     else:
         print("   (Short excerpts from cited guideline chunks below)")
@@ -71,9 +79,10 @@ def display_answer(answer: GeneratedAnswer) -> None:
     # 4. CONFIDENCE & SAFETY
     print("\n4. CONFIDENCE & SAFETY:")
     print(f"   Confidence: {answer.confidence} (Derived from retrieval quality)")
-    print(f"   Safety Disclaimer: {answer.safety_note if answer.safety_note else 'Grounded in official guideline evidence. Clinical judgment required.'}")
+    safety_msg = answer.safety_note if answer.safety_note else "Grounded in official guideline evidence. Clinical judgment required."
+    print(f"   Safety Disclaimer: {safety_msg}")
 
-    print("\n" + "=" * 80 + "\n")
+    print("\n" + divider + "\n")
 
 
 def setup_pipeline():
@@ -93,12 +102,48 @@ def setup_pipeline():
     return retriever, gen_service
 
 
+def split_into_questions(query: str) -> list[str]:
+    """Split a multi-question query into individual sub-questions if present."""
+    q_str = query.strip()
+    if not q_str:
+        return []
+
+    # Check for numbered list pattern: 1. ... 2. ...
+    numbered_parts = re.split(r"(?:\r?\n|\s+)(?=\d+[\.\)]\s+)", q_str)
+    numbered_parts = [re.sub(r"^\d+[\.\)]\s*", "", p).strip() for p in numbered_parts if p.strip()]
+    if len(numbered_parts) > 1:
+        return numbered_parts
+
+    # Check for multiple question marks: Q1? Q2?
+    if q_str.count("?") > 1:
+        parts = [p.strip() + "?" for p in q_str.split("?") if p.strip()]
+        parts = [p[:-1] if p.endswith("??") else p for p in parts if p.strip()]
+        if len(parts) > 1:
+            return parts
+
+    # Check for multiple lines
+    lines = [line.strip() for line in q_str.splitlines() if line.strip()]
+    if len(lines) > 1:
+        return lines
+
+    return [q_str]
+
+
 def ask_question(query: str, retriever: UnifiedRetriever, gen_service: GenerationService):
-    print(f"[Searching guidelines for: '{query}'...]")
-    results = retriever.search(query, strategy="hybrid_rerank", top_k=5)
-    answer = gen_service.generate(query, results)
-    display_answer(answer)
-    return answer
+    sub_questions = split_into_questions(query)
+    answers = []
+    
+    if len(sub_questions) > 1:
+        print(f"\n[Detected multi-question query: processing {len(sub_questions)} sub-questions...]\n")
+    
+    for sub_q in sub_questions:
+        print(f"[Searching guidelines for: '{sub_q}'...]")
+        results = retriever.search(sub_q, strategy="hybrid_rerank", top_k=5)
+        answer = gen_service.generate(sub_q, results)
+        display_answer(answer)
+        answers.append(answer)
+        
+    return answers if len(answers) > 1 else (answers[0] if answers else None)
 
 
 def main():
@@ -135,3 +180,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
