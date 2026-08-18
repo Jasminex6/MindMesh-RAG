@@ -1,0 +1,22 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "pythonPath": ".venv/Scripts/python.exe",
+  "extraPaths": [
+    "src",
+    "RAG/evaluation",
+    ".venv/Lib/site-packages"
+  ],
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "extraPaths": [
+        "src",
+        "RAG/evaluation",
+        ".venv/Lib/site-packages"
+      ]
+    }
+  ],
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic"
+}

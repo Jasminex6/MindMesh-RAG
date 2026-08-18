@@ -1,0 +1,182 @@
+[
+  {
+    "id": "eval-001",
+    "category": "direct",
+    "question": "What is the recommended first-line controller treatment for children with asthma?",
+    "expected_source_document": "WHO asthma.pdf",
+    "expected_page_section": "p. 25-28, Controller therapy",
+    "expected_chunk_id": "who-asthma-pdf-p25-001",
+    "expected_keywords": ["corticosteroid", "ics", "controller", "first-line", "inhaled"],
+    "relevance_reason": "Identifies low-dose inhaled corticosteroids (ICS) as the primary controller therapy for childhood asthma."
+  },
+  {
+    "id": "eval-002",
+    "category": "direct",
+    "question": "When is intravenous magnesium sulfate considered for a child with an acute asthma exacerbation?",
+    "expected_source_document": "WHO asthma.pdf",
+    "expected_page_section": "p. 27-28, Exacerbation management",
+    "expected_chunk_id": "who-asthma-pdf-p27-002",
+    "expected_keywords": ["magnesium", "sulfate", "intravenous", "severe", "exacerbation"],
+    "relevance_reason": "Specifies intravenous magnesium sulfate as second-line treatment for severe acute exacerbations unresponsive to initial bronchodilators."
+  },
+  {
+    "id": "eval-003",
+    "category": "direct",
+    "question": "What second-line therapy options are recommended for paediatric asthma exacerbations?",
+    "expected_source_document": "WHO asthma.pdf",
+    "expected_page_section": "p. 27-28, Severe exacerbation therapy",
+    "expected_chunk_id": "who-asthma-pdf-p27-003",
+    "expected_keywords": ["second-line", "magnesium", "aminophylline", "ipratropium", "exacerbation"],
+    "relevance_reason": "Outlines second-line add-on agents including IV magnesium sulfate and aminophylline for severe exacerbations."
+  },
+  {
+    "id": "eval-004",
+    "category": "direct",
+    "question": "What physical examination findings are typically observed in a patient during an acute asthma exacerbation?",
+    "expected_source_document": "GINA Asthma WMS.pdf",
+    "expected_page_section": "p. 180, Physical examination in exacerbations",
+    "expected_chunk_id": "gina-asthma-wms-pdf-p180-001",
+    "expected_keywords": ["expiratory", "wheeze", "tachypnea", "retractions", "accessory muscles"],
+    "relevance_reason": "Lists key physical signs of exacerbations including bilateral expiratory wheezing, tachypnea, and accessory muscle use."
+  },
+  {
+    "id": "eval-005",
+    "category": "paraphrase",
+    "question": "What does the guideline recommend for long-term asthma management in children and adolescents?",
+    "expected_source_document": "WHO asthma.pdf",
+    "expected_page_section": "p. 25-29, Chronic asthma management",
+    "expected_chunk_id": "who-asthma-pdf-p25-004",
+    "expected_keywords": ["long-term", "controller", "corticosteroid", "management", "ics"],
+    "relevance_reason": "Describes continuous step-wise controller therapy and regular symptom monitoring for long-term management."
+  },
+  {
+    "id": "eval-006",
+    "category": "paraphrase",
+    "question": "Which objective tests are used to confirm a diagnosis of asthma in children and young people?",
+    "expected_source_document": "GINA Asthma WMS.pdf",
+    "expected_page_section": "p. 28-30, Objective diagnostic criteria",
+    "expected_chunk_id": "gina-asthma-wms-pdf-p28-001",
+    "expected_keywords": ["spirometry", "feno", "reversibility", "pef", "diagnose"],
+    "relevance_reason": "Details objective testing including spirometry bronchodilator reversibility, PEF variability, and FeNO."
+  },
+  {
+    "id": "eval-007",
+    "category": "paraphrase",
+    "question": "How should asthma control and symptom frequency be monitored during follow-up visits?",
+    "expected_source_document": "GINA Asthma WMS.pdf",
+    "expected_page_section": "p. 40-42, Assessing asthma control",
+    "expected_chunk_id": "gina-asthma-wms-pdf-p40-001",
+    "expected_keywords": ["control", "symptom", "monitoring", "follow-up", "4 weeks"],
+    "relevance_reason": "Recommends evaluating symptom frequency, night waking, reliever use, and activity limitation over the past 4 weeks."
+  },
+  {
+    "id": "eval-008",
+    "category": "paraphrase",
+    "question": "How is asthma diagnosed in young children aged 5 years and under when spirometry cannot be performed?",
+    "expected_source_document": "GINA Asthma WMS.pdf",
+    "expected_page_section": "p. 193-195, Diagnosis in children <= 5 years",
+    "expected_chunk_id": "gina-asthma-wms-pdf-p193-001",
+    "expected_keywords": ["5 years", "young children", "trial", "response", "recurrent wheeze"],
+    "relevance_reason": "Explains diagnosis in young children via clinical symptom patterns and documented response to a 2-3 month controller trial."
+  },
+  {
+    "id": "eval-009",
+    "category": "abbreviation_terminology",
+    "question": "How are FeNO and FEV1 spirometry parameters used when assessing asthma?",
+    "expected_source_document": "GINA Asthma WMS.pdf",
+    "expected_page_section": "p. 29-30, Diagnostic biomarkers and spirometry",
+    "expected_chunk_id": "gina-asthma-wms-pdf-p29-001",
+    "expected_keywords": ["feno", "fev1", "spirometry", "fractional exhaled nitric oxide"],
+    "relevance_reason": "Defines FEV1 as forced expiratory volume in 1 second and FeNO as fractional exhaled nitric oxide for Type 2 inflammation assessment."
+  },
+  {
+    "id": "eval-010",
+    "category": "abbreviation_terminology",
+    "question": "What is EIB (exercise-induced bronchoconstriction) and how should exercise-related symptoms be managed?",
+    "expected_source_document": "GINA Asthma WMS.pdf",
+    "expected_page_section": "p. 67, Managing exercise-related symptoms",
+    "expected_chunk_id": "gina-asthma-wms-pdf-p67-001",
+    "expected_keywords": ["eib", "exercise", "bronchoconstriction", "saba", "formoterol"],
+    "relevance_reason": "Defines exercise-induced bronchoconstriction and details pre-exercise warm-up and ICS-formoterol/SABA prophylaxis."
+  },
+  {
+    "id": "eval-011",
+    "category": "abbreviation_terminology",
+    "question": "What is AERD (aspirin-exacerbated respiratory disease) and which medications trigger severe attacks?",
+    "expected_source_document": "GINA Asthma WMS.pdf",
+    "expected_page_section": "p. 65, Medication avoidance in asthma",
+    "expected_chunk_id": "gina-asthma-wms-pdf-p65-001",
+    "expected_keywords": ["aerd", "aspirin", "nsaids", "beta-blockers", "exacerbated"],
+    "relevance_reason": "Explains aspirin-exacerbated respiratory disease and warns against NSAIDs and non-selective beta-blockers."
+  },
+  {
+    "id": "eval-012",
+    "category": "threshold_value",
+    "question": "What specific bronchodilator reversibility criteria indicate a positive diagnostic test for asthma in adults and children?",
+    "expected_source_document": "GINA Asthma WMS.pdf",
+    "expected_page_section": "p. 29-30, Bronchodilator responsiveness criteria",
+    "expected_chunk_id": "gina-asthma-wms-pdf-p29-002",
+    "expected_keywords": ["12%", "200 ml", "fev1", "reversibility", "responsiveness"],
+    "relevance_reason": "States positive reversibility threshold of FEV1 increase > 12% AND > 200 mL in adults (> 12% predicted in children)."
+  },
+  {
+    "id": "eval-013",
+    "category": "threshold_value",
+    "question": "What peak expiratory flow (PEF) variability percentage supports a diagnosis of asthma?",
+    "expected_source_document": "GINA Asthma WMS.pdf",
+    "expected_page_section": "p. 29-30, PEF variability criteria",
+    "expected_chunk_id": "gina-asthma-wms-pdf-p29-003",
+    "expected_keywords": ["pef", "variability", "10%", "13%", "diurnal"],
+    "relevance_reason": "Specifies threshold of average daily diurnal PEF variability > 10% in adults and > 13% in children."
+  },
+  {
+    "id": "eval-014",
+    "category": "threshold_value",
+    "question": "What are the 4-week clinical criteria and scores used to evaluate asthma symptom control?",
+    "expected_source_document": "GINA Asthma WMS.pdf",
+    "expected_page_section": "p. 42, GINA symptom control assessment tool",
+    "expected_chunk_id": "gina-asthma-wms-pdf-p42-001",
+    "expected_keywords": ["past 4 weeks", "daytime", "night waking", "reliever", "activity"],
+    "relevance_reason": "Defines 4-week criteria: 0 = well controlled, 1-2 = partly controlled, 3-4 = uncontrolled."
+  },
+  {
+    "id": "eval-015",
+    "category": "threshold_value",
+    "question": "What SABA canister usage per year indicates high risk of severe exacerbations?",
+    "expected_source_document": "GINA Asthma WMS.pdf",
+    "expected_page_section": "p. 88, SABA over-use risk threshold",
+    "expected_chunk_id": "gina-asthma-wms-pdf-p88-001",
+    "expected_keywords": ["saba", "canisters", "3 or more", "exacerbations", "risk"],
+    "relevance_reason": "Establishes threshold of dispensing >= 3 SABA canisters/year as an independent risk factor for severe exacerbations."
+  },
+  {
+    "id": "eval-016",
+    "category": "out_of_scope",
+    "question": "What is the first-line drug treatment for type 2 diabetes in adults?",
+    "expected_source_document": "None",
+    "expected_page_section": "Out of scope",
+    "expected_chunk_id": "out-of-scope-001",
+    "expected_keywords": ["diabetes", "metformin", "insulin", "type 2"],
+    "relevance_reason": "Out-of-scope query testing retrieval score threshold and refusal behavior."
+  },
+  {
+    "id": "eval-017",
+    "category": "out_of_scope",
+    "question": "What is the recommended surgical management for acute appendicitis in adolescents?",
+    "expected_source_document": "None",
+    "expected_page_section": "Out of scope",
+    "expected_chunk_id": "out-of-scope-002",
+    "expected_keywords": ["appendicitis", "appendectomy", "surgical", "laparoscopic"],
+    "relevance_reason": "Out-of-scope query testing refusal behavior for non-respiratory surgical procedures."
+  },
+  {
+    "id": "eval-018",
+    "category": "out_of_scope",
+    "question": "What are the diagnostic criteria for essential hypertension in elderly patients?",
+    "expected_source_document": "None",
+    "expected_page_section": "Out of scope",
+    "expected_chunk_id": "out-of-scope-003",
+    "expected_keywords": ["hypertension", "blood pressure", "systolic", "diastolic"],
+    "relevance_reason": "Out-of-scope query testing refusal behavior for cardiovascular conditions."
+  }
+]

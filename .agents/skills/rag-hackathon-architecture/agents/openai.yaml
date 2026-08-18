@@ -1,0 +1,4 @@
+interface:
+  display_name: "RAG Hackathon Architecture"
+  short_description: "Build and explain a measurable medical RAG"
+  default_prompt: "Use $rag-hackathon-architecture to inspect, build, explain, and evaluate this medical RAG repository."
