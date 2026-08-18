@@ -1,9 +1,42 @@
+# IDEs & Editor configs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Internal Agent & Skill Configs
+.agents/
+.gemini/
+
+# Environments & Secrets
+.env
+.env.*
+*.env
+*.pem
+*.key
+secrets.*
+*.secret
+
+# Python Virtual Envs & Caches
 __pycache__/
 *.py[cod]
+*$py.class
 .venv/
-artifacts/
-.ipynb_checkpoints/
-tmp/
-.chroma/
-*.log
+env/
+venv/
+ENV/
+.pytest_cache/
+.coverage
+htmlcov/
 *.egg-info/
+.eggs/
+
+# Vector DB & Storage Caches
+.chroma/
+artifacts/
+tmp/
+*.log
+
+# OS Noise
+.DS_Store
+Thumbs.db

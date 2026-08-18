@@ -121,13 +121,15 @@ def reciprocal_rank_fusion(
             rrf_scores[chunk_id] = rrf_scores.get(chunk_id, 0.0) + (1.0 / (k_rrf + result.rank))
 
     sorted_ids = sorted(rrf_scores.keys(), key=lambda cid: rrf_scores[cid], reverse=True)
+    max_possible = len(runs) / (k_rrf + 1.0) if runs else 1.0
     fused_results = []
     for rank, cid in enumerate(sorted_ids[:top_k], start=1):
         original = chunk_map[cid]
+        norm_score = min(1.0, float(rrf_scores[cid]) / max_possible) if max_possible > 0 else float(rrf_scores[cid])
         fused_results.append(
             SearchResult(
                 rank=rank,
-                score=float(rrf_scores[cid]),
+                score=norm_score,
                 text=original.text,
                 metadata=original.metadata,
             )

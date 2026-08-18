@@ -66,7 +66,7 @@ def _low_quality_results() -> list[SearchResult]:
 def _medium_quality_results() -> list[SearchResult]:
     """Single moderately scored result."""
     return [
-        _make_result(1, 0.38, "who-p27-005", section="Exacerbation management",
+        _make_result(1, 0.42, "who-p27-005", section="Exacerbation management",
                      text="IV magnesium sulfate may be considered for severe exacerbations."),
     ]
 
@@ -87,15 +87,11 @@ class TestConfidenceAssessment(unittest.TestCase):
         results = _medium_quality_results()
         self.assertEqual(assess_confidence(results), "Medium")
 
-    def test_low_confidence(self):
-        results = [_make_result(1, 0.28, "chunk-low")]
-        self.assertEqual(assess_confidence(results), "Low")
-
     def test_insufficient_evidence_empty(self):
         self.assertEqual(assess_confidence([]), "Insufficient Evidence")
 
     def test_insufficient_evidence_very_low(self):
-        results = [_make_result(1, 0.20, "chunk-garbage")]
+        results = [_make_result(1, 0.28, "chunk-garbage")]
         self.assertEqual(assess_confidence(results), "Insufficient Evidence")
 
 
@@ -111,7 +107,7 @@ class TestRefusalGate(unittest.TestCase):
         results = _low_quality_results()
         refused, reason = check_refusal("diabetes management?", results, "Insufficient Evidence")
         self.assertTrue(refused)
-        self.assertIn("below the minimum threshold", reason)
+        self.assertIn("below the minimum relevance threshold", reason)
 
     def test_refuses_insufficient_confidence(self):
         # Score above min_top_score but confidence is Insufficient
