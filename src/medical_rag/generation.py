@@ -61,15 +61,14 @@ class GeneratedAnswer:
 # ---------------------------------------------------------------------------
 
 def assess_confidence(results: list[SearchResult],
-                      min_high: float = 0.42,
-                      min_medium: float = 0.35,
-                      min_low: float = 0.25) -> str:
+                      min_high: float = 0.50,
+                      min_medium: float = 0.40,
+                      min_low: float = 0.40) -> str:
     """Derive confidence label from retrieval scores.
 
     Rules (calibrated for nomic-embed-text cosine relevance scores):
         top_score >= min_high   AND  >=2 results above min_medium  → High
         top_score >= min_medium AND  >=1 result  above min_low     → Medium
-        top_score >= min_low                                        → Low
         otherwise                                               → Insufficient Evidence
     """
     if not results:
@@ -83,8 +82,6 @@ def assess_confidence(results: list[SearchResult],
         return "High"
     if top_score >= min_medium and above_low >= 1:
         return "Medium"
-    if top_score >= min_low:
-        return "Low"
     return "Insufficient Evidence"
 
 
@@ -114,7 +111,7 @@ def check_refusal(query: str,
                   results: list[SearchResult],
                   confidence: str,
                   min_results: int = 1,
-                  min_top_score: float = 0.25) -> tuple[bool, str]:
+                  min_top_score: float = 0.40) -> tuple[bool, str]:
     """Decide whether to refuse answering.
 
     Returns (should_refuse, reason).
@@ -135,7 +132,7 @@ def check_refusal(query: str,
     if results[0].score < min_top_score:
         return True, (
             f"Top retrieval score ({results[0].score:.2f}) is below the "
-            f"minimum threshold ({min_top_score:.2f}). The query may be "
+            f"minimum relevance threshold ({min_top_score:.2f}). The query may be "
             "outside the scope of the loaded guidelines."
         )
 
@@ -159,14 +156,14 @@ retrieved guideline evidence provided below. You are NOT a doctor and must
 NOT add medical knowledge from your training data.
 
 RULES:
-1. Recommendation: Short, direct answer based ONLY on retrieved chunks. No patient-specific treatment.
+1. Recommendation: Answer ONLY the specific question asked based strictly on retrieved chunks. Do NOT substitute emergency treatment or unrelated conditions (e.g., bronchiolitis) if general symptoms/precautions were asked.
 2. Supporting Evidence: Bullet points containing short excerpts from the exact retrieved chunks used.
 3. Citations: Map each claim to its exact chunk_id from the evidence.
-4. If the retrieved evidence does not contain the answer, set "recommendation": "Insufficient Evidence".
+4. If the retrieved evidence chunks do not directly answer the specific question asked, set "recommendation": "Insufficient Evidence".
 
 Respond ONLY in the following JSON structure (no markdown fences, no extra text):
 {
-  "recommendation": "Short direct recommendation",
+  "recommendation": "Short direct recommendation answering the specific question",
   "supporting_evidence": [
     "Short excerpt from chunk supporting the recommendation"
   ],
@@ -181,10 +178,14 @@ Respond ONLY in the following JSON structure (no markdown fences, no extra text)
 """
 
 
-def build_evidence_block(results: list[SearchResult]) -> str:
-    """Format retrieved chunks into the evidence block for the prompt."""
+def build_evidence_block(results: list[SearchResult], min_chunk_score: float = 0.32) -> str:
+    """Format retrieved chunks into the evidence block for the prompt, filtering weak chunks."""
     lines = []
+    top_score = results[0].score if results else 0.0
     for r in results:
+        # Filter out chunks that are below min threshold or significantly lower than top score
+        if r.score < min_chunk_score or (top_score - r.score > 0.15):
+            continue
         meta = r.metadata
         lines.append(f"--- EVIDENCE CHUNK ---")
         lines.append(f"chunk_id: {meta.get('chunk_id', 'unknown')}")
