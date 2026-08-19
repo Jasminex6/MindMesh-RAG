@@ -22,9 +22,14 @@ class _Unit:
 
 def is_section_heading(line: str) -> bool:
     text = re.sub(r"\s+", " ", line.strip())
-    if not text or len(text) > 180 or TOC_LEADER_RE.fullmatch(text):
+    if not text or len(text) > 120 or TOC_LEADER_RE.fullmatch(text):
         return False
     if text.startswith(("•", "-", "–", "—")):
+        return False
+    # Reject body sentences (ending with period/semicolon or having many words)
+    if text.endswith((".", ";", "!", "?")) and len(text.split()) > 6:
+        return False
+    if len(text.split()) > 12:
         return False
     if re.match(
         r"^(?:\d+(?:\.\d+)?\.?|section\s+\d+|chapter\s+\d+|part\s+[ivx\d]+)\s+\S",
@@ -32,14 +37,13 @@ def is_section_heading(line: str) -> bool:
         re.IGNORECASE,
     ):
         return True
-    if re.match(r"^(?:recommendation|recommendations|appendix|annex)\b", text, re.I):
+    if re.match(r"^(?:recommendation|recommendations|appendix|annex)(?:\s+\d+[\.\d+]*)?:?$", text, re.I):
         return True
-    if text.isupper() and 4 <= len(text) <= 100 and not text.endswith((".", ";")):
+    if text.isupper() and 4 <= len(text) <= 80:
         return True
     return bool(
         text[0].isupper()
-        and len(text.split()) <= 16
-        and not text.endswith((".", ";"))
+        and len(text.split()) <= 10
         and re.match(
             r"^(?:summary of recommendations|initial (?:clinical|management|treatment)|"
             r"diagnosing\b|monitoring\b|pharmacological\b|self-management\b|"
@@ -55,6 +59,31 @@ def split_sentences(text: str) -> list[str]:
     """Split text into natural sentences using punctuation boundaries."""
     sentences = re.split(r"(?<=[.!?])\s+", text.strip())
     return [s.strip() for s in sentences if s.strip()]
+
+
+_NON_CLINICAL_KEYWORDS = [
+    r"\bfunding\b",
+    r"\backnowledg?ments?\b",
+    r"\bisbn\b",
+    r"\bsome\s+rights\s+reserved\b",
+    r"\bcataloguing-in-publication\b",
+    r"\bdeclaration\s+of\s+interests?\b",
+    r"\bannex\s+1\.\s+management\s+of\s+conflicts\b",
+]
+_NON_CLINICAL_REGEX = re.compile("|".join(_NON_CLINICAL_KEYWORDS), re.IGNORECASE)
+
+
+def is_non_clinical_chunk(text: str) -> bool:
+    """Filter out non-clinical metadata, administrative noise, or table dumps with < 40% alphabetic text."""
+    cleaned = text.strip()
+    if len(cleaned) < 100:
+        return True
+    if _NON_CLINICAL_REGEX.search(cleaned):
+        return True
+    alpha_chars = sum(1 for c in cleaned if c.isalpha())
+    if (alpha_chars / max(len(cleaned), 1)) < 0.40:
+        return True
+    return False
 
 
 class SectionAwareChunker:
@@ -161,8 +190,10 @@ class SectionAwareChunker:
             nonlocal buffer, sequence
             if not buffer:
                 return
-            chunks.append(self._make_chunk(document, buffer, sequence, reason, topic))
-            sequence += 1
+            c = self._make_chunk(document, buffer, sequence, reason, topic)
+            if not is_non_clinical_chunk(c.text):
+                chunks.append(c)
+                sequence += 1
             limit = self.chunk_size - next_tokens
             buffer = self._overlap_tail(buffer, limit) if keep_overlap else []
 

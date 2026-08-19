@@ -16,8 +16,8 @@ from medical_rag.generation import (
     parse_llm_response,
     post_generation_safety_check,
     build_evidence_block,
-    _is_patient_specific,
 )
+from medical_rag.safety import is_patient_specific_scenario as _is_patient_specific
 
 
 # ---------------------------------------------------------------------------
@@ -64,9 +64,9 @@ def _low_quality_results() -> list[SearchResult]:
 
 
 def _medium_quality_results() -> list[SearchResult]:
-    """Single moderately scored result."""
+    """Single moderately scored result (reranker score >= 0.60)."""
     return [
-        _make_result(1, 0.42, "who-p27-005", section="Exacerbation management",
+        _make_result(1, 0.68, "who-p27-005", section="Exacerbation management",
                      text="IV magnesium sulfate may be considered for severe exacerbations."),
     ]
 
@@ -85,34 +85,34 @@ class TestConfidenceAssessment(unittest.TestCase):
 
     def test_medium_confidence(self):
         results = _medium_quality_results()
-        self.assertEqual(assess_confidence(results), "Medium")
+        self.assertEqual(assess_confidence(results), "Moderate")
 
     def test_insufficient_evidence_empty(self):
-        self.assertEqual(assess_confidence([]), "Insufficient Evidence")
+        self.assertEqual(assess_confidence([]), "Low / Not Grounded")
 
     def test_insufficient_evidence_very_low(self):
         results = [_make_result(1, 0.28, "chunk-garbage")]
-        self.assertEqual(assess_confidence(results), "Insufficient Evidence")
+        self.assertEqual(assess_confidence(results), "Low / Not Grounded")
 
 
 class TestRefusalGate(unittest.TestCase):
     """System must refuse under specified conditions."""
 
     def test_refuses_empty_results(self):
-        refused, reason = check_refusal("What is the first-line treatment?", [], "Insufficient Evidence")
+        refused, reason = check_refusal("What is the first-line treatment?", [], "Low / Not Grounded")
         self.assertTrue(refused)
-        self.assertIn("No relevant", reason)
+        self.assertIn("loaded WHO and NICE NG245", reason)
 
     def test_refuses_low_top_score(self):
         results = _low_quality_results()
-        refused, reason = check_refusal("diabetes management?", results, "Insufficient Evidence")
+        refused, reason = check_refusal("diabetes management?", results, "Low / Not Grounded")
         self.assertTrue(refused)
-        self.assertIn("below the minimum relevance threshold", reason)
+        self.assertIn("loaded WHO and NICE NG245", reason)
 
     def test_refuses_insufficient_confidence(self):
-        # Score above min_top_score but confidence is Insufficient
+        # Score above min_top_score but confidence is Low / Not Grounded
         results = [_make_result(1, 0.42, "chunk-meh")]
-        refused, reason = check_refusal("some query", results, "Insufficient Evidence")
+        refused, reason = check_refusal("some query", results, "Low / Not Grounded")
         self.assertTrue(refused)
 
     def test_refuses_patient_specific_diagnosis(self):
@@ -156,9 +156,9 @@ class TestCitationVerification(unittest.TestCase):
     def test_verified_citations(self):
         results = _high_quality_results()
         citations = [
-            Citation(claim="ICS is first-line", chunk_id="who-p25-001",
+            Citation(claim="Inhaled corticosteroids preferred controller", chunk_id="who-p25-001",
                      document="", section="", page="", score=0.0),
-            Citation(claim="Step therapy approach", chunk_id="who-p26-002",
+            Citation(claim="Inhaled corticosteroids preferred controller", chunk_id="who-p26-002",
                      document="", section="", page="", score=0.0),
         ]
         verified = verify_citations(citations, results)
@@ -180,7 +180,7 @@ class TestCitationVerification(unittest.TestCase):
     def test_mixed_verification(self):
         results = _high_quality_results()
         citations = [
-            Citation(claim="Real claim", chunk_id="who-p25-001",
+            Citation(claim="Inhaled corticosteroids preferred controller", chunk_id="who-p25-001",
                      document="", section="", page="", score=0.0),
             Citation(claim="Fake claim", chunk_id="nonexistent",
                      document="", section="", page="", score=0.0),
@@ -311,8 +311,8 @@ class TestGenerationServiceWithMockedLLM(unittest.TestCase):
             "recommendation": "Low-dose inhaled corticosteroids (ICS) are recommended as first-line controller therapy.",
             "supporting_evidence": "WHO guideline recommends ICS as preferred controller for children with asthma.",
             "citations": [
-                {"claim": "ICS is first-line controller", "chunk_id": "who-p25-001"},
-                {"claim": "Step therapy for escalation", "chunk_id": "who-p26-002"},
+                {"claim": "Inhaled corticosteroids preferred controller", "chunk_id": "who-p25-001"},
+                {"claim": "Inhaled corticosteroids preferred controller", "chunk_id": "who-p26-002"},
             ],
             "safety_note": "Always consult a healthcare professional. This is guideline-based information only.",
         })
@@ -333,6 +333,23 @@ class TestGenerationServiceWithMockedLLM(unittest.TestCase):
         self.assertTrue(all(c.verified for c in answer.citations))
         # Metadata should be enriched
         self.assertEqual(answer.citations[0].document, "WHO asthma.pdf")
+
+    @patch("medical_rag.generation.call_llm")
+    def test_unwraps_nested_json_recommendation(self, mock_llm):
+        raw_nested = json.dumps({
+            "recommendation": json.dumps({
+                "recommendation": "Wheezing, shortness of breath, chest tightness, and cough",
+                "supporting_evidence": ["history of respiratory symptoms"],
+            })
+        })
+        mock_llm.return_value = raw_nested
+
+        high = _high_quality_results()
+        svc = GenerationService(model="test")
+        answer = svc.generate("asthma symptoms", high)
+
+        self.assertFalse(answer.recommendation.startswith("{"))
+        self.assertEqual(answer.recommendation, "Wheezing, shortness of breath, chest tightness, and cough")
 
     @patch("medical_rag.generation.call_llm")
     def test_hallucinated_citation_detected(self, mock_llm):
@@ -371,7 +388,7 @@ class TestGenerationServiceWithMockedLLM(unittest.TestCase):
         answer = svc.generate("When is IV magnesium used?", results)
 
         self.assertFalse(answer.refused)
-        self.assertEqual(answer.confidence, "Medium")
+        self.assertEqual(answer.confidence, "Moderate")
         self.assertTrue(answer.citations[0].verified)
 
     @patch("medical_rag.generation.call_llm")

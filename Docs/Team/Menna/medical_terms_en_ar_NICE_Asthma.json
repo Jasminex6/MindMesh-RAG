@@ -1,0 +1,1922 @@
+{
+  "metadata": {
+    "source_file": "NICE Asthma.pdf",
+    "source_title": "Asthma: diagnosis, monitoring and chronic asthma management (BTS, NICE, SIGN) (NG245)",
+    "published": "27 November 2024",
+    "updated_copyright": "2026",
+    "purpose": "English-Arabic medical terminology normalization for RAG/medical chatbot",
+    "scope": "Terminology extracted from the uploaded NICE asthma guideline, including definitions, diagnosis, monitoring, treatment, medicines, devices, risk factors, patient management, research and abbreviations.",
+    "translation_note": "Arabic terms are working translations for retrieval and normalization, not an official Arabic translation by NICE."
+  },
+  "terms": [
+    {
+      "term_en": "Asthma",
+      "term_ar": "الربو",
+      "category": "disease",
+      "synonyms_en": [],
+      "synonyms_ar": [
+        "مرض الربو"
+      ]
+    },
+    {
+      "term_en": "Asthma control",
+      "term_ar": "السيطرة على الربو",
+      "category": "clinical_management",
+      "synonyms_en": [
+        "controlled asthma"
+      ],
+      "synonyms_ar": [
+        "التحكم في الربو"
+      ]
+    },
+    {
+      "term_en": "Uncontrolled asthma",
+      "term_ar": "الربو غير المسيطر عليه",
+      "category": "clinical_status",
+      "synonyms_en": [],
+      "synonyms_ar": [
+        "الربو غير المتحكم فيه"
+      ]
+    },
+    {
+      "term_en": "Asthma exacerbation",
+      "term_ar": "تفاقم الربو / نوبة الربو",
+      "category": "clinical_event",
+      "synonyms_en": [
+        "asthma attack",
+        "acute exacerbation"
+      ],
+      "synonyms_ar": [
+        "نوبة حادة للربو",
+        "تفاقم حاد"
+      ]
+    },
+    {
+      "term_en": "Wheeze",
+      "term_ar": "الأزيز / الصفير التنفسي",
+      "category": "symptom",
+      "synonyms_en": [
+        "wheezing"
+      ],
+      "synonyms_ar": [
+        "الصفير"
+      ]
+    },
+    {
+      "term_en": "Cough",
+      "term_ar": "السعال",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Shortness of breath",
+      "term_ar": "ضيق النفس",
+      "category": "symptom",
+      "synonyms_en": [
+        "breathlessness",
+        "dyspnoea",
+        "dyspnea"
+      ],
+      "synonyms_ar": [
+        "ضيق التنفس"
+      ]
+    },
+    {
+      "term_en": "Chest tightness",
+      "term_ar": "ضيق / انقباض الصدر",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Night-time awakening",
+      "term_ar": "الاستيقاظ ليلًا بسبب الربو",
+      "category": "symptom",
+      "synonyms_en": [
+        "night waking"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Exercise limitation",
+      "term_ar": "محدودية النشاط البدني / التمارين",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Atopic disorder",
+      "term_ar": "اضطراب تأتبي / اضطراب تحسسي",
+      "category": "disease_class",
+      "synonyms_en": [
+        "atopy"
+      ],
+      "synonyms_ar": [
+        "أمراض الحساسية"
+      ]
+    },
+    {
+      "term_en": "Allergic rhinitis",
+      "term_ar": "التهاب الأنف التحسسي",
+      "category": "disease",
+      "synonyms_en": [
+        "hay fever"
+      ],
+      "synonyms_ar": [
+        "حمى القش"
+      ]
+    },
+    {
+      "term_en": "Atopic dermatitis",
+      "term_ar": "التهاب الجلد التأتبي / الإكزيما",
+      "category": "disease",
+      "synonyms_en": [
+        "eczema"
+      ],
+      "synonyms_ar": [
+        "الإكزيما"
+      ]
+    },
+    {
+      "term_en": "Food allergy",
+      "term_ar": "حساسية الطعام",
+      "category": "disease",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Airway",
+      "term_ar": "مجرى الهواء",
+      "category": "anatomy",
+      "synonyms_en": [
+        "airways"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Airway smooth muscle",
+      "term_ar": "العضلات الملساء لمجرى الهواء",
+      "category": "anatomy",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bronchoconstriction",
+      "term_ar": "تضيّق القصبات الهوائية",
+      "category": "pathophysiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bronchospasm",
+      "term_ar": "تشنج القصبات الهوائية",
+      "category": "pathophysiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bronchodilator",
+      "term_ar": "موسّع القصبات الهوائية",
+      "category": "medication_class",
+      "synonyms_en": [
+        "bronchodilators"
+      ],
+      "synonyms_ar": [
+        "موسّع الشعب الهوائية"
+      ]
+    },
+    {
+      "term_en": "Bronchodilator reversibility",
+      "term_ar": "قابلية عكس انسداد مجرى الهواء بموسعات القصبات",
+      "category": "diagnostic_test",
+      "synonyms_en": [
+        "bronchodilator reversibility (BDR)"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Airway responsiveness",
+      "term_ar": "استجابة مجرى الهواء",
+      "category": "pathophysiology",
+      "synonyms_en": [
+        "bronchial responsiveness"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bronchial hyperresponsiveness",
+      "term_ar": "فرط استجابة القصبات الهوائية",
+      "category": "pathophysiology",
+      "synonyms_en": [
+        "bronchial hyper-responsiveness"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bronchial challenge test",
+      "term_ar": "اختبار التحدي القصبي",
+      "category": "diagnostic_test",
+      "synonyms_en": [
+        "bronchial challenge"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Methacholine",
+      "term_ar": "الميثاكولين",
+      "category": "diagnostic_agent",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Mannitol",
+      "term_ar": "مانيتول",
+      "category": "diagnostic_agent",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Histamine challenge",
+      "term_ar": "اختبار التحدي بالهيستامين",
+      "category": "diagnostic_test",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Exercise challenge",
+      "term_ar": "اختبار التحدي بالتمارين الرياضية",
+      "category": "diagnostic_test",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Spirometry",
+      "term_ar": "قياس التنفس / اختبار وظائف الرئة بالتنفس",
+      "category": "diagnostic_test",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "FEV1",
+      "term_ar": "حجم الزفير القسري في ثانية واحدة",
+      "category": "lung_function",
+      "synonyms_en": [
+        "forced expiratory volume in 1 second"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Peak expiratory flow",
+      "term_ar": "ذروة تدفق الزفير",
+      "category": "lung_function",
+      "synonyms_en": [
+        "PEF",
+        "peak flow"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Peak expiratory flow variability",
+      "term_ar": "تباين ذروة تدفق الزفير",
+      "category": "lung_function",
+      "synonyms_en": [
+        "PEF variability"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Fractional exhaled nitric oxide",
+      "term_ar": "جزء أكسيد النيتريك الزفيرِي",
+      "category": "diagnostic_test",
+      "synonyms_en": [
+        "FeNO",
+        "fractional exhaled nitric oxide test"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nitric oxide",
+      "term_ar": "أكسيد النيتريك",
+      "category": "biomarker",
+      "synonyms_en": [
+        "NO"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Parts per billion",
+      "term_ar": "جزء في المليار",
+      "category": "measurement",
+      "synonyms_en": [
+        "ppb"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Eosinophil count",
+      "term_ar": "تعداد الخلايا الحمضية / اليوزينيات",
+      "category": "blood_test",
+      "synonyms_en": [
+        "blood eosinophil count"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Eosinophil",
+      "term_ar": "الخلية الحمضية / اليوزينوفيل",
+      "category": "cell",
+      "synonyms_en": [
+        "eosinophils"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "White blood cell",
+      "term_ar": "خلايا الدم البيضاء",
+      "category": "cell",
+      "synonyms_en": [
+        "white blood cells",
+        "WBC"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "IgE",
+      "term_ar": "الغلوبولين المناعي E",
+      "category": "blood_test",
+      "synonyms_en": [
+        "immunoglobulin E",
+        "total IgE"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Total serum IgE",
+      "term_ar": "إجمالي الغلوبولين المناعي E في المصل",
+      "category": "blood_test",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Skin prick testing",
+      "term_ar": "اختبار وخز الجلد",
+      "category": "allergy_test",
+      "synonyms_en": [
+        "skin prick test"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Allergen",
+      "term_ar": "مُسبّب للحساسية / مستأرج",
+      "category": "allergy",
+      "synonyms_en": [
+        "allergens"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Sensitisation",
+      "term_ar": "التحسّس",
+      "category": "allergy",
+      "synonyms_en": [
+        "sensitization"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "House dust mite",
+      "term_ar": "عثّ غبار المنزل",
+      "category": "allergen",
+      "synonyms_en": [
+        "house dust mites"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Reference range",
+      "term_ar": "المجال المرجعي",
+      "category": "laboratory",
+      "synonyms_en": [
+        "laboratory reference range"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Predicted normal FEV1",
+      "term_ar": "قيمة FEV1 الطبيعية المتوقعة",
+      "category": "lung_function",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Baseline FEV1",
+      "term_ar": "قيمة FEV1 الأساسية",
+      "category": "lung_function",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Reversibility",
+      "term_ar": "قابلية عكس الانسداد / الاستجابة العكوسة",
+      "category": "lung_function",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Objective test",
+      "term_ar": "اختبار موضوعي",
+      "category": "diagnostic_test",
+      "synonyms_en": [
+        "objective testing"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Clinical assessment",
+      "term_ar": "التقييم السريري",
+      "category": "clinical_assessment",
+      "synonyms_en": [
+        "initial clinical assessment"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Clinical history",
+      "term_ar": "التاريخ السريري / المرضي",
+      "category": "clinical_assessment",
+      "synonyms_en": [
+        "medical history"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Differential diagnosis",
+      "term_ar": "التشخيص التفريقي",
+      "category": "diagnosis",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Alternative diagnosis",
+      "term_ar": "تشخيص بديل",
+      "category": "diagnosis",
+      "synonyms_en": [
+        "alternate diagnosis"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Occupational asthma",
+      "term_ar": "الربو المهني",
+      "category": "disease",
+      "synonyms_en": [
+        "work-related asthma"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Occupational exposure",
+      "term_ar": "التعرّض المهني",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "occupational exposures"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Environmental exposure",
+      "term_ar": "التعرّض البيئي",
+      "category": "risk_factor",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Air pollution",
+      "term_ar": "تلوث الهواء",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "indoor air pollution",
+        "outdoor air pollution"
+      ],
+      "synonyms_ar": [
+        "تلوث الهواء الداخلي",
+        "تلوث الهواء الخارجي"
+      ]
+    },
+    {
+      "term_en": "Indoor mould exposure",
+      "term_ar": "التعرّض للعفن داخل المنزل",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "mold exposure"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Smoking",
+      "term_ar": "التدخين",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "active smoking",
+        "passive smoking"
+      ],
+      "synonyms_ar": [
+        "التدخين النشط",
+        "التدخين السلبي"
+      ]
+    },
+    {
+      "term_en": "Vaping",
+      "term_ar": "استخدام السجائر الإلكترونية / التدخين الإلكتروني",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "e-cigarette use"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Comorbidity",
+      "term_ar": "مرض مصاحب",
+      "category": "comorbidity",
+      "synonyms_en": [
+        "comorbidities"
+      ],
+      "synonyms_ar": [
+        "أمراض مصاحبة"
+      ]
+    },
+    {
+      "term_en": "Adherence",
+      "term_ar": "الالتزام بالعلاج",
+      "category": "management",
+      "synonyms_en": [
+        "medication adherence",
+        "treatment adherence"
+      ],
+      "synonyms_ar": [
+        "الالتزام الدوائي"
+      ]
+    },
+    {
+      "term_en": "Non-adherence",
+      "term_ar": "عدم الالتزام بالعلاج",
+      "category": "management",
+      "synonyms_en": [
+        "nonadherence"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Inhaler technique",
+      "term_ar": "طريقة استخدام جهاز الاستنشاق",
+      "category": "patient_education",
+      "synonyms_en": [],
+      "synonyms_ar": [
+        "تقنية استخدام البخاخ"
+      ]
+    },
+    {
+      "term_en": "Inhaler device",
+      "term_ar": "جهاز الاستنشاق / البخاخ",
+      "category": "device",
+      "synonyms_en": [
+        "inhaler"
+      ],
+      "synonyms_ar": [
+        "البخاخ"
+      ]
+    },
+    {
+      "term_en": "Digital inhaler",
+      "term_ar": "جهاز استنشاق رقمي",
+      "category": "device",
+      "synonyms_en": [
+        "smart inhaler"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Reliever inhaler",
+      "term_ar": "بخاخ مُسكّن للأعراض / بخاخ إسعافي",
+      "category": "device",
+      "synonyms_en": [
+        "rescue inhaler"
+      ],
+      "synonyms_ar": [
+        "بخاخ الإنقاذ"
+      ]
+    },
+    {
+      "term_en": "Maintenance therapy",
+      "term_ar": "العلاج المداوم / الوقائي",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Maintenance dose",
+      "term_ar": "جرعة المداومة",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Step-up treatment",
+      "term_ar": "تصعيد العلاج / زيادة شدة العلاج",
+      "category": "treatment",
+      "synonyms_en": [
+        "step up therapy"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Step-down treatment",
+      "term_ar": "خفض العلاج تدريجيًا",
+      "category": "treatment",
+      "synonyms_en": [
+        "step down therapy"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Treatment escalation",
+      "term_ar": "تصعيد العلاج",
+      "category": "treatment",
+      "synonyms_en": [
+        "escalation of treatment"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Treatment reduction",
+      "term_ar": "خفض العلاج",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Pharmacological treatment",
+      "term_ar": "العلاج الدوائي",
+      "category": "treatment",
+      "synonyms_en": [
+        "pharmacological management"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Non-pharmacological management",
+      "term_ar": "التدبير غير الدوائي",
+      "category": "management",
+      "synonyms_en": [
+        "non-pharmacological treatment"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Self-management",
+      "term_ar": "الإدارة الذاتية للمرض",
+      "category": "management",
+      "synonyms_en": [
+        "self-management programme"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Asthma action plan",
+      "term_ar": "خطة التعامل مع الربو / خطة عمل للربو",
+      "category": "management",
+      "synonyms_en": [
+        "personalised asthma action plan",
+        "personalized asthma action plan"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Personalised action plan",
+      "term_ar": "خطة عمل شخصية",
+      "category": "management",
+      "synonyms_en": [
+        "personalized action plan"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Rescue medication",
+      "term_ar": "دواء الإنقاذ / الدواء الإسعافي",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "As-needed therapy",
+      "term_ar": "العلاج عند الحاجة",
+      "category": "treatment",
+      "synonyms_en": [
+        "PRN therapy"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "AIR therapy",
+      "term_ar": "العلاج المُسكّن المضاد للالتهاب",
+      "category": "treatment",
+      "synonyms_en": [
+        "anti-inflammatory reliever therapy"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "As-needed AIR therapy",
+      "term_ar": "العلاج المُسكّن المضاد للالتهاب عند الحاجة",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Maintenance and reliever therapy",
+      "term_ar": "العلاج المداوم والمُسكّن",
+      "category": "treatment",
+      "synonyms_en": [
+        "MART"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "ICS/formoterol",
+      "term_ar": "كورتيكوستيرويد مستنشق/فورموتيرول",
+      "category": "medication_combination",
+      "synonyms_en": [
+        "ICS-formoterol"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Inhaled corticosteroid",
+      "term_ar": "كورتيكوستيرويد مستنشق",
+      "category": "medication_class",
+      "synonyms_en": [
+        "ICS",
+        "inhaled corticosteroids"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Short-acting beta2 agonist",
+      "term_ar": "ناهض بيتا-2 قصير المفعول",
+      "category": "medication_class",
+      "synonyms_en": [
+        "SABA"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Long-acting beta2 agonist",
+      "term_ar": "ناهض بيتا-2 طويل المفعول",
+      "category": "medication_class",
+      "synonyms_en": [
+        "LABA"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Long-acting muscarinic receptor antagonist",
+      "term_ar": "مضاد مستقبلات المسكارين طويل المفعول",
+      "category": "medication_class",
+      "synonyms_en": [
+        "LAMA"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Leukotriene receptor antagonist",
+      "term_ar": "مضاد مستقبلات اللوكوترينات",
+      "category": "medication_class",
+      "synonyms_en": [
+        "LTRA",
+        "leukotriene modifier"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Leukotriene modifier",
+      "term_ar": "معدّل اللوكوترينات",
+      "category": "medication_class",
+      "synonyms_en": [
+        "leukotriene modifiers"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Beta-receptor",
+      "term_ar": "مستقبل بيتا",
+      "category": "pharmacology",
+      "synonyms_en": [
+        "beta receptor"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Muscarinic receptor",
+      "term_ar": "مستقبل مسكاريني",
+      "category": "pharmacology",
+      "synonyms_en": [
+        "muscarinic receptors"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Oral corticosteroid",
+      "term_ar": "كورتيكوستيرويد فموي",
+      "category": "medication_class",
+      "synonyms_en": [
+        "oral corticosteroids"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Systemic corticosteroid",
+      "term_ar": "كورتيكوستيرويد جهازي",
+      "category": "medication_class",
+      "synonyms_en": [
+        "systemic corticosteroids"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Theophylline",
+      "term_ar": "الثيوفيلين",
+      "category": "medication",
+      "synonyms_en": [
+        "oral theophylline"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Formoterol",
+      "term_ar": "فورموتيرول",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Budesonide",
+      "term_ar": "بوديزونيد",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Montelukast",
+      "term_ar": "مونتيلوكاست",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Neuropsychiatric reaction",
+      "term_ar": "تفاعل عصبي نفسي",
+      "category": "adverse_effect",
+      "synonyms_en": [
+        "neuropsychiatric reactions"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Side effect",
+      "term_ar": "أثر جانبي",
+      "category": "adverse_effect",
+      "synonyms_en": [
+        "side effects"
+      ],
+      "synonyms_ar": [
+        "تأثير جانبي"
+      ]
+    },
+    {
+      "term_en": "Adverse event",
+      "term_ar": "حدث ضار",
+      "category": "safety",
+      "synonyms_en": [
+        "adverse events"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Asthma Control Questionnaire",
+      "term_ar": "استبيان السيطرة على الربو",
+      "category": "questionnaire",
+      "synonyms_en": [
+        "ACQ"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Asthma Control Test",
+      "term_ar": "اختبار السيطرة على الربو",
+      "category": "questionnaire",
+      "synonyms_en": [
+        "ACT"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Childhood Asthma Control Test",
+      "term_ar": "اختبار السيطرة على الربو لدى الأطفال",
+      "category": "questionnaire",
+      "synonyms_en": [
+        "Childhood ACT",
+        "C-ACT"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Symptom questionnaire",
+      "term_ar": "استبيان الأعراض",
+      "category": "questionnaire",
+      "synonyms_en": [
+        "validated symptom questionnaire"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Symptom diary",
+      "term_ar": "مذكرة الأعراض / سجل الأعراض",
+      "category": "monitoring",
+      "synonyms_en": [
+        "symptom diary"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Monitoring asthma control",
+      "term_ar": "مراقبة السيطرة على الربو",
+      "category": "monitoring",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Pulmonary function",
+      "term_ar": "وظائف الرئة",
+      "category": "lung_function",
+      "synonyms_en": [
+        "lung function"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Pulmonary function monitoring",
+      "term_ar": "مراقبة وظائف الرئة",
+      "category": "monitoring",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Telehealthcare",
+      "term_ar": "الرعاية الصحية عن بُعد",
+      "category": "healthcare",
+      "synonyms_en": [
+        "telehealth"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Computerised decision support system",
+      "term_ar": "نظام دعم القرار المحوسب",
+      "category": "healthcare_technology",
+      "synonyms_en": [
+        "computerized decision support system",
+        "CDSS"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Risk-stratified care",
+      "term_ar": "الرعاية المبنية على تصنيف المخاطر",
+      "category": "management",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Risk factor",
+      "term_ar": "عامل خطر",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "risk factors"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Emergency department",
+      "term_ar": "قسم الطوارئ",
+      "category": "healthcare",
+      "synonyms_en": [
+        "ED"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Hospital admission",
+      "term_ar": "الدخول إلى المستشفى",
+      "category": "healthcare",
+      "synonyms_en": [
+        "hospitalisation",
+        "hospitalization"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Primary care",
+      "term_ar": "الرعاية الأولية",
+      "category": "healthcare",
+      "synonyms_en": [
+        "primary healthcare"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Secondary care",
+      "term_ar": "الرعاية الثانوية",
+      "category": "healthcare",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Specialist asthma care",
+      "term_ar": "رعاية الربو المتخصصة",
+      "category": "healthcare",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Respiratory medicine",
+      "term_ar": "طب الجهاز التنفسي",
+      "category": "specialty",
+      "synonyms_en": [
+        "respiratory medicine"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Paediatric respiratory specialist",
+      "term_ar": "اختصاصي الجهاز التنفسي للأطفال",
+      "category": "specialty",
+      "synonyms_en": [
+        "paediatric respiratory specialist"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Paediatric low dose",
+      "term_ar": "جرعة منخفضة للأطفال",
+      "category": "dosage",
+      "synonyms_en": [
+        "paediatric low-dose"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Paediatric moderate dose",
+      "term_ar": "جرعة متوسطة للأطفال",
+      "category": "dosage",
+      "synonyms_en": [
+        "paediatric moderate-dose"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Low-dose MART",
+      "term_ar": "العلاج المداوم والمُسكّن بجرعة منخفضة",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Moderate-dose MART",
+      "term_ar": "العلاج المداوم والمُسكّن بجرعة متوسطة",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Fixed-dose regimen",
+      "term_ar": "نظام جرعة ثابتة",
+      "category": "treatment",
+      "synonyms_en": [
+        "fixed-dose"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Treatment trial",
+      "term_ar": "تجربة علاجية",
+      "category": "treatment",
+      "synonyms_en": [
+        "trial of treatment"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Review",
+      "term_ar": "مراجعة / متابعة طبية",
+      "category": "healthcare",
+      "synonyms_en": [
+        "clinical review",
+        "annual review"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Follow-up",
+      "term_ar": "المتابعة",
+      "category": "healthcare",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Shared decision making",
+      "term_ar": "اتخاذ القرار المشترك",
+      "category": "patient_care",
+      "synonyms_en": [
+        "shared decision-making"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Healthcare professional",
+      "term_ar": "أخصائي / مقدم رعاية صحية",
+      "category": "healthcare",
+      "synonyms_en": [
+        "healthcare practitioner"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Family or carer",
+      "term_ar": "الأسرة أو مقدم الرعاية",
+      "category": "patient_care",
+      "synonyms_en": [
+        "caregiver"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Pregnancy",
+      "term_ar": "الحمل",
+      "category": "special_population",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Breastfeeding",
+      "term_ar": "الرضاعة الطبيعية",
+      "category": "special_population",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Postpartum period",
+      "term_ar": "فترة ما بعد الولادة",
+      "category": "special_population",
+      "synonyms_en": [
+        "postpartum"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Adolescent",
+      "term_ar": "مراهق / مراهقة",
+      "category": "population",
+      "synonyms_en": [
+        "adolescents"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Young people",
+      "term_ar": "الشباب / اليافعون",
+      "category": "population",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Children under 5",
+      "term_ar": "الأطفال دون سن الخامسة",
+      "category": "population",
+      "synonyms_en": [
+        "children aged under 5"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Children aged 5 to 11",
+      "term_ar": "الأطفال من عمر 5 إلى 11 سنة",
+      "category": "population",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "People aged 12 and over",
+      "term_ar": "الأشخاص بعمر 12 سنة فأكثر",
+      "category": "population",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Occupational asthma specialist",
+      "term_ar": "اختصاصي الربو المهني",
+      "category": "specialty",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Sensitivity",
+      "term_ar": "الحساسية / الحساسية التشخيصية",
+      "category": "diagnostic_accuracy",
+      "synonyms_en": [
+        "diagnostic sensitivity"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Specificity",
+      "term_ar": "النوعية / الخصوصية التشخيصية",
+      "category": "diagnostic_accuracy",
+      "synonyms_en": [
+        "diagnostic specificity"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Cut-off value",
+      "term_ar": "القيمة الحدّية / حد القطع",
+      "category": "diagnostic_measure",
+      "synonyms_en": [
+        "cut-off"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Rule-in test",
+      "term_ar": "اختبار لتأكيد التشخيص",
+      "category": "diagnostic_test",
+      "synonyms_en": [
+        "rule-in"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Rule-out",
+      "term_ar": "استبعاد التشخيص",
+      "category": "diagnostic_test",
+      "synonyms_en": [
+        "rule-out"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Diagnostic accuracy",
+      "term_ar": "الدقة التشخيصية",
+      "category": "diagnostic_accuracy",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Cost-effectiveness",
+      "term_ar": "الفعالية من حيث التكلفة",
+      "category": "health_economics",
+      "synonyms_en": [
+        "cost effectiveness"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Clinical effectiveness",
+      "term_ar": "الفعالية السريرية",
+      "category": "health_outcomes",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Health outcome",
+      "term_ar": "النتيجة الصحية",
+      "category": "health_outcomes",
+      "synonyms_en": [
+        "clinical outcome"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Morbidity",
+      "term_ar": "المراضة",
+      "category": "health_outcomes",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Mortality",
+      "term_ar": "الوفيات",
+      "category": "health_outcomes",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Hospitalisation",
+      "term_ar": "الاستشفاء / الدخول إلى المستشفى",
+      "category": "health_outcomes",
+      "synonyms_en": [
+        "hospitalization"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Exacerbation requiring oral corticosteroids",
+      "term_ar": "تفاقم يستلزم كورتيكوستيرويدات فموية",
+      "category": "clinical_event",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Acute episode",
+      "term_ar": "نوبة حادة",
+      "category": "clinical_event",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Respiratory symptoms",
+      "term_ar": "أعراض تنفسية",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Work-related asthma symptoms",
+      "term_ar": "أعراض الربو المرتبطة بالعمل",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Asthma-related healthcare review",
+      "term_ar": "مراجعة رعاية صحية متعلقة بالربو",
+      "category": "healthcare",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Environmental trigger",
+      "term_ar": "محفّز بيئي",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "environmental triggers"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Personal trigger",
+      "term_ar": "محفّز شخصي",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "personal triggers"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Seasonal factor",
+      "term_ar": "عامل موسمي",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "seasonal factors"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Psychosocial factor",
+      "term_ar": "عامل نفسي اجتماعي",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "psychosocial factors"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Anxiety",
+      "term_ar": "القلق",
+      "category": "psychosocial",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Depression",
+      "term_ar": "الاكتئاب",
+      "category": "psychosocial",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Adrenal suppression",
+      "term_ar": "تثبيط الغدة الكظرية",
+      "category": "adverse_effect",
+      "synonyms_en": [
+        "adrenal suppression"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Licensed daily dose",
+      "term_ar": "الجرعة اليومية المرخّصة",
+      "category": "medication_safety",
+      "synonyms_en": [
+        "maximum licensed daily dose"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Prescribing",
+      "term_ar": "وصف الأدوية",
+      "category": "healthcare",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Prescription record",
+      "term_ar": "سجل الوصفات الطبية",
+      "category": "healthcare",
+      "synonyms_en": [
+        "prescription records"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Medicine adherence",
+      "term_ar": "الالتزام بتناول الأدوية",
+      "category": "management",
+      "synonyms_en": [
+        "medicines adherence"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Treatment response",
+      "term_ar": "الاستجابة للعلاج",
+      "category": "clinical_monitoring",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Treatment failure",
+      "term_ar": "فشل الاستجابة للعلاج",
+      "category": "clinical_course",
+      "synonyms_en": [
+        "failure to respond to treatment"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Maintenance inhaler",
+      "term_ar": "بخاخ المداومة / الوقاية",
+      "category": "device",
+      "synonyms_en": [
+        "maintenance inhaler"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Combination inhaler",
+      "term_ar": "بخاخ مركب",
+      "category": "device",
+      "synonyms_en": [
+        "combination inhaler"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Single inhaler",
+      "term_ar": "بخاخ واحد",
+      "category": "device",
+      "synonyms_en": [
+        "single inhaler"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Oral medicine",
+      "term_ar": "دواء فموي",
+      "category": "medication",
+      "synonyms_en": [
+        "oral medicine"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Inhaled medicine",
+      "term_ar": "دواء مستنشق",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Asthma symptoms",
+      "term_ar": "أعراض الربو",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Normal lung function",
+      "term_ar": "وظائف الرئة الطبيعية",
+      "category": "lung_function",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Exercise",
+      "term_ar": "التمارين الرياضية / النشاط البدني",
+      "category": "activity",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Rescue treatment",
+      "term_ar": "علاج الإنقاذ",
+      "category": "treatment",
+      "synonyms_en": [
+        "rescue therapy"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Asthma-related death",
+      "term_ar": "وفاة مرتبطة بالربو",
+      "category": "outcome",
+      "synonyms_en": [
+        "asthma death"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Asthma-related hospital admission",
+      "term_ar": "دخول المستشفى بسبب الربو",
+      "category": "outcome",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Emergency department visit",
+      "term_ar": "زيارة قسم الطوارئ",
+      "category": "outcome",
+      "synonyms_en": [
+        "emergency visit"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Asthma review",
+      "term_ar": "مراجعة الربو / متابعة الربو",
+      "category": "healthcare",
+      "synonyms_en": [
+        "asthma-related review"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Digital monitoring",
+      "term_ar": "المراقبة الرقمية",
+      "category": "monitoring",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Smart inhaler",
+      "term_ar": "البخاخ الذكي",
+      "category": "device",
+      "synonyms_en": [
+        "smart inhaler",
+        "digital inhaler"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Telephone interview",
+      "term_ar": "مقابلة هاتفية",
+      "category": "telehealth",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Internet-based monitoring",
+      "term_ar": "المراقبة عبر الإنترنت",
+      "category": "telehealth",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Smartphone-based monitoring",
+      "term_ar": "المراقبة عبر الهاتف الذكي",
+      "category": "telehealth",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Primary care pharmacist",
+      "term_ar": "صيدلي الرعاية الأولية",
+      "category": "healthcare",
+      "synonyms_en": [
+        "community pharmacist"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Community worker",
+      "term_ar": "عامل مجتمعي",
+      "category": "healthcare",
+      "synonyms_en": [
+        "community workers"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Asthma education",
+      "term_ar": "التثقيف حول الربو",
+      "category": "patient_education",
+      "synonyms_en": [
+        "asthma education programme"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Patient experience",
+      "term_ar": "تجربة المريض",
+      "category": "patient_care",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Care pathway",
+      "term_ar": "مسار الرعاية",
+      "category": "healthcare",
+      "synonyms_en": [
+        "clinical pathway"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Diagnostic pathway",
+      "term_ar": "مسار التشخيص",
+      "category": "diagnosis",
+      "synonyms_en": [
+        "diagnostic pathways"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Treatment pathway",
+      "term_ar": "مسار العلاج",
+      "category": "treatment",
+      "synonyms_en": [
+        "treatment pathways"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Clinical practice guideline",
+      "term_ar": "إرشادات الممارسة السريرية",
+      "category": "guideline",
+      "synonyms_en": [
+        "clinical guideline"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Evidence review",
+      "term_ar": "مراجعة الأدلة",
+      "category": "research",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Systematic review",
+      "term_ar": "مراجعة منهجية",
+      "category": "research",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Randomised controlled trial",
+      "term_ar": "تجربة عشوائية محكومة",
+      "category": "research",
+      "synonyms_en": [
+        "RCT",
+        "randomized controlled trial"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Confidence interval",
+      "term_ar": "فترة الثقة",
+      "category": "statistics",
+      "synonyms_en": [
+        "CI"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Odds ratio",
+      "term_ar": "نسبة الأرجحية",
+      "category": "statistics",
+      "synonyms_en": [
+        "OR"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Evidence certainty",
+      "term_ar": "يقين الدليل",
+      "category": "evidence",
+      "synonyms_en": [
+        "certainty of evidence"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Guideline committee",
+      "term_ar": "لجنة الإرشادات",
+      "category": "guideline",
+      "synonyms_en": [
+        "guideline committee"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "BTS",
+      "term_ar": "الجمعية البريطانية لأمراض الصدر",
+      "category": "organisation",
+      "synonyms_en": [
+        "British Thoracic Society"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "NICE",
+      "term_ar": "المعهد الوطني للتميز في الرعاية الصحية",
+      "category": "organisation",
+      "synonyms_en": [
+        "National Institute for Health and Care Excellence"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "SIGN",
+      "term_ar": "الشبكة الاسكتلندية للإرشادات بين الكليات",
+      "category": "organisation",
+      "synonyms_en": [
+        "Scottish Intercollegiate Guidelines Network"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "MHRA",
+      "term_ar": "وكالة تنظيم الأدوية ومنتجات الرعاية الصحية",
+      "category": "organisation",
+      "synonyms_en": [
+        "Medicines and Healthcare products Regulatory Agency"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "BNF",
+      "term_ar": "الدستور الوطني البريطاني للأدوية",
+      "category": "reference",
+      "synonyms_en": [
+        "British National Formulary"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "SABA",
+      "term_ar": "ناهض بيتا-2 قصير المفعول",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "short-acting beta2 agonist"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "LABA",
+      "term_ar": "ناهض بيتا-2 طويل المفعول",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "long-acting beta2 agonist"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "ICS",
+      "term_ar": "كورتيكوستيرويد مستنشق",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "inhaled corticosteroid"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "LTRA",
+      "term_ar": "مضاد مستقبلات اللوكوترينات",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "leukotriene receptor antagonist"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "LAMA",
+      "term_ar": "مضاد مستقبلات المسكارين طويل المفعول",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "long-acting muscarinic receptor antagonist"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "MART",
+      "term_ar": "العلاج المداوم والمُسكّن",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "maintenance and reliever therapy"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "AIR",
+      "term_ar": "العلاج المُسكّن المضاد للالتهاب",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "anti-inflammatory reliever"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "PEF",
+      "term_ar": "ذروة تدفق الزفير",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "peak expiratory flow"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "FeNO",
+      "term_ar": "جزء أكسيد النيتريك الزفيرِي",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "fractional exhaled nitric oxide"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "BDR",
+      "term_ar": "قابلية عكس انسداد القصبات بموسعات القصبات",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "bronchodilator reversibility"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "ACQ",
+      "term_ar": "استبيان السيطرة على الربو",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "Asthma Control Questionnaire"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "ACT",
+      "term_ar": "اختبار السيطرة على الربو",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "Asthma Control Test"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "NHS",
+      "term_ar": "هيئة الخدمات الصحية الوطنية البريطانية",
+      "category": "abbreviation",
+      "synonyms_en": [
+        "National Health Service"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "NG245",
+      "term_ar": "الإرشاد NG245 الخاص بالربو",
+      "category": "guideline_id",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    }
+  ]
+}

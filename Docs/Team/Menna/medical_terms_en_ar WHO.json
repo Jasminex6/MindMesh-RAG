@@ -1,0 +1,1959 @@
+{
+  "metadata": {
+    "source": "WHO consolidated guidelines for the management of common childhood illness: management of asthma in children and adolescents and bronchiolitis in infants and young children",
+    "source_file": "WHO.pdf",
+    "language_source": "English",
+    "language_target": "Arabic",
+    "purpose": "RAG medical chatbot terminology normalization",
+    "note": "Source-derived terminology from the uploaded WHO document; Arabic renderings are a working translation for RAG normalization, not an official WHO Arabic translation."
+  },
+  "terms": [
+    {
+      "term_en": "Asthma",
+      "term_ar": "الربو",
+      "category": "disease",
+      "synonyms_en": [],
+      "synonyms_ar": [
+        "مرض الربو"
+      ]
+    },
+    {
+      "term_en": "Bronchiolitis",
+      "term_ar": "التهاب القصيبات الهوائية",
+      "category": "disease",
+      "synonyms_en": [
+        "acute bronchiolitis",
+        "viral bronchiolitis"
+      ],
+      "synonyms_ar": [
+        "التهاب القصيبات الحاد",
+        "التهاب القصيبات الفيروسي"
+      ]
+    },
+    {
+      "term_en": "Apnoea",
+      "term_ar": "انقطاع النفس",
+      "category": "clinical_sign",
+      "synonyms_en": [
+        "apnea"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Wheezing",
+      "term_ar": "الأزيز / الصفير التنفسي",
+      "category": "symptom",
+      "synonyms_en": [
+        "wheeze"
+      ],
+      "synonyms_ar": [
+        "الأزيز",
+        "الصفير التنفسي"
+      ]
+    },
+    {
+      "term_en": "Respiratory distress",
+      "term_ar": "الضائقة التنفسية",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": [
+        "عسر التنفس"
+      ]
+    },
+    {
+      "term_en": "Tachypnoea",
+      "term_ar": "تسرّع التنفس",
+      "category": "clinical_sign",
+      "synonyms_en": [
+        "tachypnea"
+      ],
+      "synonyms_ar": [
+        "التنفس السريع"
+      ]
+    },
+    {
+      "term_en": "Tachycardia",
+      "term_ar": "تسرّع القلب",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": [
+        "سرعة ضربات القلب"
+      ]
+    },
+    {
+      "term_en": "Hyperinflated chest",
+      "term_ar": "فرط انتفاخ الصدر",
+      "category": "clinical_sign",
+      "synonyms_en": [
+        "hyperinflation"
+      ],
+      "synonyms_ar": [
+        "فرط انتفاخ الرئة"
+      ]
+    },
+    {
+      "term_en": "Hyperresonant sounds",
+      "term_ar": "أصوات مفرطة الرنين",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Crackles",
+      "term_ar": "الخراخر / الفرقعات التنفسية",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Grunting",
+      "term_ar": "الأنين التنفسي",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Retractions",
+      "term_ar": "التراجعات الصدرية",
+      "category": "clinical_sign",
+      "synonyms_en": [
+        "chest retractions"
+      ],
+      "synonyms_ar": [
+        "انكماشات الصدر"
+      ]
+    },
+    {
+      "term_en": "Chest indrawing",
+      "term_ar": "انغماس الصدر للداخل",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Cyanosis",
+      "term_ar": "الزُرقة",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Lethargy",
+      "term_ar": "الخمول",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Hypoxaemia",
+      "term_ar": "نقص أكسجة الدم",
+      "category": "clinical_sign",
+      "synonyms_en": [
+        "hypoxemia"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Respiratory failure",
+      "term_ar": "الفشل التنفسي",
+      "category": "complication",
+      "synonyms_en": [
+        "acute respiratory failure"
+      ],
+      "synonyms_ar": [
+        "الفشل التنفسي الحاد"
+      ]
+    },
+    {
+      "term_en": "Pneumothorax",
+      "term_ar": "استرواح الصدر",
+      "category": "complication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Myocardial injury",
+      "term_ar": "إصابة عضلة القلب",
+      "category": "complication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Neutropenia",
+      "term_ar": "قلة العدلات",
+      "category": "complication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Sepsis",
+      "term_ar": "الإنتان",
+      "category": "complication",
+      "synonyms_en": [],
+      "synonyms_ar": [
+        "تعفن الدم"
+      ]
+    },
+    {
+      "term_en": "Shock",
+      "term_ar": "الصدمة",
+      "category": "complication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Neurological complications",
+      "term_ar": "المضاعفات العصبية",
+      "category": "complication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Rhinitis",
+      "term_ar": "التهاب الأنف",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Coryza",
+      "term_ar": "الزكام / التهاب الأنف الحاد",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nasal congestion",
+      "term_ar": "احتقان الأنف",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Cough",
+      "term_ar": "السعال",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Dyspnoea",
+      "term_ar": "ضيق النفس",
+      "category": "symptom",
+      "synonyms_en": [
+        "dyspnea"
+      ],
+      "synonyms_ar": [
+        "ضيق التنفس"
+      ]
+    },
+    {
+      "term_en": "Chest tightness",
+      "term_ar": "ضيق / انقباض الصدر",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Airway",
+      "term_ar": "مجرى الهواء",
+      "category": "anatomy",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Lower respiratory tract",
+      "term_ar": "الجهاز التنفسي السفلي",
+      "category": "anatomy",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Upper respiratory tract",
+      "term_ar": "الجهاز التنفسي العلوي",
+      "category": "anatomy",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Airway inflammation",
+      "term_ar": "التهاب مجرى الهواء",
+      "category": "pathophysiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bronchoconstriction",
+      "term_ar": "تضيّق القصبات الهوائية",
+      "category": "pathophysiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bronchodilation",
+      "term_ar": "توسّع القصبات الهوائية",
+      "category": "pathophysiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Airway hyperresponsiveness",
+      "term_ar": "فرط استجابة مجرى الهواء",
+      "category": "pathophysiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Airflow limitation",
+      "term_ar": "محدودية تدفق الهواء",
+      "category": "pathophysiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Exacerbation",
+      "term_ar": "تفاقم / نوبة حادة",
+      "category": "clinical_course",
+      "synonyms_en": [
+        "flare-up",
+        "attack"
+      ],
+      "synonyms_ar": [
+        "تفاقم حاد",
+        "نوبة"
+      ]
+    },
+    {
+      "term_en": "Acute asthma exacerbation",
+      "term_ar": "تفاقم حاد للربو",
+      "category": "clinical_course",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bronchodilator",
+      "term_ar": "موسّع القصبات الهوائية",
+      "category": "treatment",
+      "synonyms_en": [
+        "bronchodilator therapy"
+      ],
+      "synonyms_ar": [
+        "موسّع الشعب الهوائية"
+      ]
+    },
+    {
+      "term_en": "Corticosteroids",
+      "term_ar": "الكورتيكوستيرويدات / الستيرويدات القشرية",
+      "category": "medication",
+      "synonyms_en": [
+        "steroids"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Inhaled corticosteroids",
+      "term_ar": "الكورتيكوستيرويدات المستنشقة",
+      "category": "medication",
+      "synonyms_en": [
+        "ICS"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Systemic corticosteroids",
+      "term_ar": "الكورتيكوستيرويدات الجهازية",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Salbutamol",
+      "term_ar": "سالبيوتامول",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Terbutaline",
+      "term_ar": "تيربوتالين",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Ipratropium bromide",
+      "term_ar": "بروميد الإبراتروبيوم",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Magnesium sulfate",
+      "term_ar": "كبريتات المغنيسيوم",
+      "category": "medication",
+      "synonyms_en": [
+        "MgSO4"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Aminophylline",
+      "term_ar": "أمينوفيلين",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Prednisolone",
+      "term_ar": "بريدنيزولون",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Dexamethasone",
+      "term_ar": "ديكساميثازون",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Budesonide",
+      "term_ar": "بوديزونيد",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Formoterol",
+      "term_ar": "فورموتيرول",
+      "category": "medication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nebulization",
+      "term_ar": "إعطاء الدواء بواسطة الرذاذ / التبخير",
+      "category": "procedure",
+      "synonyms_en": [
+        "nebulized therapy"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nebulizer",
+      "term_ar": "جهاز الرذاذ / جهاز الاستنشاق بالرذاذ",
+      "category": "device",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Inhaler",
+      "term_ar": "جهاز الاستنشاق",
+      "category": "device",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Spacer",
+      "term_ar": "حجرة الاستنشاق / المباعد",
+      "category": "device",
+      "synonyms_en": [
+        "holding chamber"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Metered-dose inhaler",
+      "term_ar": "جهاز استنشاق الجرعات المحددة",
+      "category": "device",
+      "synonyms_en": [
+        "MDI"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Chest X-ray",
+      "term_ar": "الأشعة السينية للصدر",
+      "category": "investigation",
+      "synonyms_en": [
+        "CXR",
+        "chest radiograph"
+      ],
+      "synonyms_ar": [
+        "أشعة الصدر"
+      ]
+    },
+    {
+      "term_en": "Pulse oximetry",
+      "term_ar": "قياس التأكسج النبضي",
+      "category": "investigation",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Oxygen saturation",
+      "term_ar": "تشبع الأكسجين",
+      "category": "measurement",
+      "synonyms_en": [
+        "SpO2"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Peripheral capillary oxygen saturation",
+      "term_ar": "تشبع الأكسجين المحيطي في الدم الشعيري",
+      "category": "measurement",
+      "synonyms_en": [
+        "SpO2"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Peak expiratory flow",
+      "term_ar": "ذروة تدفق الزفير",
+      "category": "measurement",
+      "synonyms_en": [
+        "PEF",
+        "peak flow"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Forced expiratory volume in 1 second",
+      "term_ar": "حجم الزفير القسري في ثانية واحدة",
+      "category": "measurement",
+      "synonyms_en": [
+        "FEV1"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Supplemental oxygen",
+      "term_ar": "الأكسجين الإضافي",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Standard-flow oxygen",
+      "term_ar": "الأكسجين بالتدفق القياسي",
+      "category": "respiratory_support",
+      "synonyms_en": [
+        "SFO"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Low-flow oxygen",
+      "term_ar": "الأكسجين منخفض التدفق",
+      "category": "respiratory_support",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "High-flow nasal cannula",
+      "term_ar": "القنية الأنفية عالية التدفق",
+      "category": "respiratory_support",
+      "synonyms_en": [
+        "HFNC"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Humidified high-flow nasal cannula",
+      "term_ar": "القنية الأنفية عالية التدفق والمرطبة",
+      "category": "respiratory_support",
+      "synonyms_en": [
+        "HHFNC"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Continuous positive airway pressure",
+      "term_ar": "الضغط الإيجابي المستمر في مجرى الهواء",
+      "category": "respiratory_support",
+      "synonyms_en": [
+        "CPAP"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bilevel positive airway pressure",
+      "term_ar": "الضغط الإيجابي ثنائي المستوى في مجرى الهواء",
+      "category": "respiratory_support",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Non-invasive ventilation",
+      "term_ar": "التهوية غير الغازية",
+      "category": "respiratory_support",
+      "synonyms_en": [
+        "NIV"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Non-invasive positive pressure ventilation",
+      "term_ar": "التهوية بالضغط الإيجابي غير الغازية",
+      "category": "respiratory_support",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Mechanical ventilation",
+      "term_ar": "التهوية الميكانيكية",
+      "category": "respiratory_support",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Invasive mechanical ventilation",
+      "term_ar": "التهوية الميكانيكية الغازية",
+      "category": "respiratory_support",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Endotracheal intubation",
+      "term_ar": "التنبيب الرغامي",
+      "category": "procedure",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Extubation",
+      "term_ar": "نزع الأنبوب الرغامي",
+      "category": "procedure",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Respiratory syncytial virus",
+      "term_ar": "الفيروس المخلوي التنفسي",
+      "category": "pathogen",
+      "synonyms_en": [
+        "RSV"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Adenovirus",
+      "term_ar": "الفيروس الغدي",
+      "category": "pathogen",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Human metapneumovirus",
+      "term_ar": "الفيروس الرئوي البشري (الميتابنوموفيروس)",
+      "category": "pathogen",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Influenza",
+      "term_ar": "الإنفلونزا",
+      "category": "disease",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Parainfluenza",
+      "term_ar": "نظير الإنفلونزا",
+      "category": "pathogen",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Prematurity",
+      "term_ar": "الخداج",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "preterm birth"
+      ],
+      "synonyms_ar": [
+        "الولادة المبكرة"
+      ]
+    },
+    {
+      "term_en": "Comorbidity",
+      "term_ar": "مرض مصاحب",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "comorbidities"
+      ],
+      "synonyms_ar": [
+        "أمراض مصاحبة"
+      ]
+    },
+    {
+      "term_en": "Immunocompromised",
+      "term_ar": "مثبط المناعة / ضعيف المناعة",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "immunocompromized"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Chronic lung disease",
+      "term_ar": "مرض الرئة المزمن",
+      "category": "comorbidity",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Congenital heart disease",
+      "term_ar": "مرض القلب الخِلقي",
+      "category": "comorbidity",
+      "synonyms_en": [
+        "congenital heart condition"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Reactive airway disease",
+      "term_ar": "مرض مجرى الهواء التفاعلي",
+      "category": "respiratory_condition",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Ventilator-induced lung injury",
+      "term_ar": "إصابة الرئة الناجمة عن جهاز التنفس الصناعي",
+      "category": "complication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nasal mucosal irritation",
+      "term_ar": "تهيج الغشاء المخاطي للأنف",
+      "category": "adverse_effect",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Epistaxis",
+      "term_ar": "الرعاف / نزيف الأنف",
+      "category": "adverse_effect",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bradycardia",
+      "term_ar": "بطء القلب",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Hypotension",
+      "term_ar": "انخفاض ضغط الدم",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Arrhythmia",
+      "term_ar": "اضطراب نظم القلب",
+      "category": "clinical_sign",
+      "synonyms_en": [
+        "arrhythmias"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Hypokalaemia",
+      "term_ar": "نقص بوتاسيوم الدم",
+      "category": "laboratory_abnormality",
+      "synonyms_en": [
+        "hypokalemia"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Lactate",
+      "term_ar": "اللاكتات",
+      "category": "laboratory_measurement",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Oxygen desaturation",
+      "term_ar": "انخفاض تشبع الأكسجين",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Airway trauma",
+      "term_ar": "إصابة مجرى الهواء",
+      "category": "complication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Vocal cord dysfunction",
+      "term_ar": "خلل وظيفة الأحبال الصوتية",
+      "category": "complication",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Prolonged sedation",
+      "term_ar": "التهدئة المطولة",
+      "category": "treatment_effect",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Antibiotic",
+      "term_ar": "مضاد حيوي",
+      "category": "medication",
+      "synonyms_en": [
+        "antibiotics"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Antimicrobial resistance",
+      "term_ar": "مقاومة مضادات الميكروبات",
+      "category": "public_health",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Viral infection",
+      "term_ar": "عدوى فيروسية",
+      "category": "infection",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bacterial infection",
+      "term_ar": "عدوى بكتيرية",
+      "category": "infection",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bacterial superinfection",
+      "term_ar": "عدوى بكتيرية ثانوية",
+      "category": "infection",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Upper respiratory tract infection",
+      "term_ar": "عدوى الجهاز التنفسي العلوي",
+      "category": "infection",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Lower respiratory tract infection",
+      "term_ar": "عدوى الجهاز التنفسي السفلي",
+      "category": "infection",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Pneumonia",
+      "term_ar": "الالتهاب الرئوي",
+      "category": "disease",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Atelectasis",
+      "term_ar": "انخماص الرئة",
+      "category": "radiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Focal opacity",
+      "term_ar": "عتامة بؤرية",
+      "category": "radiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bronchial wall thickening",
+      "term_ar": "زيادة سماكة جدار القصبات",
+      "category": "radiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Peribronchial cuffing",
+      "term_ar": "التكفف حول القصبات",
+      "category": "radiology",
+      "synonyms_en": [
+        "peribronchial cuffing"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Pleural effusion",
+      "term_ar": "الانصباب الجنبي",
+      "category": "complication",
+      "synonyms_en": [
+        "effusion"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Pharmacological treatment",
+      "term_ar": "العلاج الدوائي",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Supportive care",
+      "term_ar": "الرعاية الداعمة",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "First-line therapy",
+      "term_ar": "العلاج من الخط الأول",
+      "category": "treatment",
+      "synonyms_en": [
+        "standard first-line therapy"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Second-line therapy",
+      "term_ar": "العلاج من الخط الثاني",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Third-line therapy",
+      "term_ar": "العلاج من الخط الثالث",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Maintenance and reliever therapy",
+      "term_ar": "العلاج المداوم والمُسكن",
+      "category": "treatment",
+      "synonyms_en": [
+        "MART"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Reliever therapy",
+      "term_ar": "العلاج المُسكن للأعراض / علاج الإنقاذ",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Long-term management",
+      "term_ar": "العلاج / التدبير طويل الأمد",
+      "category": "management",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Acute management",
+      "term_ar": "التدبير الحاد",
+      "category": "management",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Clinical diagnosis",
+      "term_ar": "التشخيص السريري",
+      "category": "diagnosis",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Differential diagnosis",
+      "term_ar": "التشخيص التفريقي",
+      "category": "diagnosis",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Clinical examination",
+      "term_ar": "الفحص السريري",
+      "category": "diagnosis",
+      "synonyms_en": [
+        "physical examination"
+      ],
+      "synonyms_ar": [
+        "الفحص البدني"
+      ]
+    },
+    {
+      "term_en": "Medical history",
+      "term_ar": "التاريخ المرضي",
+      "category": "diagnosis",
+      "synonyms_en": [
+        "history"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Laboratory investigations",
+      "term_ar": "الفحوصات المخبرية",
+      "category": "investigation",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Virological studies",
+      "term_ar": "الفحوصات الفيروسية",
+      "category": "investigation",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Electrocardiogram",
+      "term_ar": "تخطيط كهربية القلب",
+      "category": "investigation",
+      "synonyms_en": [
+        "ECG"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Serum electrolytes",
+      "term_ar": "شوارد المصل / إلكتروليتات الدم",
+      "category": "investigation",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Intensive care unit",
+      "term_ar": "وحدة العناية المركزة",
+      "category": "hospital_care",
+      "synonyms_en": [
+        "ICU"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Paediatric intensive care unit",
+      "term_ar": "وحدة العناية المركزة للأطفال",
+      "category": "hospital_care",
+      "synonyms_en": [
+        "PICU"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Hospital admission",
+      "term_ar": "الدخول إلى المستشفى",
+      "category": "hospital_care",
+      "synonyms_en": [
+        "hospitalization"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Emergency department",
+      "term_ar": "قسم الطوارئ",
+      "category": "hospital_care",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Short-acting beta2 agonist",
+      "term_ar": "ناهض بيتا-2 قصير المفعول",
+      "category": "medication_class",
+      "synonyms_en": [
+        "SABA"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Long-acting beta2 agonist",
+      "term_ar": "ناهض بيتا-2 طويل المفعول",
+      "category": "medication_class",
+      "synonyms_en": [
+        "LABA"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Inhaled corticosteroids / long-acting beta2 agonist",
+      "term_ar": "الكورتيكوستيرويدات المستنشقة / ناهض بيتا-2 طويل المفعول",
+      "category": "medication_class",
+      "synonyms_en": [
+        "ICS/LABA"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Anticholinergic",
+      "term_ar": "مضاد للكولين",
+      "category": "medication_class",
+      "synonyms_en": [
+        "anti-cholinergic"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Beta2 agonist",
+      "term_ar": "ناهض بيتا-2",
+      "category": "medication_class",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Hypertonic saline",
+      "term_ar": "المحلول الملحي مفرط التوتر",
+      "category": "treatment",
+      "synonyms_en": [
+        "3% saline"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Normal saline",
+      "term_ar": "المحلول الملحي الطبيعي",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nebulized hypertonic saline",
+      "term_ar": "المحلول الملحي مفرط التوتر المُعطى بالرذاذ",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Prodrome",
+      "term_ar": "أعراض بادئة / مرحلة تمهيدية للمرض",
+      "category": "clinical_course",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Morbidity",
+      "term_ar": "المراضة",
+      "category": "epidemiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Mortality",
+      "term_ar": "الوفيات",
+      "category": "epidemiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Premature mortality",
+      "term_ar": "الوفيات المبكرة",
+      "category": "epidemiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Adverse event",
+      "term_ar": "حدث ضار",
+      "category": "safety",
+      "synonyms_en": [
+        "adverse effect"
+      ],
+      "synonyms_ar": [
+        "أثر جانبي",
+        "تأثير ضار"
+      ]
+    },
+    {
+      "term_en": "Placebo",
+      "term_ar": "دواء وهمي",
+      "category": "clinical_trial",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Randomized controlled trial",
+      "term_ar": "تجربة عشوائية محكومة",
+      "category": "clinical_research",
+      "synonyms_en": [
+        "RCT"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Systematic review",
+      "term_ar": "مراجعة منهجية",
+      "category": "clinical_research",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Meta-analysis",
+      "term_ar": "تحليل تلوي",
+      "category": "clinical_research",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Confidence interval",
+      "term_ar": "فترة الثقة",
+      "category": "statistics",
+      "synonyms_en": [
+        "CI"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Relative risk",
+      "term_ar": "المخاطر النسبية",
+      "category": "statistics",
+      "synonyms_en": [
+        "RR"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Odds ratio",
+      "term_ar": "نسبة الأرجحية",
+      "category": "statistics",
+      "synonyms_en": [
+        "OR"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Mean difference",
+      "term_ar": "الفرق في المتوسط",
+      "category": "statistics",
+      "synonyms_en": [
+        "MD"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Relative risk reduction",
+      "term_ar": "الانخفاض النسبي في المخاطر",
+      "category": "statistics",
+      "synonyms_en": [
+        "RRR"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Relative risk increase",
+      "term_ar": "الزيادة النسبية في المخاطر",
+      "category": "statistics",
+      "synonyms_en": [
+        "RRI"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Standard deviation",
+      "term_ar": "الانحراف المعياري",
+      "category": "statistics",
+      "synonyms_en": [
+        "SD"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Weighted mean difference",
+      "term_ar": "الفرق في المتوسط المرجح",
+      "category": "statistics",
+      "synonyms_en": [
+        "WMD"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Confidence of evidence",
+      "term_ar": "يقين الدليل",
+      "category": "evidence",
+      "synonyms_en": [
+        "certainty of evidence"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Low-certainty evidence",
+      "term_ar": "دليل منخفض اليقين",
+      "category": "evidence",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Very low-certainty evidence",
+      "term_ar": "دليل منخفض اليقين جدًا",
+      "category": "evidence",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Moderate-certainty evidence",
+      "term_ar": "دليل متوسط اليقين",
+      "category": "evidence",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Strong recommendation",
+      "term_ar": "توصية قوية",
+      "category": "guideline",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Conditional recommendation",
+      "term_ar": "توصية مشروطة",
+      "category": "guideline",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Guideline Development Group",
+      "term_ar": "مجموعة تطوير الإرشادات",
+      "category": "guideline",
+      "synonyms_en": [
+        "GDG"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Global Initiative for Asthma",
+      "term_ar": "المبادرة العالمية للربو",
+      "category": "organization",
+      "synonyms_en": [
+        "GINA"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "World Health Organization",
+      "term_ar": "منظمة الصحة العالمية",
+      "category": "organization",
+      "synonyms_en": [
+        "WHO"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Integrated Management of Childhood Illness",
+      "term_ar": "التدبير المتكامل لأمراض الطفولة",
+      "category": "programme",
+      "synonyms_en": [
+        "IMCI"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Grading of Recommendations Assessment, Development and Evaluation",
+      "term_ar": "تصنيف تقييم التوصيات وتطويرها وتقويمها",
+      "category": "methodology",
+      "synonyms_en": [
+        "GRADE"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Population, intervention, comparator and outcome",
+      "term_ar": "السكان، والتدخل، والمقارنة، والنتيجة",
+      "category": "methodology",
+      "synonyms_en": [
+        "PICO"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Noncommunicable disease",
+      "term_ar": "مرض غير سارٍ",
+      "category": "disease_class",
+      "synonyms_en": [
+        "NCD"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Low- and middle-income country",
+      "term_ar": "بلد منخفض ومتوسط الدخل",
+      "category": "epidemiology",
+      "synonyms_en": [
+        "LMIC"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Sustainable Development Goal",
+      "term_ar": "هدف التنمية المستدامة",
+      "category": "public_health",
+      "synonyms_en": [
+        "SDG"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "WHO Model List of Essential Medicines for Children",
+      "term_ar": "قائمة منظمة الصحة العالمية النموذجية للأدوية الأساسية للأطفال",
+      "category": "policy",
+      "synonyms_en": [
+        "EMLc"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Maintenance therapy",
+      "term_ar": "العلاج المداوم / الوقائي",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Emergency treatment",
+      "term_ar": "العلاج الطارئ",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Self-management",
+      "term_ar": "الإدارة الذاتية",
+      "category": "management",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Asthma action plan",
+      "term_ar": "خطة التعامل مع الربو",
+      "category": "management",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Risk factor",
+      "term_ar": "عامل خطر",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "risk factors"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Trigger",
+      "term_ar": "مُحفّز",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "triggers"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Allergen",
+      "term_ar": "مُسبّب للحساسية",
+      "category": "risk_factor",
+      "synonyms_en": [
+        "allergens"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Air pollution",
+      "term_ar": "تلوث الهواء",
+      "category": "risk_factor",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Tobacco smoke",
+      "term_ar": "دخان التبغ",
+      "category": "risk_factor",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Oxygen free radicals",
+      "term_ar": "الجذور الحرة للأكسجين",
+      "category": "pathophysiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Mast cells",
+      "term_ar": "الخلايا البدينة",
+      "category": "immunology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "T-cells",
+      "term_ar": "الخلايا التائية",
+      "category": "immunology",
+      "synonyms_en": [
+        "T cells"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nitric oxide",
+      "term_ar": "أكسيد النيتريك",
+      "category": "biochemistry",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Prostaglandin",
+      "term_ar": "البروستاغلاندين",
+      "category": "biochemistry",
+      "synonyms_en": [
+        "prostaglandins"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Mucosal oedema",
+      "term_ar": "وذمة الغشاء المخاطي",
+      "category": "pathophysiology",
+      "synonyms_en": [
+        "mucosal edema"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Airway secretions",
+      "term_ar": "إفرازات مجرى الهواء",
+      "category": "pathophysiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Cholinergic bronchomotor tone",
+      "term_ar": "النغمة القصبية الحركية الكولينية",
+      "category": "pathophysiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bronchomotor tone",
+      "term_ar": "النغمة الحركية للقصبات",
+      "category": "pathophysiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Bioavailability",
+      "term_ar": "التوافر الحيوي",
+      "category": "pharmacology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Systemic side-effects",
+      "term_ar": "الآثار الجانبية الجهازية",
+      "category": "safety",
+      "synonyms_en": [
+        "systemic adverse effects"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nausea",
+      "term_ar": "الغثيان",
+      "category": "adverse_effect",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Vomiting",
+      "term_ar": "القيء",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Headache",
+      "term_ar": "الصداع",
+      "category": "adverse_effect",
+      "synonyms_en": [
+        "headaches"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Dry mouth",
+      "term_ar": "جفاف الفم",
+      "category": "adverse_effect",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Abdominal pain",
+      "term_ar": "ألم البطن",
+      "category": "adverse_effect",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Conjunctivitis",
+      "term_ar": "التهاب الملتحمة",
+      "category": "adverse_effect",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Respiratory rate",
+      "term_ar": "معدل التنفس",
+      "category": "measurement",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Heart rate",
+      "term_ar": "معدل ضربات القلب",
+      "category": "measurement",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Work of breathing",
+      "term_ar": "جهد التنفس",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Accessory muscles",
+      "term_ar": "العضلات الإضافية المساعدة للتنفس",
+      "category": "anatomy",
+      "synonyms_en": [
+        "accessory breathing muscles"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Mental state",
+      "term_ar": "الحالة العقلية / الوعي",
+      "category": "clinical_assessment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Glasgow Coma Scale",
+      "term_ar": "مقياس غلاسكو للغيبوبة",
+      "category": "clinical_assessment",
+      "synonyms_en": [
+        "GCS"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Moderate paediatric asthma exacerbation",
+      "term_ar": "تفاقم متوسط للربو لدى الأطفال",
+      "category": "severity",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Severe paediatric asthma exacerbation",
+      "term_ar": "تفاقم شديد للربو لدى الأطفال",
+      "category": "severity",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Life-threatening asthma",
+      "term_ar": "الربو المهدد للحياة",
+      "category": "severity",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Self-limiting",
+      "term_ar": "محدود ذاتيًا / يزول تلقائيًا",
+      "category": "clinical_course",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Ambulatory care",
+      "term_ar": "الرعاية الإسعافية / الخارجية",
+      "category": "healthcare",
+      "synonyms_en": [
+        "ambulatory basis"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Hospital stay",
+      "term_ar": "مدة الإقامة في المستشفى",
+      "category": "healthcare",
+      "synonyms_en": [
+        "length of hospital stay"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Escalation of care",
+      "term_ar": "تصعيد مستوى الرعاية",
+      "category": "healthcare",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Respiratory support",
+      "term_ar": "دعم الجهاز التنفسي",
+      "category": "respiratory_support",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nasal prongs",
+      "term_ar": "القنيات الأنفية",
+      "category": "device",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Face mask",
+      "term_ar": "قناع الوجه",
+      "category": "device",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Headbox",
+      "term_ar": "صندوق الرأس لإعطاء الأكسجين",
+      "category": "device",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nasal bubble CPAP",
+      "term_ar": "الضغط الإيجابي المستمر الفقاعي عبر الأنف",
+      "category": "respiratory_support",
+      "synonyms_en": [
+        "bubble CPAP"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Positive end-expiratory pressure",
+      "term_ar": "الضغط الإيجابي في نهاية الزفير",
+      "category": "respiratory_physiology",
+      "synonyms_en": [
+        "PEEP"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nasopharyngeal dead space",
+      "term_ar": "الحيز الميت الأنفي البلعومي",
+      "category": "respiratory_physiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nasal erosion",
+      "term_ar": "تآكل الأنف / الغشاء المخاطي الأنفي",
+      "category": "adverse_effect",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Inhaled condensation",
+      "term_ar": "تكاثف مستنشق",
+      "category": "adverse_effect",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Oxygen tube disconnection",
+      "term_ar": "انفصال أنبوب الأكسجين",
+      "category": "adverse_event",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Transient bradycardia",
+      "term_ar": "بطء القلب العابر",
+      "category": "adverse_effect",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Sedation",
+      "term_ar": "التهدئة / التخدير الخفيف",
+      "category": "treatment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Breastfeeding",
+      "term_ar": "الرضاعة الطبيعية",
+      "category": "paediatrics",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Feeding difficulty",
+      "term_ar": "صعوبة التغذية",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Adequate hydration",
+      "term_ar": "الترطيب الكافي",
+      "category": "supportive_care",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nasal saline drops",
+      "term_ar": "قطرات المحلول الملحي للأنف",
+      "category": "supportive_care",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nasal suctioning",
+      "term_ar": "شفط إفرازات الأنف",
+      "category": "supportive_care",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Nasal obstruction",
+      "term_ar": "انسداد الأنف",
+      "category": "symptom",
+      "synonyms_en": [
+        "nasal block"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Clinical signs",
+      "term_ar": "العلامات السريرية",
+      "category": "clinical_assessment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Clinical symptoms",
+      "term_ar": "الأعراض السريرية",
+      "category": "clinical_assessment",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Auscultation",
+      "term_ar": "التسمّع",
+      "category": "clinical_examination",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Chest percussion",
+      "term_ar": "قرع الصدر",
+      "category": "clinical_examination",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Dullness to percussion",
+      "term_ar": "الغباش عند القرع",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Absent breath sounds",
+      "term_ar": "غياب أصوات التنفس",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Persistent symptoms",
+      "term_ar": "أعراض مستمرة",
+      "category": "clinical_course",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Recurrent pneumonia",
+      "term_ar": "الالتهاب الرئوي المتكرر",
+      "category": "disease",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Severe hypoxaemia",
+      "term_ar": "نقص أكسجة الدم الشديد",
+      "category": "clinical_sign",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Ionizing radiation",
+      "term_ar": "الإشعاع المؤيّن",
+      "category": "radiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Radiography",
+      "term_ar": "التصوير الشعاعي",
+      "category": "investigation",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Lung abnormalities",
+      "term_ar": "تغيرات / اضطرابات الرئة",
+      "category": "radiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Distension",
+      "term_ar": "التمدد / الانتفاخ",
+      "category": "radiology",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Respiratory syncytial virus outbreak",
+      "term_ar": "تفشي الفيروس المخلوي التنفسي",
+      "category": "epidemiology",
+      "synonyms_en": [
+        "RSV outbreak"
+      ],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Respiratory infection",
+      "term_ar": "عدوى الجهاز التنفسي",
+      "category": "infection",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    },
+    {
+      "term_en": "Respiratory symptoms",
+      "term_ar": "أعراض الجهاز التنفسي",
+      "category": "symptom",
+      "synonyms_en": [],
+      "synonyms_ar": []
+    }
+  ]
+}
