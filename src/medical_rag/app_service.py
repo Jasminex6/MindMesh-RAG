@@ -62,13 +62,19 @@ class RagApplicationService:
         timing["prep_ms"] = (time.perf_counter() - prep_start) * 1000.0
 
         # Video Trigger Detection
+        v_url, v_title = None, None
         try:
-            from video_triggers import detect_video
+            try:
+                from .video_triggers import detect_video
+            except ImportError:
+                from video_triggers import detect_video
+
             video_trig = detect_video(q_raw) or detect_video(canonical_q)
-            v_url = video_trig.video_path if video_trig else None
-            v_title = (video_trig.title_ar if language == "ar" else video_trig.title) if video_trig else None
-        except Exception:
-            v_url, v_title = None, None
+            if video_trig:
+                v_url = str(video_trig.video_path)
+                v_title = str(video_trig.title)
+        except Exception as e:
+            print(f"[app_service] Video trigger notice: {e}")
 
         # 2. Pre-Flight Safety Gate & Router (evaluated on reconstructed query)
         gate_start = time.perf_counter()
@@ -99,7 +105,7 @@ class RagApplicationService:
                 self.persistence.add_message(conversation_id, "assistant", response.recommendation, response.to_dict())
             return response
 
-        if decision.status == "CLARIFY":
+        if decision.status == "CLARIFY" and not v_url:
             response = RAGResponse(
                 status="CLARIFY",
                 language=language,
@@ -145,7 +151,7 @@ class RagApplicationService:
                 self.persistence.add_message(conversation_id, "assistant", response.recommendation, response.to_dict())
             return response
 
-        if intent.requires_refusal or intent.category == "out_of_scope":
+        if (intent.requires_refusal or intent.category == "out_of_scope") and not v_url:
             out_card = intent.refusal_reason or (
                 "I am a clinical decision support assistant specialized in pediatric asthma and acute bronchiolitis management based on WHO and NICE NG245 guidelines.\n\n"
                 "I can only assist with medical questions regarding pediatric respiratory symptoms, diagnostic pathways, medication stepping (MART/ICS), and acute exacerbation protocols. Please enter a clinical question."
@@ -160,6 +166,8 @@ class RagApplicationService:
                 citations=(),
                 confidence="Ungrounded",
                 safety_message=out_card,
+                video_url=v_url,
+                video_title=v_title,
                 timing_ms={"total_ms": (time.perf_counter() - start_time) * 1000.0},
             )
             if self.persistence and conversation_id:
@@ -168,7 +176,7 @@ class RagApplicationService:
             return response
 
         # 4. Mandatory Age Slot Guard
-        if intent.category in AGE_MANDATORY_INTENTS and not slots.get("age_band"):
+        if intent.category in AGE_MANDATORY_INTENTS and not slots.get("age_band") and not v_url:
             q_low = canonical_q.lower()
             if "under 6" in q_low or "under-5" in q_low or "infant" in q_low or "toddler" in q_low:
                 slots["age_band"] = "under_6"
@@ -188,6 +196,8 @@ class RagApplicationService:
                     citations=(),
                     confidence="Ungrounded",
                     safety_message="Age group or population context required before guideline retrieval.",
+                    video_url=v_url,
+                    video_title=v_title,
                     timing_ms={"total_ms": (time.perf_counter() - start_time) * 1000.0},
                 )
                 if self.persistence and conversation_id:
@@ -229,19 +239,26 @@ class RagApplicationService:
         # 7. Clean output handling on Refusal / Insufficient Evidence (NO_EVIDENCE)
         if answer.refused:
             timing["total_ms"] = (time.perf_counter() - start_time) * 1000.0
-            no_evidence_card = (
-                "**لم يتم العثور على إرشادات محددة في الدليل**\n\n"
-                "لا تحتوي إرشادات منظمة الصحة العالمية وNICE NG245 المحملة على أدلة سريرية كافية للإجابة على هذا السيناريو السريري.\n\n"
-                "**الخطوات التالية الموصى بها:**\n"
-                "- إعادة صياغة السؤال باستخدام مصطلحات سريرية قياسية (مثل عمر المريض، شدة الأعراض، أو الفئة الدوائية).\n"
-                "- استشارة أخصائي أمراض الصدر للأطفال."
-                if language == "ar" else
-                "**No Specific Guideline Guidance Found**\n\n"
-                "The loaded WHO and NICE NG245 pediatric guidelines do not contain sufficiently specific evidence to answer this particular clinical scenario.\n\n"
-                "**Recommended Next Steps:**\n"
-                "- Rephrase the query with standard clinical terms (e.g., patient age, specific symptom severity, or drug class).\n"
-                "- Consult local hospital formularies or refer to a pediatric respiratory specialist."
-            )
+            if v_url:
+                no_evidence_card = (
+                    f"**فيديو توضيحي: {v_title}**\n\nإليك فيديو تدريبي توضيحي لإرشادات تقنيات التنفس واستخدام البخاخ."
+                    if language == "ar" else
+                    f"**Demonstration Video: {v_title}**\n\nHere is an instructional demonstration video for breathing exercises and asthma management."
+                )
+            else:
+                no_evidence_card = (
+                    "**لم يتم العثور على إرشادات محددة في الدليل**\n\n"
+                    "لا تحتوي إرشادات منظمة الصحة العالمية وNICE NG245 المحملة على أدلة سريرية كافية للإجابة على هذا السيناريو السريري.\n\n"
+                    "**الخطوات التالية الموصى بها:**\n"
+                    "- إعادة صياغة السؤال باستخدام مصطلحات سريرية قياسية (مثل عمر المريض، شدة الأعراض، أو الفئة الدوائية).\n"
+                    "- استشارة أخصائي أمراض الصدر للأطفال."
+                    if language == "ar" else
+                    "**No Specific Guideline Guidance Found**\n\n"
+                    "The loaded WHO and NICE NG245 pediatric guidelines do not contain sufficiently specific evidence to answer this particular clinical scenario.\n\n"
+                    "**Recommended Next Steps:**\n"
+                    "- Rephrase the query with standard clinical terms (e.g., patient age, specific symptom severity, or drug class).\n"
+                    "- Consult local hospital formularies or refer to a pediatric respiratory specialist."
+                )
             response = RAGResponse(
                 status="NO_EVIDENCE",
                 language=language,
@@ -290,10 +307,7 @@ class RagApplicationService:
                 )
             )
 
-        from .video_triggers import detect_video
-        video_trig = detect_video(q_raw) or detect_video(canonical_q)
-        v_url = video_trig.video_path if video_trig else None
-        v_title = (video_trig.title_ar if language == "ar" else video_trig.title) if video_trig else None
+        # Use precomputed v_url and v_title from top of ask()
 
         response = RAGResponse(
             status="SUCCESS",

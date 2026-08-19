@@ -355,10 +355,16 @@ export default function ClinicalChat({ session, onSendMessage, isSubmitting }) {
                                   <video
                                     controls
                                     autoPlay
+                                    muted
+                                    playsInline
+                                    preload="auto"
                                     loop
                                     src={msg.response.video_url}
-                                    className="w-full rounded-lg border border-slate-700 bg-black max-h-72 object-contain"
-                                  />
+                                    className="w-full rounded-lg border border-slate-700 bg-black max-h-80 object-contain"
+                                  >
+                                    <source src={msg.response.video_url} type="video/mp4" />
+                                    Your browser does not support the video tag.
+                                  </video>
                                 </div>
                               )}
                             </>
@@ -373,10 +379,16 @@ export default function ClinicalChat({ session, onSendMessage, isSubmitting }) {
                               <video
                                 controls
                                 autoPlay
+                                muted
+                                playsInline
+                                preload="auto"
                                 loop
                                 src={msg.response.video_url}
-                                className="w-full rounded-lg border border-slate-700 bg-black max-h-72 object-contain"
-                              />
+                                className="w-full rounded-lg border border-slate-700 bg-black max-h-80 object-contain"
+                              >
+                                <source src={msg.response.video_url} type="video/mp4" />
+                                Your browser does not support the video tag.
+                              </video>
                             </div>
                           )}
 
