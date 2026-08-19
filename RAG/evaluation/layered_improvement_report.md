@@ -10,7 +10,7 @@ This report measures the exact **percentage improvement (delta %)** achieved acr
 | **Layer 1: Noise Removal** | `0.4259` | **`0.4222`** | `0/3` | `0.0000` | **`0.0%`** |
 | **Layer 2: Acronym Expansion** | `0.4074` | **`0.4222`** | `0/3` | `0.0000` | **`0.0%`** |
 | **Layer 3: Refusal Threshold (0.72)** | `0.5741` | **`0.5889`** | `3/3` | `+0.1667` | **`+39.5%`** |
-| **Layer 4: Hybrid RRF + Reranker + Sentence Chunking** | `0.7222` | **`0.6444`** | `3/3` | `+0.2222` | **`+52.6%`** |
+| **Layer 4: Hybrid RRF + Reranker + Sentence Chunking** | `0.7037` | **`0.6333`** | `3/3` | `+0.2111` | **`+50.0%`** |
 
 ---
 ## 💡 Insights & Answers to Architecture Questions

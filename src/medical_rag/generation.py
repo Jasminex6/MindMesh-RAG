@@ -20,6 +20,7 @@ from dataclasses import asdict, dataclass, field
 from typing import Any
 
 from .models import SearchResult
+from .claim_verification import verify_claim_support
 
 
 # ---------------------------------------------------------------------------
@@ -263,27 +264,35 @@ def parse_llm_response(raw: str) -> dict[str, Any]:
 
 def verify_citations(citations: list[Citation],
                      results: list[SearchResult]) -> list[Citation]:
-    """Check that each citation's chunk_id actually exists in the retrieved set."""
+    """Check each citation's chunk_id exists AND that the cited chunk text
+    actually supports the claim (not just topically related to it)."""
     retrieved_ids = {
         str(r.metadata.get("chunk_id", "")): r for r in results
     }
     verified = []
     for cit in citations:
-        if cit.chunk_id in retrieved_ids:
-            cit.verified = True
-            # Enrich with full metadata from the actual retrieved chunk
-            r = retrieved_ids[cit.chunk_id]
-            cit.document = str(r.metadata.get("document", cit.document))
-            cit.section = str(r.metadata.get("section", cit.section))
-            page_start = r.metadata.get("page_start", r.metadata.get("page", ""))
-            page_end = r.metadata.get("page_end", page_start)
-            cit.page = f"{page_start}" if page_start == page_end else f"{page_start}-{page_end}"
-            cit.score = r.score
-        else:
+        r = retrieved_ids.get(cit.chunk_id)
+
+        if r is None:
             cit.verified = False
+            verified.append(cit)
+            continue
+
+        # NEW: existence check is not enough — verify the claim is actually
+        # supported by this chunk's text, not just that the chunk_id exists.
+        support = verify_claim_support(cit.claim, r.text)
+        cit.verified = support.supported
+
+        # Enrich with full metadata from the actual retrieved chunk
+        cit.document = str(r.metadata.get("document", cit.document))
+        cit.section = str(r.metadata.get("section", cit.section))
+        page_start = r.metadata.get("page_start", r.metadata.get("page", ""))
+        page_end = r.metadata.get("page_end", page_start)
+        cit.page = f"{page_start}" if page_start == page_end else f"{page_start}-{page_end}"
+        cit.score = r.score
+
         verified.append(cit)
     return verified
-
 
 def post_generation_safety_check(answer: GeneratedAnswer) -> GeneratedAnswer:
     """Final safety sweep on the generated answer.

@@ -12,6 +12,7 @@ from medical_rag.pipeline import CorpusPipeline
 from medical_rag.vector_repository import ChromaVectorRepository
 from medical_rag.hybrid_retrieval import UnifiedRetriever
 from medical_rag.generation import GenerationService, GeneratedAnswer
+from medical_rag.router import route_query
 from langchain_ollama import OllamaEmbeddings
 
 
@@ -94,6 +95,29 @@ def setup_pipeline():
 
 
 def ask_question(query: str, retriever: UnifiedRetriever, gen_service: GenerationService):
+    # --- Safety / ambiguity gate — runs BEFORE retrieval ---
+    decision = route_query(query)
+
+    if decision.status == "BLOCKED":
+        print("\n" + "=" * 80)
+        print(f"CLINICAL QUESTION: {query}")
+        print("=" * 80)
+        print(f"\n[BLOCKED — {decision.category}]")
+        print(f"   {decision.safety_message_en}")
+        print(f"   {decision.safety_message_ar}")
+        print("\n" + "=" * 80 + "\n")
+        return None
+
+    if decision.status == "CLARIFY":
+        print("\n" + "=" * 80)
+        print(f"CLINICAL QUESTION: {query}")
+        print("=" * 80)
+        print("\n[CLARIFICATION NEEDED]")
+        print(f"   {decision.clarification_question}")
+        print("\n" + "=" * 80 + "\n")
+        return None
+
+    # --- decision.status == "PROCEED" — continue as before ---
     print(f"[Searching guidelines for: '{query}'...]")
     results = retriever.search(query, strategy="hybrid_rerank", top_k=5)
     answer = gen_service.generate(query, results)
