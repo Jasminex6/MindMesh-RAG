@@ -10,6 +10,7 @@ from .models import Chunk, ParsedGuideline, SourceSpec
 from .query_rewriter import ConversationalQueryRewriter, rewrite_conversational_query
 from .query_decomposition import is_compound_query, decompose_query, retrieve_multi_question
 from .intent_classifier import IntentClassifier, IntentDecision, summarize_for_retrieval
+from .nlp_processor import NlpQueryProcessor, ProcessedQueryResult
 
 __all__ = [
     "Citation",
@@ -34,4 +35,6 @@ __all__ = [
     "IntentClassifier",
     "IntentDecision",
     "summarize_for_retrieval",
+    "NlpQueryProcessor",
+    "ProcessedQueryResult",
 ]

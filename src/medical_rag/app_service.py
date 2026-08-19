@@ -49,13 +49,19 @@ class RagApplicationService:
         if self.persistence and conversation_id and not chat_history:
             chat_history = self.persistence.get_conversation_messages(conversation_id)
 
-        # 1. Preprocessing & Multi-Turn Conversational Query Rewriting
+        # 1. Stage 1: Bilingual NLP Query Processing & Reconstruction
         prep_start = time.perf_counter()
-        q_normalized = normalize_medical_typos(q_raw)
-        canonical_q = canonicalize_query(q_normalized, chat_history=chat_history)
+        from .nlp_processor import NlpQueryProcessor
+        nlp_proc = NlpQueryProcessor()
+        nlp_res = nlp_proc.process(q_raw, chat_history=chat_history)
+        
+        language = nlp_res.language
+        canonical_q = nlp_res.reconstructed_query or q_raw
+        if nlp_res.implied_age_band and not slots.get("age_band"):
+            slots["age_band"] = nlp_res.implied_age_band
         timing["prep_ms"] = (time.perf_counter() - prep_start) * 1000.0
 
-        # 2. Pre-Flight Safety Gate & Router (evaluated on canonical query)
+        # 2. Pre-Flight Safety Gate & Router (evaluated on reconstructed query)
         gate_start = time.perf_counter()
         decision: RoutingDecision = route_query(canonical_q)
         timing["safety_gate_ms"] = (time.perf_counter() - gate_start) * 1000.0

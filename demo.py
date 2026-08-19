@@ -146,14 +146,19 @@ def ask_question(
     if slots is None:
         slots = {}
 
-    processed_query = query
-    if chat_history:
-        rewriter = ConversationalQueryRewriter(model=getattr(gen_service, "model", "llama3.2"))
-        processed_query = rewriter.rewrite(query, chat_history=chat_history, skip_llm=skip_llm_rewriter)
-        if processed_query != query:
-            print(f"[Query Rewriter] Rewrote query into standalone query:\n  Original: '{query}'\n  Rewritten: '{processed_query}'")
+    # 1. Stage 1: Bilingual NLP Query Processing & Topic Shift Detection
+    from medical_rag.nlp_processor import NlpQueryProcessor
+    nlp_proc = NlpQueryProcessor()
+    nlp_res = nlp_proc.process(query, chat_history=chat_history)
 
-    # 1. Sub-millisecond Pre-Flight Safety Gate & Router
+    processed_query = nlp_res.reconstructed_query or query
+    if nlp_res.implied_age_band and not slots.get("age_band"):
+        slots["age_band"] = nlp_res.implied_age_band
+
+    if processed_query != query:
+        print(f"[NLP Query Processor] Reconstructed query:\n  Original: '{query}'\n  Reconstructed: '{processed_query}' (Language: {nlp_res.language}, Topic Shift: {nlp_res.is_topic_shift})")
+
+    # 2. Sub-millisecond Pre-Flight Safety Gate & Router
     routing = route_query(processed_query)
     if routing.status == "BLOCKED":
         refusal_reason = routing.safety_message_en
