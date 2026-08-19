@@ -229,19 +229,26 @@ class RagApplicationService:
         # 7. Clean output handling on Refusal / Insufficient Evidence (NO_EVIDENCE)
         if answer.refused:
             timing["total_ms"] = (time.perf_counter() - start_time) * 1000.0
-            no_evidence_card = (
-                "**لم يتم العثور على إرشادات محددة في الدليل**\n\n"
-                "لا تحتوي إرشادات منظمة الصحة العالمية وNICE NG245 المحملة على أدلة سريرية كافية للإجابة على هذا السيناريو السريري.\n\n"
-                "**الخطوات التالية الموصى بها:**\n"
-                "- إعادة صياغة السؤال باستخدام مصطلحات سريرية قياسية (مثل عمر المريض، شدة الأعراض، أو الفئة الدوائية).\n"
-                "- استشارة أخصائي أمراض الصدر للأطفال."
-                if language == "ar" else
-                "**No Specific Guideline Guidance Found**\n\n"
-                "The loaded WHO and NICE NG245 pediatric guidelines do not contain sufficiently specific evidence to answer this particular clinical scenario.\n\n"
-                "**Recommended Next Steps:**\n"
-                "- Rephrase the query with standard clinical terms (e.g., patient age, specific symptom severity, or drug class).\n"
-                "- Consult local hospital formularies or refer to a pediatric respiratory specialist."
-            )
+            if v_url:
+                no_evidence_card = (
+                    f"**فيديو توضيحي: {v_title}**\n\nإليك فيديو تدريبي توضيحي لإرشادات تقنيات التنفس واستخدام البخاخ."
+                    if language == "ar" else
+                    f"**Demonstration Video: {v_title}**\n\nHere is an instructional demonstration video for breathing exercises and asthma management."
+                )
+            else:
+                no_evidence_card = (
+                    "**لم يتم العثور على إرشادات محددة في الدليل**\n\n"
+                    "لا تحتوي إرشادات منظمة الصحة العالمية وNICE NG245 المحملة على أدلة سريرية كافية للإجابة على هذا السيناريو السريري.\n\n"
+                    "**الخطوات التالية الموصى بها:**\n"
+                    "- إعادة صياغة السؤال باستخدام مصطلحات سريرية قياسية (مثل عمر المريض، شدة الأعراض، أو الفئة الدوائية).\n"
+                    "- استشارة أخصائي أمراض الصدر للأطفال."
+                    if language == "ar" else
+                    "**No Specific Guideline Guidance Found**\n\n"
+                    "The loaded WHO and NICE NG245 pediatric guidelines do not contain sufficiently specific evidence to answer this particular clinical scenario.\n\n"
+                    "**Recommended Next Steps:**\n"
+                    "- Rephrase the query with standard clinical terms (e.g., patient age, specific symptom severity, or drug class).\n"
+                    "- Consult local hospital formularies or refer to a pediatric respiratory specialist."
+                )
             response = RAGResponse(
                 status="NO_EVIDENCE",
                 language=language,
