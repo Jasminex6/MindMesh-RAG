@@ -62,7 +62,7 @@ class TestIntentClassifier(unittest.TestCase):
             self.assertEqual(intent.category, "emergency")
             self.assertFalse(intent.requires_clarification)
             self.assertTrue(intent.requires_emergency)
-            self.assertIn("EMERGENCY URGENT WARNING", intent.emergency_response)
+            self.assertIn("EMERGENCY WARNING", intent.emergency_response)
 
 
 if __name__ == "__main__":

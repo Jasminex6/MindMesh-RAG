@@ -111,13 +111,14 @@ class RagApplicationService:
         intent = classifier.classify(canonical_q)
 
         if intent.requires_refusal or intent.requires_emergency:
-            refusal_reason = intent.refusal_reason or intent.emergency_response or "Request refused per safety policy."
+            refusal_reason = intent.refusal_reason or intent.emergency_response or ("تم رفض الطلب بناءً على سياسة الأمان." if language == "ar" else "Request refused per safety policy.")
+            rec_title = "مرفوض (تم تفعيل بروتوكول الأمان)" if language == "ar" else "Refused (Safety Protocol Triggered)"
             response = RAGResponse(
                 status="REFUSAL",
                 language=language,
                 query=q_raw,
                 resolved_query=canonical_q,
-                recommendation="Refused (Safety Protocol Triggered)",
+                recommendation=rec_title,
                 evidence=(),
                 citations=(),
                 confidence="Insufficient Evidence",

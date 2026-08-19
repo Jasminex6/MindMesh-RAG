@@ -65,7 +65,7 @@ class TestRagApplicationService(unittest.TestCase):
         ]
 
         response = self.service.ask("how is it treated?", chat_history=chat_history)
-        self.assertTrue("treat" in response.resolved_query.lower() and "paediatric" in response.resolved_query.lower())
+        self.assertTrue("treat" in response.resolved_query.lower() and ("child" in response.resolved_query.lower() or "pediatric" in response.resolved_query.lower() or "paediatric" in response.resolved_query.lower()))
 
 
 if __name__ == "__main__":

@@ -93,7 +93,7 @@ _EMERGENCY_PATTERNS = [
     r"\bcan'?t\s+speak\s+(in\s+full\s+sentences|words)\b",
     r"\bblue\s+(lips|face|skin|tongue)\b",
     r"\bcall\s+911\b",
-    r"أنقذوني|طفلي\s+لا\s+يتنفس|ازرقاق|اختناق|صعوبة\s+شديدة\s+في\s+التنفس",
+    r"أنقذوني|طفلي\s+لا\s+يتنفس|ازرقاق|اختناق|صعوبة\s+شديدة\s+في\s+التنفس|بموت|انا\s+بموت|أنا\s+بموت|مش\s+قادر\s+اتنفس",
 ]
 
 _OUT_OF_SCOPE_PATTERNS = [
@@ -223,19 +223,19 @@ class IntentClassifier:
         # 2. Emergency Detection
         for pat in _EMERGENCY_PATTERNS:
             if re.search(pat, q_str, re.IGNORECASE):
+                is_ar = bool(re.search(r"[\u0600-\u06FF]", q_str))
+                emergency_msg = (
+                    "🔴 تحذير طوارئ: إذا كان الطفل أو المريض يعاني من صعوبة شديدة في التنفس أو زرقة في الشفتين أو خطر على الحياة، توجه فوراً إلى أقرب مستشفى أو اتصل بالإسعاف (123). لا تنتظر إجابة النظام."
+                    if is_ar else
+                    "🔴 EMERGENCY WARNING: If a patient is experiencing severe breathing difficulty, turning blue, or life-threatening symptoms, seek immediate emergency medical care (call 911/123/local emergency services) immediately. Do not delay emergency evaluation."
+                )
                 return IntentDecision(
                     category="emergency",
                     requires_clarification=False,
                     requires_emergency=True,
                     requires_refusal=True,
-                    emergency_response=(
-                        "EMERGENCY URGENT WARNING: If a patient is experiencing severe breathing difficulty, "
-                        "turning blue, or choking, seek immediate emergency medical care (call 911 or "
-                        "go to the nearest emergency department) immediately. Do not delay emergency evaluation."
-                    ),
-                    refusal_reason=(
-                        "EMERGENCY WARNING: Severe respiratory symptoms require immediate medical attention."
-                    ),
+                    emergency_response=emergency_msg,
+                    refusal_reason=emergency_msg,
                 )
 
         # 3. Out of Scope Detection

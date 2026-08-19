@@ -161,10 +161,12 @@ def ask_question(
     # 2. Sub-millisecond Pre-Flight Safety Gate & Router
     routing = route_query(processed_query)
     if routing.status == "BLOCKED":
-        refusal_reason = routing.safety_message_en
+        is_ar = nlp_res.language == "ar"
+        refusal_reason = (routing.safety_message_ar if is_ar and routing.safety_message_ar else routing.safety_message_en)
+        rec_title = "مرفوض (تم تفعيل بروتوكول الأمان)" if is_ar else f"Refused ({routing.category} Guardrail Triggered)"
         refused_answer = GeneratedAnswer(
             query=query,
-            recommendation=f"Refused ({routing.category} Guardrail Triggered)",
+            recommendation=rec_title,
             supporting_evidence="(RAG retrieval bypassed - safety refusal triggered)",
             citations=[],
             confidence="Insufficient Evidence",
@@ -178,15 +180,17 @@ def ask_question(
             chat_history.append({"role": "assistant", "content": refusal_reason})
         return refused_answer
 
-    # 2. Intent Classifier & Hard Refusal
+    # 3. Intent Classifier & Hard Refusal
     classifier = IntentClassifier()
     intent = classifier.classify(processed_query)
 
     if intent.requires_refusal or intent.requires_emergency:
-        refusal_reason = intent.refusal_reason or intent.emergency_response or "Request refused per safety policy."
+        is_ar = nlp_res.language == "ar"
+        refusal_reason = intent.refusal_reason or intent.emergency_response or ("تم رفض الطلب بناءً على سياسة الأمان." if is_ar else "Request refused per safety policy.")
+        rec_title = "مرفوض (تم تفعيل بروتوكول الأمان)" if is_ar else "Refused (Safety Protocol Triggered)"
         refused_answer = GeneratedAnswer(
             query=query,
-            recommendation="Refused (Safety Protocol Triggered)",
+            recommendation=rec_title,
             supporting_evidence="(RAG retrieval bypassed - safety refusal triggered)",
             citations=[],
             confidence="Insufficient Evidence",
