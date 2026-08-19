@@ -9,11 +9,11 @@ from .canonicalization import canonicalize_query
 from .contracts import CitationContract, EvidenceContract, RAGResponse
 from .generation import GeneratedAnswer, GenerationService
 from .hybrid_retrieval import UnifiedRetriever, format_retrieval_query, normalize_medical_typos
-from .intent import QueryIntent, classify_query_intent
+from .router import route_query, RoutingDecision
 
 
 class RagApplicationService:
-    """Application facade coordinating safety, retrieval, generation, contracts, memory, and persistence."""
+    """Application facade coordinating safety router, retrieval, generation, contracts, memory, and persistence."""
 
     def __init__(
         self,
@@ -40,31 +40,36 @@ class RagApplicationService:
         q_raw = query.strip()
         timing: dict[str, float] = {}
 
-        # Load chat history from persistence if conversation_id is provided and history not passed explicitly
         if self.persistence and conversation_id and not chat_history:
             chat_history = self.persistence.get_conversation_messages(conversation_id)
 
-        # 1. Early Safety & Out-of-Scope Gate
+        # 1. Preprocessing & Multi-Turn Canonicalization
+        prep_start = time.perf_counter()
+        q_normalized = normalize_medical_typos(q_raw)
+        canonical_q = canonicalize_query(q_normalized, chat_history=chat_history)
+        search_q = format_retrieval_query(canonical_q)
+        timing["prep_ms"] = (time.perf_counter() - prep_start) * 1000.0
+
+        # 2. Pre-Flight Safety & Ambiguity Router (evaluated on canonical query)
         gate_start = time.perf_counter()
-        intent = classify_query_intent(q_raw)
+        decision: RoutingDecision = route_query(canonical_q)
         timing["safety_gate_ms"] = (time.perf_counter() - gate_start) * 1000.0
 
-        if intent in (QueryIntent.OUT_OF_SCOPE, QueryIntent.PATIENT_SPECIFIC):
-            refusal_reason = (
-                "Patient-specific dosage or prescribing requests require direct clinical calculation. Clinical consultation required."
-                if intent == QueryIntent.PATIENT_SPECIFIC
-                else "This query is out of scope for the Pediatric Asthma Clinical Decision Support system (zero guideline retrieval performed)."
+        if decision.status == "BLOCKED":
+            safety_msg = (
+                decision.safety_message_ar if language == "ar" and decision.safety_message_ar
+                else decision.safety_message_en
             )
             response = RAGResponse(
                 status="REFUSAL",
                 language=language,
                 query=q_raw,
-                resolved_query=q_raw,
-                recommendation="Refused (Safety Guardrail Triggered)",
+                resolved_query=canonical_q,
+                recommendation=f"Refused ({decision.category} Guardrail Triggered)",
                 evidence=(),
                 citations=(),
                 confidence="Insufficient Evidence",
-                safety_message=refusal_reason,
+                safety_message=safety_msg,
                 timing_ms={"total_ms": (time.perf_counter() - start_time) * 1000.0},
             )
             if self.persistence and conversation_id:
@@ -72,12 +77,23 @@ class RagApplicationService:
                 self.persistence.add_message(conversation_id, "assistant", response.recommendation, response.to_dict())
             return response
 
-        # 2. Preprocessing & Canonicalization (with Multi-Turn Follow-Up Resolution)
-        prep_start = time.perf_counter()
-        q_normalized = normalize_medical_typos(q_raw)
-        canonical_q = canonicalize_query(q_normalized, chat_history=chat_history)
-        search_q = format_retrieval_query(canonical_q)
-        timing["prep_ms"] = (time.perf_counter() - prep_start) * 1000.0
+        if decision.status == "CLARIFY":
+            response = RAGResponse(
+                status="CLARIFY",
+                language=language,
+                query=q_raw,
+                resolved_query=canonical_q,
+                recommendation=decision.clarification_question or "Please clarify your question.",
+                evidence=(),
+                citations=(),
+                confidence="Needs Clarification",
+                safety_message="Age group or population context required before guideline retrieval.",
+                timing_ms={"total_ms": (time.perf_counter() - start_time) * 1000.0},
+            )
+            if self.persistence and conversation_id:
+                self.persistence.add_message(conversation_id, "user", q_raw)
+                self.persistence.add_message(conversation_id, "assistant", response.recommendation, response.to_dict())
+            return response
 
         # 3. Retrieval
         ret_start = time.perf_counter()
@@ -89,7 +105,27 @@ class RagApplicationService:
         answer: GeneratedAnswer = self.gen_service.generate(canonical_q, results)
         timing["generation_ms"] = (time.perf_counter() - gen_start) * 1000.0
 
-        # 5. Convert to RAGResponse contract
+        # 5. Clean output handling on Refusal / Insufficient Evidence
+        if answer.refused:
+            timing["total_ms"] = (time.perf_counter() - start_time) * 1000.0
+            response = RAGResponse(
+                status="REFUSAL",
+                language=language,
+                query=q_raw,
+                resolved_query=canonical_q,
+                recommendation=answer.recommendation or "Refused (Insufficient Evidence)",
+                evidence=(),
+                citations=(),
+                confidence="Insufficient Evidence",
+                safety_message=answer.safety_note or answer.refusal_reason,
+                timing_ms=timing,
+            )
+            if self.persistence and conversation_id:
+                self.persistence.add_message(conversation_id, "user", q_raw)
+                self.persistence.add_message(conversation_id, "assistant", response.recommendation, response.to_dict())
+            return response
+
+        # 6. Convert to RAGResponse contract for successful answer
         evidence_list = []
         for r in results:
             evidence_list.append(
@@ -121,7 +157,7 @@ class RagApplicationService:
         timing["total_ms"] = (time.perf_counter() - start_time) * 1000.0
 
         response = RAGResponse(
-            status="REFUSAL" if answer.refused else "ANSWER",
+            status="ANSWER",
             language=language,
             query=q_raw,
             resolved_query=canonical_q,

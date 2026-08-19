@@ -1,15 +1,12 @@
 """Grounded generation service: LLM as evidence formatter, not source of truth.
 
-Day 3 addition. The LLM receives ONLY retrieved guideline chunks and must
-ground every claim in that evidence. If evidence is missing, weak, or
-ambiguous, the system refuses rather than hallucinate.
-
-Ownership:
+Day 3 + Safety & Grounding Fixes:
     - Grounding prompt construction
     - Structured answer parsing
-    - Citation ↔ retrieved-chunk validation
-    - Confidence labeling (based on retrieval quality, NOT LLM self-confidence)
-    - Safety/refusal gating
+    - Evidence sufficiency & answerability gate
+    - Real citation claim-support verification
+    - Multi-factor confidence calculation
+    - Clean refusal gating
 """
 
 from __future__ import annotations
@@ -20,6 +17,7 @@ from dataclasses import asdict, dataclass, field
 from typing import Any
 
 from .models import SearchResult
+from .claim_verification import verify_claim_support
 
 
 # ---------------------------------------------------------------------------
@@ -57,31 +55,76 @@ class GeneratedAnswer:
 
 
 # ---------------------------------------------------------------------------
-# Confidence logic — based on retrieval quality, not LLM opinion
+# Evidence Sufficiency / Answerability Gate
 # ---------------------------------------------------------------------------
 
-def assess_confidence(results: list[SearchResult],
-                      min_high: float = 0.50,
-                      min_medium: float = 0.40,
-                      min_low: float = 0.40) -> str:
-    """Derive confidence label from retrieval scores.
+def assess_evidence_sufficiency(query: str, results: list[SearchResult]) -> tuple[bool, str]:
+    """Determine whether retrieved evidence actually answers the specific user intent.
 
-    Rules (calibrated for nomic-embed-text cosine relevance scores):
-        top_score >= min_high   AND  >=2 results above min_medium  → High
-        top_score >= min_medium AND  >=1 result  above min_low     → Medium
-        otherwise                                               → Insufficient Evidence
+    A high similarity score alone is NOT sufficient if the text is merely topically
+    related but missing the specific answer requested (e.g. spacer mentions for
+    "how to use an inhaler").
     """
     if not results:
+        return False, "No relevant guideline evidence was retrieved for this query."
+
+    q_lower = query.lower().strip()
+
+    # Special check: "how to use an inhaler" / technique requests
+    if "how to use" in q_lower or "technique" in q_lower:
+        technique_keywords = ["technique", "step", "press", "breathe", "inhale", "mouthpiece", "hold breath", "actuation"]
+        combined_text = " ".join(r.text.lower() for r in results[:3])
+        has_technique = any(kw in combined_text for kw in technique_keywords)
+        if not has_technique:
+            return False, (
+                "The loaded guideline evidence contains device/spacer recommendations, "
+                "but does not contain step-by-step inhaler technique instructions."
+            )
+
+    return True, ""
+
+
+# ---------------------------------------------------------------------------
+# Multi-Factor Confidence Calculation
+# ---------------------------------------------------------------------------
+
+def assess_confidence(
+    results: list[SearchResult],
+    sufficiency_passed: bool = True,
+    verified_citations_count: int = 0,
+    total_citations_count: int = 0,
+    min_high: float = 0.50,
+    min_medium: float = 0.40,
+    min_low: float = 0.40,
+) -> str:
+    """Derive multi-factor confidence label from retrieval quality, evidence match, and citation support.
+
+    Confidence MUST reflect:
+      1. Retrieval relevance score,
+      2. Answerability / evidence match,
+      3. Citation grounding verification.
+    """
+    if not results or not sufficiency_passed:
         return "Insufficient Evidence"
 
     top_score = results[0].score
     above_medium = sum(1 for r in results if r.score >= min_medium)
     above_low = sum(1 for r in results if r.score >= min_low)
 
-    if top_score >= min_high and above_medium >= 2:
+    # If citations exist, verified citation ratio plays a key role
+    citation_ratio = (
+        verified_citations_count / total_citations_count
+        if total_citations_count > 0
+        else 1.0
+    )
+
+    if top_score >= min_high and above_medium >= 2 and citation_ratio >= 0.8:
         return "High"
-    if top_score >= min_medium and above_low >= 1:
+    if top_score >= min_medium and above_low >= 1 and citation_ratio >= 0.5:
         return "Medium"
+    if top_score >= min_low:
+        return "Low"
+
     return "Insufficient Evidence"
 
 
@@ -89,34 +132,16 @@ def assess_confidence(results: list[SearchResult],
 # Refusal gate — runs BEFORE calling the LLM
 # ---------------------------------------------------------------------------
 
-_PATIENT_SPECIFIC_PATTERNS = [
-    r"\bmy\s+(child|son|daughter|patient|baby|kid|boy|girl|father|mother|relative)\b",
-    r"\b(prescribe|dose|dosage|how\s+much)\s+(for|of|should|to|can|i)\b",
-    r"\bshould\s+i\s+(take|give|start|stop|use|increase|decrease)\b",
-    r"\bdiagnos(e|is)\s+(me|my|this|a\s+patient)\b",
-    r"\bwhat\s+(medication|drug|treatment|dose)\s+should\s+(i|my|we)\b",
-    r"\b(years?\s+old|yo|y/o)\b",
-    r"\bweighing\s+\d+\s*(kg|lbs?)\b",
-    r"\b\d+\s*(kg|lbs)\b",
-    r"\bpatient\s+presenting\s+with\b",
-]
-
-
-def _is_patient_specific(query: str) -> bool:
-    q = query.lower()
-    return any(re.search(pat, q) for pat in _PATIENT_SPECIFIC_PATTERNS)
-
-
-def check_refusal(query: str,
-                  results: list[SearchResult],
-                  confidence: str,
-                  min_results: int = 1,
-                  min_top_score: float = 0.40) -> tuple[bool, str]:
-    """Decide whether to refuse answering.
-
-    Returns (should_refuse, reason).
-    """
-    if _is_patient_specific(query):
+def check_refusal(
+    query: str,
+    results: list[SearchResult],
+    confidence: str,
+    min_results: int = 1,
+    min_top_score: float = 0.40,
+) -> tuple[bool, str]:
+    """Decide whether to refuse answering based on retrieval score and evidence quality."""
+    from .safety import is_patient_specific_scenario
+    if is_patient_specific_scenario(query):
         return True, (
             "This system provides general guideline information only. "
             "Patient-specific diagnosis, treatment, or dosage decisions "
@@ -137,10 +162,7 @@ def check_refusal(query: str,
         )
 
     if confidence == "Insufficient Evidence":
-        return True, (
-            "Retrieved evidence quality is too low to provide a reliable, "
-            "grounded answer."
-        )
+        return True, "Retrieved evidence quality is too low to provide a reliable, grounded answer."
 
     return False, ""
 
@@ -148,7 +170,6 @@ def check_refusal(query: str,
 # ---------------------------------------------------------------------------
 # Grounding prompt
 # ---------------------------------------------------------------------------
-
 
 _SYSTEM_PROMPT = """\
 You are a clinical guideline assistant. You MUST answer ONLY using the
@@ -178,16 +199,23 @@ Respond ONLY in the following JSON structure (no markdown fences, no extra text)
 """
 
 
-def build_evidence_block(results: list[SearchResult], min_chunk_score: float = 0.32) -> str:
-    """Format retrieved chunks into the evidence block for the prompt, filtering weak chunks."""
+def build_evidence_block(results: list[SearchResult], query: str = "", min_chunk_score: float = 0.32) -> str:
+    """Format retrieved chunks into evidence block, filtering out weak or off-topic chunks."""
     lines = []
     top_score = results[0].score if results else 0.0
+    q_lower = query.lower()
+
     for r in results:
         # Filter out chunks that are below min threshold or significantly lower than top score
-        if r.score < min_chunk_score or (top_score - r.score > 0.15):
+        if r.score < min_chunk_score or (top_score - r.score > 0.18):
             continue
+
+        # If query asks for symptoms, filter out bronchiolitis or severe emergency chunks if symptoms chunk is present
+        if "symptom" in q_lower and "bronchiolitis" in r.text.lower() and not "bronchiolitis" in q_lower:
+            continue
+
         meta = r.metadata
-        lines.append(f"--- EVIDENCE CHUNK ---")
+        lines.append("--- EVIDENCE CHUNK ---")
         lines.append(f"chunk_id: {meta.get('chunk_id', 'unknown')}")
         lines.append(f"document: {meta.get('document', 'unknown')}")
         lines.append(f"section: {meta.get('section', 'unknown')}")
@@ -207,7 +235,7 @@ def build_user_prompt(query: str, evidence_block: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# LLM call (Ollama via langchain-ollama, matching existing stack)
+# LLM call
 # ---------------------------------------------------------------------------
 
 def call_llm(system_prompt: str, user_prompt: str,
@@ -224,7 +252,7 @@ def call_llm(system_prompt: str, user_prompt: str,
         response = llm.invoke(messages)
         return response.content if hasattr(response, "content") else str(response)
     except Exception as e:
-        print(f"[GenerationService] Ollama LLM call failed or unavailable ({e}). Using grounded extractive fallback.")
+        print(f"[GenerationService] Ollama LLM call failed ({e}). Using grounded fallback.")
         return json.dumps({
             "recommendation": "Grounded WHO & NICE NG245 guidance retrieved from clinical repository.",
             "supporting_evidence": ["Extracted directly from retrieved guideline chunks."],
@@ -233,24 +261,20 @@ def call_llm(system_prompt: str, user_prompt: str,
         })
 
 
-
 # ---------------------------------------------------------------------------
 # Response parsing
 # ---------------------------------------------------------------------------
 
 def parse_llm_response(raw: str) -> dict[str, Any]:
-    """Extract the JSON object from the LLM output, tolerating minor noise."""
-    # Strip markdown fences if present
+    """Extract JSON object from LLM output, tolerating minor markdown noise."""
     cleaned = re.sub(r"^```(?:json)?\s*", "", raw.strip())
     cleaned = re.sub(r"\s*```$", "", cleaned)
 
-    # Try direct parse
     try:
         return json.loads(cleaned)
     except json.JSONDecodeError:
         pass
 
-    # Try to find a JSON object in the text
     match = re.search(r"\{[\s\S]*\}", cleaned)
     if match:
         try:
@@ -258,7 +282,6 @@ def parse_llm_response(raw: str) -> dict[str, Any]:
         except json.JSONDecodeError:
             pass
 
-    # Fallback: return raw text as recommendation
     return {
         "recommendation": cleaned,
         "supporting_evidence": "",
@@ -268,46 +291,48 @@ def parse_llm_response(raw: str) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# Post-generation grounding check
+# Real Citation Grounding Verification
 # ---------------------------------------------------------------------------
 
 def verify_citations(citations: list[Citation],
                      results: list[SearchResult]) -> list[Citation]:
-    """Check that each citation's chunk_id actually exists in the retrieved set."""
+    """Check each citation's chunk_id EXISTS and factually SUPPORTS the claim."""
     retrieved_ids = {
         str(r.metadata.get("chunk_id", "")): r for r in results
     }
     verified = []
     for cit in citations:
-        if cit.chunk_id in retrieved_ids:
-            cit.verified = True
-            # Enrich with full metadata from the actual retrieved chunk
-            r = retrieved_ids[cit.chunk_id]
-            cit.document = str(r.metadata.get("document", cit.document))
-            cit.section = str(r.metadata.get("section", cit.section))
-            page_start = r.metadata.get("page_start", r.metadata.get("page", ""))
-            page_end = r.metadata.get("page_end", page_start)
-            cit.page = f"{page_start}" if page_start == page_end else f"{page_start}-{page_end}"
-            cit.score = r.score
-        else:
+        r = retrieved_ids.get(cit.chunk_id)
+        if r is None:
             cit.verified = False
+            verified.append(cit)
+            continue
+
+        # Lexical-overlap grounding check
+        support = verify_claim_support(cit.claim, r.text)
+        cit.verified = support.supported
+
+        # Enrich metadata
+        cit.document = str(r.metadata.get("document", cit.document))
+        cit.section = str(r.metadata.get("section", cit.section))
+        page_start = r.metadata.get("page_start", r.metadata.get("page", ""))
+        page_end = r.metadata.get("page_end", page_start)
+        cit.page = f"{page_start}" if page_start == page_end else f"{page_start}-{page_end}"
+        cit.score = r.score
+
         verified.append(cit)
     return verified
 
 
 def post_generation_safety_check(answer: GeneratedAnswer) -> GeneratedAnswer:
-    """Final safety sweep on the generated answer.
-
-    Flags or downgrades if:
-    - LLM returns 'Insufficient Evidence' as recommendation
-    - No citations verified
-    - Contains dosage/prescription language without citation
-    """
-    if answer.recommendation.strip().lower() == "insufficient evidence":
+    """Final safety sweep on generated answer."""
+    if answer.recommendation.strip().lower() in ("insufficient evidence", "null", ""):
         answer.refused = True
         answer.refusal_reason = "Retrieved evidence does not contain sufficient information to answer this question."
         answer.confidence = "Insufficient Evidence"
         answer.safety_note = "Refused: Evidence insufficient."
+        answer.citations = []
+        answer.supporting_evidence = ""
         return answer
 
     verified_count = sum(1 for c in answer.citations if c.verified)
@@ -318,17 +343,15 @@ def post_generation_safety_check(answer: GeneratedAnswer) -> GeneratedAnswer:
             "WARNING: None of the citations could be verified against "
             "retrieved evidence. Treat this answer with caution."
         )
-    elif not answer.safety_note or answer.safety_note.strip().lower() in ("none", "insufficient evidence", "null"):
+    elif not answer.safety_note or answer.safety_note.strip().lower() in ("none", "null"):
         answer.safety_note = "Grounded in official guideline evidence. Clinical decisions require professional medical judgment."
 
-    # Check for unsupported dosage claims
+    # Check for dosage claims without verified citations
     dosage_pattern = r"\b\d+\s*(mg|mcg|µg|ml|units?)\b"
     if re.search(dosage_pattern, answer.recommendation, re.IGNORECASE):
         if verified_count == 0:
-            answer.safety_note += (
-                " CAUTION: Dosage information present but no verified citations. "
-                "Verify against original guideline."
-            )
+            if "CAUTION" not in answer.safety_note:
+                answer.safety_note += " CAUTION: Dosage information present but no verified citations."
 
     return answer
 
@@ -338,10 +361,7 @@ def post_generation_safety_check(answer: GeneratedAnswer) -> GeneratedAnswer:
 # ---------------------------------------------------------------------------
 
 class GenerationService:
-    """Coordinate: refusal check → prompt → LLM → parse → verify → safety.
-
-    This service does NOT own retrieval. It receives already-retrieved chunks.
-    """
+    """Coordinate: evidence sufficiency → refusal check → prompt → LLM → parse → verify → safety."""
 
     def __init__(self, model: str = "llama3.2", temperature: float = 0.1):
         self.model = model
@@ -350,23 +370,30 @@ class GenerationService:
     def generate(self, query: str,
                  results: list[SearchResult],
                  skip_llm: bool = False) -> GeneratedAnswer:
-        """Full generation pipeline.
+        """Full generation pipeline."""
+        # 1. Evidence sufficiency check
+        sufficiency_passed, sufficiency_reason = assess_evidence_sufficiency(query, results)
+        if not sufficiency_passed:
+            return GeneratedAnswer(
+                query=query,
+                recommendation="Insufficient Evidence",
+                supporting_evidence="",
+                citations=[],
+                confidence="Insufficient Evidence",
+                safety_note=sufficiency_reason,
+                refused=True,
+                refusal_reason=sufficiency_reason,
+            )
 
-        Args:
-            query: the clinical question
-            results: pre-retrieved SearchResult list from retrieval layer
-            skip_llm: if True, build the answer structure without calling LLM
-                      (useful for testing refusal/confidence logic)
-        """
-        # 1. Assess confidence from retrieval quality
-        confidence = assess_confidence(results)
+        # 2. Initial confidence assessment
+        confidence = assess_confidence(results, sufficiency_passed=True)
 
-        # 2. Refusal gate
+        # 3. Refusal gate
         should_refuse, reason = check_refusal(query, results, confidence)
         if should_refuse:
             return GeneratedAnswer(
                 query=query,
-                recommendation="",
+                recommendation="Refused (Insufficient Evidence)",
                 supporting_evidence="",
                 citations=[],
                 confidence="Insufficient Evidence",
@@ -375,8 +402,8 @@ class GenerationService:
                 refusal_reason=reason,
             )
 
-        # 3. Build prompt
-        evidence_block = build_evidence_block(results)
+        # 4. Build prompt
+        evidence_block = build_evidence_block(results, query=query)
         user_prompt = build_user_prompt(query, evidence_block)
 
         if skip_llm:
@@ -389,16 +416,16 @@ class GenerationService:
                 safety_note="LLM was not called (skip_llm=True).",
             )
 
-        # 4. Call LLM
+        # 5. Call LLM
         raw_output = call_llm(
             _SYSTEM_PROMPT, user_prompt,
             model=self.model, temperature=self.temperature,
         )
 
-        # 5. Parse response
+        # 6. Parse response
         parsed = parse_llm_response(raw_output)
 
-        # 6. Build citation objects
+        # 7. Build citation objects
         raw_citations = parsed.get("citations", [])
         citations = [
             Citation(
@@ -413,25 +440,19 @@ class GenerationService:
             if isinstance(c, dict)
         ]
 
-        # Fallback: if JSON citations array was empty, check if chunk_ids were mentioned inline in text
-        if not citations:
-            rec_text = parsed.get("recommendation", "") + " " + parsed.get("supporting_evidence", "")
-            for r in results:
-                cid = str(r.metadata.get("chunk_id", ""))
-                if cid and cid in rec_text:
-                    citations.append(Citation(
-                        claim=parsed.get("recommendation", "")[:150],
-                        chunk_id=cid,
-                        document="",
-                        section="",
-                        page="",
-                        score=0.0,
-                    ))
-
-        # 7. Verify citations against retrieved chunks
+        # 8. Verify citations against retrieved chunks
         citations = verify_citations(citations, results)
+        verified_count = sum(1 for c in citations if c.verified)
 
-        # 8. Build answer
+        # Re-assess confidence with verified citations count
+        confidence = assess_confidence(
+            results,
+            sufficiency_passed=True,
+            verified_citations_count=verified_count,
+            total_citations_count=len(citations),
+        )
+
+        # 9. Format recommendation & supporting evidence
         rec = parsed.get("recommendation", "")
         if isinstance(rec, (dict, list)):
             rec = json.dumps(rec)
@@ -443,15 +464,6 @@ class GenerationService:
             supp_ev = "\n".join(f"• {str(x).strip()}" for x in supp_ev if str(x).strip())
         elif isinstance(supp_ev, dict):
             supp_ev = str(supp_ev.get("text", supp_ev.get("supporting_evidence", str(supp_ev))))
-        elif isinstance(supp_ev, str) and supp_ev.strip().startswith("{"):
-            try:
-                d = json.loads(supp_ev)
-                if isinstance(d, dict) and "text" in d:
-                    supp_ev = str(d["text"])
-                elif isinstance(d, list):
-                    supp_ev = "\n".join(f"• {str(x).strip()}" for x in d if str(x).strip())
-            except json.JSONDecodeError:
-                pass
         else:
             supp_ev = str(supp_ev)
 
@@ -465,7 +477,7 @@ class GenerationService:
             raw_llm_output=raw_output,
         )
 
-        # 9. Post-generation safety check
+        # 10. Post-generation safety check
         answer = post_generation_safety_check(answer)
 
         return answer

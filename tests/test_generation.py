@@ -16,8 +16,8 @@ from medical_rag.generation import (
     parse_llm_response,
     post_generation_safety_check,
     build_evidence_block,
-    _is_patient_specific,
 )
+from medical_rag.safety import is_patient_specific_scenario as _is_patient_specific
 
 
 # ---------------------------------------------------------------------------
@@ -156,9 +156,9 @@ class TestCitationVerification(unittest.TestCase):
     def test_verified_citations(self):
         results = _high_quality_results()
         citations = [
-            Citation(claim="ICS is first-line", chunk_id="who-p25-001",
+            Citation(claim="Inhaled corticosteroids preferred controller", chunk_id="who-p25-001",
                      document="", section="", page="", score=0.0),
-            Citation(claim="Step therapy approach", chunk_id="who-p26-002",
+            Citation(claim="Inhaled corticosteroids preferred controller", chunk_id="who-p26-002",
                      document="", section="", page="", score=0.0),
         ]
         verified = verify_citations(citations, results)
@@ -180,7 +180,7 @@ class TestCitationVerification(unittest.TestCase):
     def test_mixed_verification(self):
         results = _high_quality_results()
         citations = [
-            Citation(claim="Real claim", chunk_id="who-p25-001",
+            Citation(claim="Inhaled corticosteroids preferred controller", chunk_id="who-p25-001",
                      document="", section="", page="", score=0.0),
             Citation(claim="Fake claim", chunk_id="nonexistent",
                      document="", section="", page="", score=0.0),
@@ -311,8 +311,8 @@ class TestGenerationServiceWithMockedLLM(unittest.TestCase):
             "recommendation": "Low-dose inhaled corticosteroids (ICS) are recommended as first-line controller therapy.",
             "supporting_evidence": "WHO guideline recommends ICS as preferred controller for children with asthma.",
             "citations": [
-                {"claim": "ICS is first-line controller", "chunk_id": "who-p25-001"},
-                {"claim": "Step therapy for escalation", "chunk_id": "who-p26-002"},
+                {"claim": "Inhaled corticosteroids preferred controller", "chunk_id": "who-p25-001"},
+                {"claim": "Inhaled corticosteroids preferred controller", "chunk_id": "who-p26-002"},
             ],
             "safety_note": "Always consult a healthcare professional. This is guideline-based information only.",
         })

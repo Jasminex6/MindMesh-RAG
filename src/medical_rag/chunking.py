@@ -22,9 +22,14 @@ class _Unit:
 
 def is_section_heading(line: str) -> bool:
     text = re.sub(r"\s+", " ", line.strip())
-    if not text or len(text) > 180 or TOC_LEADER_RE.fullmatch(text):
+    if not text or len(text) > 120 or TOC_LEADER_RE.fullmatch(text):
         return False
     if text.startswith(("•", "-", "–", "—")):
+        return False
+    # Reject body sentences (ending with period/semicolon or having many words)
+    if text.endswith((".", ";", "!", "?")) and len(text.split()) > 6:
+        return False
+    if len(text.split()) > 12:
         return False
     if re.match(
         r"^(?:\d+(?:\.\d+)?\.?|section\s+\d+|chapter\s+\d+|part\s+[ivx\d]+)\s+\S",
@@ -32,14 +37,13 @@ def is_section_heading(line: str) -> bool:
         re.IGNORECASE,
     ):
         return True
-    if re.match(r"^(?:recommendation|recommendations|appendix|annex)\b", text, re.I):
+    if re.match(r"^(?:recommendation|recommendations|appendix|annex)(?:\s+\d+[\.\d+]*)?:?$", text, re.I):
         return True
-    if text.isupper() and 4 <= len(text) <= 100 and not text.endswith((".", ";")):
+    if text.isupper() and 4 <= len(text) <= 80:
         return True
     return bool(
         text[0].isupper()
-        and len(text.split()) <= 16
-        and not text.endswith((".", ";"))
+        and len(text.split()) <= 10
         and re.match(
             r"^(?:summary of recommendations|initial (?:clinical|management|treatment)|"
             r"diagnosing\b|monitoring\b|pharmacological\b|self-management\b|"
