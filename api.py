@@ -68,6 +68,7 @@ class AskRequest(BaseModel):
     query: str
     conversation_id: Optional[str] = None
     chat_history: Optional[List[Dict[str, Any]]] = None
+    slots: Optional[Dict[str, Any]] = None
 
 
 class CreateSessionRequest(BaseModel):
@@ -92,6 +93,7 @@ def ask_question(req: AskRequest):
         response = _app_service.ask(
             query=req.query.strip(),
             conversation_id=req.conversation_id,
+            slots=req.slots or {},
             chat_history=req.chat_history or [],
         )
         return response.to_dict()
