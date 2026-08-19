@@ -28,16 +28,22 @@ def tokenize(text: str) -> list[str]:
     return re.findall(r"\b[a-z0-9]+\b", text.lower())
 
 
-def expand_medical_query(query: str) -> str:
-    """Expand medical acronyms into full terms for broader recall."""
-    tokens = tokenize(query)
-    added_terms = []
-    for token in tokens:
-        if token in ACRONYM_MAP and ACRONYM_MAP[token] not in query.lower():
-            added_terms.append(ACRONYM_MAP[token])
-    if added_terms:
-        return f"{query} {' '.join(added_terms)}"
-    return query
+def format_retrieval_query(query: str) -> str:
+    """Format retrieval query string preserving natural terms."""
+    return query.strip()
+
+
+def normalize_medical_typos(query: str) -> str:
+    """Normalize common typos in clinical query string."""
+    replacements = {
+        "anad": "and",
+        "asmtha": "asthma",
+        "symtoms": "symptoms",
+        "treament": "treatment",
+    }
+    tokens = query.split()
+    normalized = [replacements.get(t.lower(), t) for t in tokens]
+    return " ".join(normalized)
 
 
 class BM25Retriever:
