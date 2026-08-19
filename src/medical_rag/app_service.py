@@ -62,13 +62,20 @@ class RagApplicationService:
         timing["prep_ms"] = (time.perf_counter() - prep_start) * 1000.0
 
         # Video Trigger Detection
+        v_url, v_title = None, None
         try:
-            from video_triggers import detect_video
+            try:
+                from .video_triggers import detect_video
+            except ImportError:
+                from video_triggers import detect_video
+
             video_trig = detect_video(q_raw) or detect_video(canonical_q)
-            v_url = video_trig.video_path if video_trig else None
-            v_title = (video_trig.title_ar if language == "ar" else video_trig.title) if video_trig else None
-        except Exception:
-            v_url, v_title = None, None
+            if video_trig:
+                v_url = str(video_trig.video_path)
+                v_title = str(video_trig.title)
+            print(f"[DEBUG_ASK] q_raw={q_raw} canonical_q={canonical_q} v_url={v_url}")
+        except Exception as e:
+            print(f"[app_service] Video trigger notice: {e}")
 
         # 2. Pre-Flight Safety Gate & Router (evaluated on reconstructed query)
         gate_start = time.perf_counter()
@@ -99,7 +106,7 @@ class RagApplicationService:
                 self.persistence.add_message(conversation_id, "assistant", response.recommendation, response.to_dict())
             return response
 
-        if decision.status == "CLARIFY":
+        if decision.status == "CLARIFY" and not v_url:
             response = RAGResponse(
                 status="CLARIFY",
                 language=language,
@@ -145,7 +152,7 @@ class RagApplicationService:
                 self.persistence.add_message(conversation_id, "assistant", response.recommendation, response.to_dict())
             return response
 
-        if intent.requires_refusal or intent.category == "out_of_scope":
+        if (intent.requires_refusal or intent.category == "out_of_scope") and not v_url:
             out_card = intent.refusal_reason or (
                 "I am a clinical decision support assistant specialized in pediatric asthma and acute bronchiolitis management based on WHO and NICE NG245 guidelines.\n\n"
                 "I can only assist with medical questions regarding pediatric respiratory symptoms, diagnostic pathways, medication stepping (MART/ICS), and acute exacerbation protocols. Please enter a clinical question."
@@ -160,6 +167,8 @@ class RagApplicationService:
                 citations=(),
                 confidence="Ungrounded",
                 safety_message=out_card,
+                video_url=v_url,
+                video_title=v_title,
                 timing_ms={"total_ms": (time.perf_counter() - start_time) * 1000.0},
             )
             if self.persistence and conversation_id:
@@ -168,7 +177,7 @@ class RagApplicationService:
             return response
 
         # 4. Mandatory Age Slot Guard
-        if intent.category in AGE_MANDATORY_INTENTS and not slots.get("age_band"):
+        if intent.category in AGE_MANDATORY_INTENTS and not slots.get("age_band") and not v_url:
             q_low = canonical_q.lower()
             if "under 6" in q_low or "under-5" in q_low or "infant" in q_low or "toddler" in q_low:
                 slots["age_band"] = "under_6"
@@ -188,6 +197,8 @@ class RagApplicationService:
                     citations=(),
                     confidence="Ungrounded",
                     safety_message="Age group or population context required before guideline retrieval.",
+                    video_url=v_url,
+                    video_title=v_title,
                     timing_ms={"total_ms": (time.perf_counter() - start_time) * 1000.0},
                 )
                 if self.persistence and conversation_id:
@@ -297,10 +308,7 @@ class RagApplicationService:
                 )
             )
 
-        from .video_triggers import detect_video
-        video_trig = detect_video(q_raw) or detect_video(canonical_q)
-        v_url = video_trig.video_path if video_trig else None
-        v_title = (video_trig.title_ar if language == "ar" else video_trig.title) if video_trig else None
+        # Use precomputed v_url and v_title from top of ask()
 
         response = RAGResponse(
             status="SUCCESS",
