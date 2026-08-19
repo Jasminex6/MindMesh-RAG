@@ -18,6 +18,7 @@ from medical_rag.query_rewriter import ConversationalQueryRewriter
 from medical_rag.intent_classifier import IntentClassifier, AGE_MANDATORY_INTENTS, AGE_BAND_OPTIONS, summarize_for_retrieval
 from medical_rag.router import route_query
 from langchain_ollama import OllamaEmbeddings
+from video_triggers import detect_video
 
 
 def display_answer(answer: GeneratedAnswer) -> None:
@@ -26,6 +27,11 @@ def display_answer(answer: GeneratedAnswer) -> None:
     print("\n" + divider)
     print(f"CLINICAL QUESTION: {answer.query}")
     print(divider)
+
+    video = detect_video(answer.query)
+    if video:
+        print(f"\n[🎥 INSTRUCTIONAL VIDEO TRIGGERED: {video.title}]")
+        print(f"   Video URL: {video.video_path}")
 
     if answer.refused:
         print("\n1. RECOMMENDATION:")

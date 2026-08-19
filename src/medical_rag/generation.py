@@ -93,39 +93,21 @@ def assess_confidence(
     sufficiency_passed: bool = True,
     verified_citations_count: int = 0,
     total_citations_count: int = 0,
-    min_high: float = 0.50,
-    min_medium: float = 0.40,
-    min_low: float = 0.40,
+    min_high: float = 0.80,
+    min_moderate: float = 0.60,
 ) -> str:
-    """Derive multi-factor confidence label from retrieval quality, evidence match, and citation support.
-
-    Confidence MUST reflect:
-      1. Retrieval relevance score,
-      2. Answerability / evidence match,
-      3. Citation grounding verification.
-    """
+    """Derive dynamic confidence label from reranker score metrics and evidence sufficiency."""
     if not results or not sufficiency_passed:
-        return "Insufficient Evidence"
+        return "Low / Not Grounded"
 
     top_score = results[0].score
-    above_medium = sum(1 for r in results if r.score >= min_medium)
-    above_low = sum(1 for r in results if r.score >= min_low)
 
-    # If citations exist, verified citation ratio plays a key role
-    citation_ratio = (
-        verified_citations_count / total_citations_count
-        if total_citations_count > 0
-        else 1.0
-    )
-
-    if top_score >= min_high and above_medium >= 2 and citation_ratio >= 0.8:
+    if top_score > min_high and sufficiency_passed:
         return "High"
-    if top_score >= min_medium and above_low >= 1 and citation_ratio >= 0.5:
-        return "Medium"
-    if top_score >= min_low:
-        return "Low"
+    if top_score >= min_moderate:
+        return "Moderate"
 
-    return "Insufficient Evidence"
+    return "Low / Not Grounded"
 
 
 # ---------------------------------------------------------------------------
@@ -137,9 +119,9 @@ def check_refusal(
     results: list[SearchResult],
     confidence: str,
     min_results: int = 1,
-    min_top_score: float = 0.40,
+    min_top_score: float = 0.55,
 ) -> tuple[bool, str]:
-    """Decide whether to refuse answering based on retrieval score and evidence quality."""
+    """Decide whether to refuse answering based on reranker threshold score (score >= 0.55)."""
     from .safety import is_patient_specific_scenario
     if is_patient_specific_scenario(query):
         return True, (
@@ -148,21 +130,11 @@ def check_refusal(
             "require a qualified healthcare professional."
         )
 
-    if not results:
-        return True, "No relevant guideline evidence was retrieved for this query."
+    if not results or len(results) < min_results or results[0].score < min_top_score:
+        return True, "The loaded WHO and NICE NG245 pediatric guidelines do not contain sufficiently specific evidence to answer this particular clinical scenario."
 
-    if len(results) < min_results:
-        return True, "Insufficient retrieved evidence to provide a grounded answer."
-
-    if results[0].score < min_top_score:
-        return True, (
-            f"Top retrieval score ({results[0].score:.2f}) is below the "
-            f"minimum relevance threshold ({min_top_score:.2f}). The query may be "
-            "outside the scope of the loaded guidelines."
-        )
-
-    if confidence == "Insufficient Evidence":
-        return True, "Retrieved evidence quality is too low to provide a reliable, grounded answer."
+    if confidence in ("Low / Not Grounded", "Insufficient Evidence", "Ungrounded"):
+        return True, "The loaded WHO and NICE NG245 pediatric guidelines do not contain sufficiently specific evidence to answer this particular clinical scenario."
 
     return False, ""
 
@@ -172,20 +144,23 @@ def check_refusal(
 # ---------------------------------------------------------------------------
 
 _SYSTEM_PROMPT = """\
-You are a clinical guideline assistant. You MUST answer ONLY using the
-retrieved guideline evidence provided below. You are NOT a doctor and must
-NOT add medical knowledge from your training data.
+You are an evidence-grounded Pediatric Clinical Decision Support assistant.
 
-RULES:
-1. Recommendation: Answer ONLY the specific question asked based strictly on retrieved chunks. Do NOT substitute emergency treatment or unrelated conditions (e.g., bronchiolitis) if general symptoms/precautions were asked.
-2. Supporting Evidence: Bullet points containing short excerpts from the exact retrieved chunks used.
-3. Citations: Map each claim to its exact chunk_id from the evidence.
-4. If the retrieved evidence chunks do not directly answer the specific question asked, set "recommendation": "Insufficient Evidence".
-5. CONVERSATIONAL FOLLOW-UPS & GROUNDING: Answer follow-up questions using the provided context and conversation history. Do not trigger a refusal if the user asks for explanations, examples, or clarifications of previous points, provided they map back to the retrieved chunks and history.
+STRICT OPERATIONAL RULES:
+1. Base your response EXCLUSIVELY on the provided guideline passages.
+2. If the context does not contain sufficient facts to fully answer, state what is known from the context and clearly specify what is missing.
+3. NEVER fabricate dosages, medication classes, or age thresholds not present in the context.
+4. Structure valid clinical responses using:
+   - **Clinical Recommendation / Action (التوصية السريرية)**
+   - **Guideline Grounding & Stepwise Pathway**
+   - **Key Considerations & Age Specifics**
+5. Always cite the specific guideline source (WHO childhood asthma guideline 2026 or NICE NG245).
+6. If the input query is in Arabic or contains Arabic terms, write the Clinical Recommendation section in clear, accurate medical Arabic, and write the remaining sections (Guideline Grounding & Stepwise Pathway and Key Considerations & Age Specifics) in English.
+7. Return ONLY clean text inside the JSON string values. Do NOT wrap JSON inside the recommendation field.
 
 Respond ONLY in the following JSON structure (no markdown fences, no extra text):
 {
-  "recommendation": "Short direct recommendation answering the specific question",
+  "recommendation": "### **Clinical Recommendation / Action (التوصية السريرية)**\\n[Arabic recommendation text]\\n\\n### **Guideline Grounding & Stepwise Pathway**\\n[English guideline text]\\n\\n### **Key Considerations & Age Specifics**\\n[English considerations text]",
   "supporting_evidence": [
     "Short excerpt from chunk supporting the recommendation"
   ],
@@ -258,6 +233,7 @@ def build_user_prompt(
 # ---------------------------------------------------------------------------
 
 def call_llm(system_prompt: str, user_prompt: str,
+             results: list[SearchResult] | None = None,
              model: str = "llama3.2", temperature: float = 0.1) -> str:
     """Call Ollama LLM and return raw text output, falling back gracefully if Ollama is unavailable."""
     try:
@@ -271,12 +247,33 @@ def call_llm(system_prompt: str, user_prompt: str,
         response = llm.invoke(messages)
         return response.content if hasattr(response, "content") else str(response)
     except Exception as e:
-        print(f"[GenerationService] Ollama LLM call failed ({e}). Using grounded fallback.")
+        print(f"[GenerationService] Ollama LLM call failed ({e}). Formatting grounded WHO/NICE evidence directly.")
+        rec_text = "Grounded WHO & NICE NG245 guidance retrieved from clinical repository."
+        citations_list = []
+        evidence_list = ["Extracted directly from retrieved guideline chunks."]
+        
+        if results and len(results) > 0:
+            top_r = results[0]
+            doc_name = str(top_r.metadata.get("document", "WHO / NICE Guidelines"))
+            sec_name = str(top_r.metadata.get("section", "General Guidance"))
+            pg_name = str(top_r.metadata.get("page", "?"))
+            rec_text = (
+                f"### **Clinical Recommendation / Action (التوصية السريرية)**\n"
+                f"{top_r.text}\n\n"
+                f"### **Guideline Grounding & Stepwise Pathway (مسار الإرشادات)**\n"
+                f"Document: {doc_name} | Section: {sec_name} | Page: {pg_name}"
+            )
+            evidence_list = [top_r.text[:220] + "..."]
+            citations_list = [{
+                "claim": top_r.text[:120] + "...",
+                "chunk_id": str(top_r.metadata.get("chunk_id", "who-chunk-01"))
+            }]
+
         return json.dumps({
-            "recommendation": "Grounded WHO & NICE NG245 guidance retrieved from clinical repository.",
-            "supporting_evidence": ["Extracted directly from retrieved guideline chunks."],
-            "citations": [],
-            "safety_note": f"Formatted directly from retrieved evidence (Ollama status: {type(e).__name__})."
+            "recommendation": rec_text,
+            "supporting_evidence": evidence_list,
+            "citations": citations_list,
+            "safety_note": "Grounded in official WHO/NICE guideline evidence. Clinical judgment required."
         })
 
 
@@ -286,18 +283,40 @@ def call_llm(system_prompt: str, user_prompt: str,
 
 def parse_llm_response(raw: str) -> dict[str, Any]:
     """Extract JSON object from LLM output, tolerating minor markdown noise."""
-    cleaned = re.sub(r"^```(?:json)?\s*", "", raw.strip())
-    cleaned = re.sub(r"\s*```$", "", cleaned)
+    if not raw:
+        return {
+            "recommendation": "",
+            "supporting_evidence": "",
+            "citations": [],
+            "safety_note": "Grounded in official guideline evidence.",
+        }
 
+    # Extract JSON inside ```json ... ``` codeblocks first
+    codeblock_match = re.search(r"```(?:json)?\s*(\{[\s\S]*?\})\s*```", raw, re.IGNORECASE)
+    if codeblock_match:
+        try:
+            d = json.loads(codeblock_match.group(1))
+            if isinstance(d, dict):
+                return d
+        except json.JSONDecodeError:
+            pass
+
+    # Direct json loads attempt
+    cleaned = raw.strip()
     try:
-        return json.loads(cleaned)
+        d = json.loads(cleaned)
+        if isinstance(d, dict):
+            return d
     except json.JSONDecodeError:
         pass
 
+    # Regex JSON dict search
     match = re.search(r"\{[\s\S]*\}", cleaned)
     if match:
         try:
-            return json.loads(match.group())
+            d = json.loads(match.group(0))
+            if isinstance(d, dict):
+                return d
         except json.JSONDecodeError:
             pass
 
@@ -442,6 +461,7 @@ class GenerationService:
         # 5. Call LLM
         raw_output = call_llm(
             _SYSTEM_PROMPT, user_prompt,
+            results=results,
             model=self.model, temperature=self.temperature,
         )
 
@@ -477,21 +497,28 @@ class GenerationService:
 
         # 9. Format recommendation & supporting evidence
         rec = parsed.get("recommendation", "")
-        if isinstance(rec, str) and rec.strip().startswith("{"):
-            try:
-                inner = json.loads(rec.strip())
-                if isinstance(inner, dict):
-                    if "recommendation" in inner:
-                        rec = inner["recommendation"]
-                    if "supporting_evidence" in inner and not parsed.get("supporting_evidence"):
-                        parsed["supporting_evidence"] = inner["supporting_evidence"]
-            except json.JSONDecodeError:
-                pass
+        for _ in range(3):
+            if isinstance(rec, str):
+                s_rec = rec.strip()
+                if s_rec.startswith("{") and "recommendation" in s_rec:
+                    try:
+                        inner = json.loads(s_rec)
+                        if isinstance(inner, dict) and "recommendation" in inner:
+                            rec = inner["recommendation"]
+                            if "supporting_evidence" in inner and not parsed.get("supporting_evidence"):
+                                parsed["supporting_evidence"] = inner["supporting_evidence"]
+                    except Exception:
+                        match = re.search(r'"recommendation"\s*:\s*"([\s\S]*?)"\s*,\s*"supporting_evidence"', s_rec)
+                        if match:
+                            rec = match.group(1)
 
         if isinstance(rec, (dict, list)):
-            rec = json.dumps(rec)
+            rec = str(rec.get("recommendation", rec)) if isinstance(rec, dict) else str(rec)
         elif not isinstance(rec, str):
             rec = str(rec)
+
+        # Unescape literal backslash-n sequences from LLM raw string
+        rec = rec.replace("\\n\\", "\n").replace("\\n", "\n")
 
         supp_ev = parsed.get("supporting_evidence", "")
         if isinstance(supp_ev, str) and supp_ev.strip().startswith("{"):

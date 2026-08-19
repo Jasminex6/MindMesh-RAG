@@ -59,13 +59,63 @@ _ENGLISH_IMPLICIT_PRONOUNS = [
 ]
 
 
+_WHO_AR_TO_EN_CACHE: dict[str, str] | None = None
+_WHO_EN_TO_AR_CACHE: dict[str, list[str]] | None = None
+
+
+def load_who_terminology() -> tuple[dict[str, str], dict[str, list[str]]]:
+    """Load WHO & NICE Arabic/English medical terms dictionaries."""
+    global _WHO_AR_TO_EN_CACHE, _WHO_EN_TO_AR_CACHE
+    if _WHO_AR_TO_EN_CACHE is not None and _WHO_EN_TO_AR_CACHE is not None:
+        return _WHO_AR_TO_EN_CACHE, _WHO_EN_TO_AR_CACHE
+
+    ar_to_en: dict[str, str] = {}
+    en_to_ar: dict[str, list[str]] = {}
+    from pathlib import Path
+    import json
+
+    base_dir = Path(__file__).resolve().parent.parent.parent / "Docs" / "Team" / "Menna"
+    terms_files = [
+        base_dir / "medical_terms_en_ar WHO.json",
+        base_dir / "medical_terms_en_ar_NICE_Asthma.json",
+    ]
+
+    for terms_file in terms_files:
+        if terms_file.exists():
+            try:
+                with open(terms_file, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    for item in data.get("terms", []):
+                        term_en = item.get("term_en", "").strip()
+                        term_ar = item.get("term_ar", "").strip()
+                        syns_en = item.get("synonyms_en", [])
+                        syns_ar = item.get("synonyms_ar", [])
+
+                        if term_en and term_ar:
+                            all_ar = [term_ar] + syns_ar
+                            for ar in all_ar:
+                                parts = [p.strip() for p in ar.split("/") if p.strip()]
+                                for p in parts:
+                                    ar_to_en[p.lower()] = term_en
+
+                            all_en = [term_en] + syns_en
+                            for en in all_en:
+                                en_to_ar[en.lower()] = all_ar
+            except Exception:
+                pass
+
+    _WHO_AR_TO_EN_CACHE = ar_to_en
+    _WHO_EN_TO_AR_CACHE = en_to_ar
+    return ar_to_en, en_to_ar
+
+
 def detect_language(text: str) -> str:
     """Return 'ar' if Arabic characters are present, else 'en'."""
     return "ar" if _ARABIC_CHAR_PATTERN.search(text) else "en"
 
 
 def extract_clinical_terms(text: str) -> tuple[dict[str, Any], str | None]:
-    """Extract clinical concepts and implied age band from Arabic/English text."""
+    """Extract clinical concepts and implied age band from Arabic/English text using WHO terminology."""
     extracted = {}
     implied_age = None
     text_lower = text.lower()
@@ -78,6 +128,15 @@ def extract_clinical_terms(text: str) -> tuple[dict[str, Any], str | None]:
                 if concept in ("under_6", "children_6_11", "adults_adolescents"):
                     implied_age = concept
                 break
+
+    # Match 247 WHO Arabic medical terms
+    ar_to_en, _ = load_who_terminology()
+    who_matches = []
+    for ar_term, en_term in ar_to_en.items():
+        if len(ar_term) >= 3 and ar_term in text_lower:
+            who_matches.append(en_term)
+    if who_matches:
+        extracted["who_mapped_terms"] = sorted(list(set(who_matches)))
 
     # Match English age terms if not set
     if not implied_age:

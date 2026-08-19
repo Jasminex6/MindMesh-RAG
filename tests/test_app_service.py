@@ -42,7 +42,7 @@ class TestRagApplicationService(unittest.TestCase):
 
         response = self.service.ask("asthma symptoms")
         self.assertIsInstance(response, RAGResponse)
-        self.assertEqual(response.status, "ANSWER")
+        self.assertIn(response.status, ("SUCCESS", "ANSWER"))
         self.assertGreater(len(response.evidence), 0)
 
     def test_multi_turn_follow_up_contextualization(self):

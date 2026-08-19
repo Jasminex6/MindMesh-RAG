@@ -33,24 +33,65 @@ def format_retrieval_query(query: str) -> str:
     return query.strip()
 
 
+import difflib
+
+_TYPO_MAP = {
+    "anad": "and", "asmtha": "asthma", "astma": "asthma", "asthmaa": "asthma",
+    "symtoms": "symptoms", "symtom": "symptom", "treament": "treatment",
+    "inhalrr": "inhaler", "bronkiolitis": "bronchiolitis", "spiroemtry": "spirometry",
+    "veentolin": "ventolin", "salbutamoll": "salbutamol", "budesonidd": "budesonide",
+    "بخاخخ": "بخاخ", "سترويد": "ستيرويد", "فنتولينن": "فنتولين", "ربوو": "ربو", "اعراضض": "أعراض",
+}
+
+
 def normalize_medical_typos(query: str) -> str:
-    """Normalize common typos in clinical query string."""
-    replacements = {
-        "anad": "and",
-        "asmtha": "asthma",
-        "symtoms": "symptoms",
-        "treament": "treatment",
-    }
+    """Normalize common typos in clinical query string using exact map and difflib fuzzy matching."""
     tokens = query.split()
-    normalized = [replacements.get(t.lower(), t) for t in tokens]
-    return " ".join(normalized)
+    normalized_tokens = []
+    
+    # Try loading WHO/NICE terminology for fuzzy matching
+    known_terms = set()
+    try:
+        from .nlp_processor import load_who_terminology
+        ar_to_en, en_to_ar = load_who_terminology()
+        known_terms.update(en_to_ar.keys())
+    except Exception:
+        pass
+
+    for t in tokens:
+        t_low = t.lower()
+        if t_low in _TYPO_MAP:
+            normalized_tokens.append(_TYPO_MAP[t_low])
+        elif known_terms and len(t_low) >= 5 and t_low not in known_terms:
+            matches = difflib.get_close_matches(t_low, list(known_terms), n=1, cutoff=0.82)
+            if matches:
+                normalized_tokens.append(matches[0])
+            else:
+                normalized_tokens.append(t)
+        else:
+            normalized_tokens.append(t)
+
+    return " ".join(normalized_tokens)
 
 
 def expand_medical_query(query: str) -> str:
-    """Expand medical acronyms and normalize common typos in clinical query string."""
+    """Expand medical acronyms, WHO Arabic medical terms, and normalize typos in clinical query string."""
     normalized = normalize_medical_typos(query)
     tokens = tokenize(normalized)
     extra_terms = [ACRONYM_MAP[t] for t in tokens if t in ACRONYM_MAP]
+
+    # Expand 247 WHO Arabic medical terms into English
+    if re.search(r"[\u0600-\u06FF]", query):
+        try:
+            from .nlp_processor import load_who_terminology
+            ar_to_en, _ = load_who_terminology()
+            q_lower = query.lower()
+            for ar_term, en_term in ar_to_en.items():
+                if len(ar_term) >= 3 and ar_term in q_lower and en_term.lower() not in extra_terms:
+                    extra_terms.append(en_term)
+        except Exception:
+            pass
+
     if extra_terms:
         return f"{normalized} {' '.join(extra_terms)}"
     return normalized

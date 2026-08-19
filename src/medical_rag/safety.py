@@ -87,11 +87,37 @@ EMERGENCY_MESSAGE_AR = (
 )
 
 
+RED_FLAG_PATTERNS = [
+    r"\b(blue|cyanosis|turning blue|blue lips|blue face)\b",
+    r"\b(can'?t breathe|cannot breathe|gasping|stopped breathing|suffocating|struggling to breathe)\b",
+    r"\b(unconscious|unresponsive|collapsed|passed out|fainted|seizure|convulsion)\b",
+    r"\b(silent chest|exhaustion|drowsy|extreme lethargy|stridor at rest)\b",
+    r"أنقذوني|طفلي\s+لا\s+يتنفس|ازرقاق|اختناق|صعوبة\s+شديدة\s+في\s+التنفس|بموت|انا\s+بموت|أنا\s+بموت|مش\s+قادر\s+اتنفس|شفايفه\s+زرقاء|فاقد\s+الوعي",
+]
+
+_RED_FLAG_REGEX = re.compile("|".join(RED_FLAG_PATTERNS), re.IGNORECASE)
+
+
+def classify_query_intent(query: str) -> str:
+    """Classify user query into 3 pre-retrieval intent tiers: EMERGENCY, CLINICAL, OUT_OF_SCOPE."""
+    if not query or not query.strip():
+        return "OUT_OF_SCOPE"
+
+    q = query.strip()
+    if _RED_FLAG_REGEX.search(q) or is_emergency(q):
+        return "EMERGENCY"
+
+    if is_prompt_injection(q) or is_out_of_scope(q):
+        return "OUT_OF_SCOPE"
+
+    return "CLINICAL"
+
+
 def is_emergency(text: str) -> bool:
     """Detect emergency / acutely unsafe language in the query."""
     if not text:
         return False
-    return bool(_EMERGENCY_REGEX.search(text))
+    return bool(_EMERGENCY_REGEX.search(text) or _RED_FLAG_REGEX.search(text))
 
 
 # ---------------------------------------------------------------------------
@@ -160,6 +186,9 @@ _OUT_OF_SCOPE_EXPLICIT_EN = [
     r"\bheart\s+attack\b",
     r"\bcar\s+engine\b",
     r"\bice\s+cream\b",
+    r"\bgambary\b|\bgambari\b",
+    r"\bwho\s+(made|created|built)\s+you\b",
+    r"^(hello|hi|hey|howdy|good\s+(morning|afternoon|evening))\b",
     r"\bfootball\b|\bsoccer\b",
     r"\brecipe\b",
 ]
@@ -172,6 +201,9 @@ _OUT_OF_SCOPE_EXPLICIT_AR = [
     r"أزمة\s+قلبية",
     r"محرك\s+السيارة",
     r"آيس\s+كريم",
+    r"جمبري|جمبرى",
+    r"من\s+صنعك|من\0628\0646\0627\0643",
+    r"مرحبا|أهلا|ازيك|ازيكـ",
 ]
 
 _OUT_OF_SCOPE_EXPLICIT_REGEX = re.compile(
@@ -180,16 +212,16 @@ _OUT_OF_SCOPE_EXPLICIT_REGEX = re.compile(
 )
 
 _ASTHMA_TOPIC_TERMS_EN = [
-    "asthma", "wheez", "inhaler", "bronch", "ics", "saba", "laba", "mart",
+    "asthma", "wheez", "inhaler", "bronch", "bronchiolitis", "ics", "saba", "laba", "mart",
     "feno", "spirometry", "peak flow", "exacerbation", "nebuliz",
     "controller", "reliever", "steroid", "allerg", "respirat", "lung",
     "breath", "cough", "chest tight", "gina", "who guideline", "nice",
     "dose", "dosage", "treatment", "medication", "therapy", "management",
-    "symptom", "symptoms",
+    "symptom", "symptoms", "diagnos", "guideline", "guidelines",
 ]
 _ASTHMA_TOPIC_TERMS_AR = [
-    "ربو", "أزيز", "بخاخ", "شعب", "تنفس", "صدر", "كحه", "كحة", "حساسية",
-    "رئة", "رئتين", "ازمة", "أزمة", "نفس", "جرعة", "علاج", "دواء",
+    "ربو", "أزيز", "بخاخ", "شعب", "الشعيبات", "تنفس", "صدر", "كحه", "كحة", "حساسية",
+    "رئة", "رئتين", "ازمة", "أزمة", "نفس", "جرعة", "علاج", "دواء", "إرشادات", "ارشاد",
 ]
 _ASTHMA_TOPIC_TERMS = _ASTHMA_TOPIC_TERMS_EN + _ASTHMA_TOPIC_TERMS_AR
 

@@ -61,6 +61,15 @@ class RagApplicationService:
             slots["age_band"] = nlp_res.implied_age_band
         timing["prep_ms"] = (time.perf_counter() - prep_start) * 1000.0
 
+        # Video Trigger Detection
+        try:
+            from video_triggers import detect_video
+            video_trig = detect_video(q_raw) or detect_video(canonical_q)
+            v_url = video_trig.video_path if video_trig else None
+            v_title = (video_trig.title_ar if language == "ar" else video_trig.title) if video_trig else None
+        except Exception:
+            v_url, v_title = None, None
+
         # 2. Pre-Flight Safety Gate & Router (evaluated on reconstructed query)
         gate_start = time.perf_counter()
         decision: RoutingDecision = route_query(canonical_q)
@@ -81,6 +90,8 @@ class RagApplicationService:
                 citations=(),
                 confidence="Insufficient Evidence",
                 safety_message=safety_msg,
+                video_url=v_url,
+                video_title=v_title,
                 timing_ms={"total_ms": (time.perf_counter() - start_time) * 1000.0},
             )
             if self.persistence and conversation_id:
@@ -99,6 +110,8 @@ class RagApplicationService:
                 citations=(),
                 confidence="Needs Clarification",
                 safety_message="Age group or population context required before guideline retrieval.",
+                video_url=v_url,
+                video_title=v_title,
                 timing_ms={"total_ms": (time.perf_counter() - start_time) * 1000.0},
             )
             if self.persistence and conversation_id:
@@ -110,19 +123,43 @@ class RagApplicationService:
         classifier = IntentClassifier()
         intent = classifier.classify(canonical_q)
 
-        if intent.requires_refusal or intent.requires_emergency:
-            refusal_reason = intent.refusal_reason or intent.emergency_response or ("تم رفض الطلب بناءً على سياسة الأمان." if language == "ar" else "Request refused per safety policy.")
-            rec_title = "مرفوض (تم تفعيل بروتوكول الأمان)" if language == "ar" else "Refused (Safety Protocol Triggered)"
+        if intent.requires_emergency or intent.category == "emergency":
+            emergency_card = intent.emergency_response or intent.refusal_reason or (
+                "🚨 **EMERGENCY: Seek Immediate Medical Care**\n\n"
+                "**Call your local emergency services (123, 911, 999) or transport the child to the nearest emergency department immediately.** Cyanosis (turning blue) and severe respiratory distress are life-threatening signs."
+            )
             response = RAGResponse(
-                status="REFUSAL",
+                status="EMERGENCY",
                 language=language,
                 query=q_raw,
                 resolved_query=canonical_q,
-                recommendation=rec_title,
+                recommendation=emergency_card,
                 evidence=(),
                 citations=(),
-                confidence="Insufficient Evidence",
-                safety_message=refusal_reason,
+                confidence="Ungrounded",
+                safety_message=emergency_card,
+                timing_ms={"total_ms": (time.perf_counter() - start_time) * 1000.0},
+            )
+            if self.persistence and conversation_id:
+                self.persistence.add_message(conversation_id, "user", q_raw)
+                self.persistence.add_message(conversation_id, "assistant", response.recommendation, response.to_dict())
+            return response
+
+        if intent.requires_refusal or intent.category == "out_of_scope":
+            out_card = intent.refusal_reason or (
+                "I am a clinical decision support assistant specialized in pediatric asthma and acute bronchiolitis management based on WHO and NICE NG245 guidelines.\n\n"
+                "I can only assist with medical questions regarding pediatric respiratory symptoms, diagnostic pathways, medication stepping (MART/ICS), and acute exacerbation protocols. Please enter a clinical question."
+            )
+            response = RAGResponse(
+                status="OUT_OF_SCOPE",
+                language=language,
+                query=q_raw,
+                resolved_query=canonical_q,
+                recommendation=out_card,
+                evidence=(),
+                citations=(),
+                confidence="Ungrounded",
+                safety_message=out_card,
                 timing_ms={"total_ms": (time.perf_counter() - start_time) * 1000.0},
             )
             if self.persistence and conversation_id:
@@ -132,7 +169,6 @@ class RagApplicationService:
 
         # 4. Mandatory Age Slot Guard
         if intent.category in AGE_MANDATORY_INTENTS and not slots.get("age_band"):
-            # Inspect canonical query string for implied age
             q_low = canonical_q.lower()
             if "under 6" in q_low or "under-5" in q_low or "infant" in q_low or "toddler" in q_low:
                 slots["age_band"] = "under_6"
@@ -150,7 +186,7 @@ class RagApplicationService:
                     recommendation="Are you asking about children under 6, children aged 6–11, or adolescents/adults (12+)? Asthma guidance differs by age group.",
                     evidence=(),
                     citations=(),
-                    confidence="Needs Clarification",
+                    confidence="Ungrounded",
                     safety_message="Age group or population context required before guideline retrieval.",
                     timing_ms={"total_ms": (time.perf_counter() - start_time) * 1000.0},
                 )
@@ -190,19 +226,34 @@ class RagApplicationService:
         )
         timing["generation_ms"] = (time.perf_counter() - gen_start) * 1000.0
 
-        # 7. Clean output handling on Refusal / Insufficient Evidence
+        # 7. Clean output handling on Refusal / Insufficient Evidence (NO_EVIDENCE)
         if answer.refused:
             timing["total_ms"] = (time.perf_counter() - start_time) * 1000.0
+            no_evidence_card = (
+                "**لم يتم العثور على إرشادات محددة في الدليل**\n\n"
+                "لا تحتوي إرشادات منظمة الصحة العالمية وNICE NG245 المحملة على أدلة سريرية كافية للإجابة على هذا السيناريو السريري.\n\n"
+                "**الخطوات التالية الموصى بها:**\n"
+                "- إعادة صياغة السؤال باستخدام مصطلحات سريرية قياسية (مثل عمر المريض، شدة الأعراض، أو الفئة الدوائية).\n"
+                "- استشارة أخصائي أمراض الصدر للأطفال."
+                if language == "ar" else
+                "**No Specific Guideline Guidance Found**\n\n"
+                "The loaded WHO and NICE NG245 pediatric guidelines do not contain sufficiently specific evidence to answer this particular clinical scenario.\n\n"
+                "**Recommended Next Steps:**\n"
+                "- Rephrase the query with standard clinical terms (e.g., patient age, specific symptom severity, or drug class).\n"
+                "- Consult local hospital formularies or refer to a pediatric respiratory specialist."
+            )
             response = RAGResponse(
-                status="REFUSAL",
+                status="NO_EVIDENCE",
                 language=language,
                 query=q_raw,
                 resolved_query=canonical_q,
-                recommendation=answer.recommendation or "Refused (Insufficient Evidence)",
+                recommendation=no_evidence_card,
                 evidence=(),
                 citations=(),
-                confidence="Insufficient Evidence",
-                safety_message=answer.safety_note or answer.refusal_reason,
+                confidence="Ungrounded",
+                safety_message=no_evidence_card,
+                video_url=v_url,
+                video_title=v_title,
                 timing_ms=timing,
             )
             if self.persistence and conversation_id:
@@ -239,10 +290,13 @@ class RagApplicationService:
                 )
             )
 
-        timing["total_ms"] = (time.perf_counter() - start_time) * 1000.0
+        from .video_triggers import detect_video
+        video_trig = detect_video(q_raw) or detect_video(canonical_q)
+        v_url = video_trig.video_path if video_trig else None
+        v_title = (video_trig.title_ar if language == "ar" else video_trig.title) if video_trig else None
 
         response = RAGResponse(
-            status="ANSWER",
+            status="SUCCESS",
             language=language,
             query=q_raw,
             resolved_query=canonical_q,
@@ -251,6 +305,8 @@ class RagApplicationService:
             citations=tuple(citation_list),
             confidence=answer.confidence,
             safety_message=answer.safety_note,
+            video_url=v_url,
+            video_title=v_title,
             timing_ms=timing,
         )
 

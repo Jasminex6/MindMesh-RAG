@@ -33,6 +33,8 @@ app = FastAPI(
     version="1.0.0",
 )
 
+from fastapi.staticfiles import StaticFiles
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -40,6 +42,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+static_path = ROOT / "static"
+static_path.mkdir(exist_ok=True)
+app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
 
 # Singleton Service Instances
 _store = SQLiteStore()
@@ -79,6 +85,17 @@ class CreateSessionRequest(BaseModel):
 # API Endpoints
 # ---------------------------------------------------------------------------
 
+@app.get("/")
+def root_index():
+    return {
+        "service": "Pediatric Asthma Clinical Decision Support API",
+        "status": "online",
+        "frontend_ui": "http://localhost:5173",
+        "swagger_docs": "http://127.0.0.1:8000/docs",
+        "health_check": "http://127.0.0.1:8000/health",
+    }
+
+
 @app.get("/health")
 def health_check():
     return {"status": "ok", "service": "Pediatric Asthma CDS API"}
@@ -90,9 +107,13 @@ def ask_question(req: AskRequest):
         raise HTTPException(status_code=400, detail="Query cannot be empty.")
     
     try:
+        from medical_rag.nlp_processor import detect_language
+        q_clean = req.query.strip()
+        lang = detect_language(q_clean)
         response = _app_service.ask(
-            query=req.query.strip(),
+            query=q_clean,
             conversation_id=req.conversation_id,
+            language=lang,
             slots=req.slots or {},
             chat_history=req.chat_history or [],
         )

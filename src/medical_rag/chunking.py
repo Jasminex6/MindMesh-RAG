@@ -61,6 +61,31 @@ def split_sentences(text: str) -> list[str]:
     return [s.strip() for s in sentences if s.strip()]
 
 
+_NON_CLINICAL_KEYWORDS = [
+    r"\bfunding\b",
+    r"\backnowledg?ments?\b",
+    r"\bisbn\b",
+    r"\bsome\s+rights\s+reserved\b",
+    r"\bcataloguing-in-publication\b",
+    r"\bdeclaration\s+of\s+interests?\b",
+    r"\bannex\s+1\.\s+management\s+of\s+conflicts\b",
+]
+_NON_CLINICAL_REGEX = re.compile("|".join(_NON_CLINICAL_KEYWORDS), re.IGNORECASE)
+
+
+def is_non_clinical_chunk(text: str) -> bool:
+    """Filter out non-clinical metadata, administrative noise, or table dumps with < 40% alphabetic text."""
+    cleaned = text.strip()
+    if len(cleaned) < 100:
+        return True
+    if _NON_CLINICAL_REGEX.search(cleaned):
+        return True
+    alpha_chars = sum(1 for c in cleaned if c.isalpha())
+    if (alpha_chars / max(len(cleaned), 1)) < 0.40:
+        return True
+    return False
+
+
 class SectionAwareChunker:
     """Sentence-Aware Hybrid Chunker respecting section boundaries and sentence integrity."""
 
@@ -165,8 +190,10 @@ class SectionAwareChunker:
             nonlocal buffer, sequence
             if not buffer:
                 return
-            chunks.append(self._make_chunk(document, buffer, sequence, reason, topic))
-            sequence += 1
+            c = self._make_chunk(document, buffer, sequence, reason, topic)
+            if not is_non_clinical_chunk(c.text):
+                chunks.append(c)
+                sequence += 1
             limit = self.chunk_size - next_tokens
             buffer = self._overlap_tail(buffer, limit) if keep_overlap else []
 

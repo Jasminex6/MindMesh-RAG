@@ -89,6 +89,7 @@ _EMERGENCY_PATTERNS = [
     r"\b(turning|turned)\s+blue\b",
     r"\b(can'?t|cannot)\s+breathe\b",
     r"\bsevere\s+(respiratory|breathing)\s+(distress|arrest|failure|difficulty)\b",
+    r"\bsevere\s+chest\s+pain\b",
     r"\b(unconscious|gasping|suffocating|choking|drowsy|confused)\b",
     r"\bcan'?t\s+speak\s+(in\s+full\s+sentences|words)\b",
     r"\bblue\s+(lips|face|skin|tongue)\b",
@@ -221,31 +222,45 @@ class IntentClassifier:
                 )
 
         # 2. Emergency Detection
-        for pat in _EMERGENCY_PATTERNS:
-            if re.search(pat, q_str, re.IGNORECASE):
-                is_ar = bool(re.search(r"[\u0600-\u06FF]", q_str))
-                emergency_msg = (
-                    "🔴 تحذير طوارئ: إذا كان الطفل أو المريض يعاني من صعوبة شديدة في التنفس أو زرقة في الشفتين أو خطر على الحياة، توجه فوراً إلى أقرب مستشفى أو اتصل بالإسعاف (123). لا تنتظر إجابة النظام."
-                    if is_ar else
-                    "🔴 EMERGENCY WARNING: If a patient is experiencing severe breathing difficulty, turning blue, or life-threatening symptoms, seek immediate emergency medical care (call 911/123/local emergency services) immediately. Do not delay emergency evaluation."
-                )
-                return IntentDecision(
-                    category="emergency",
-                    requires_clarification=False,
-                    requires_emergency=True,
-                    requires_refusal=True,
-                    emergency_response=emergency_msg,
-                    refusal_reason=emergency_msg,
-                )
+        from .safety import classify_query_intent
+        intent_tier = classify_query_intent(q_str)
+        is_ar = bool(re.search(r"[\u0600-\u06FF]", q_str))
+
+        if intent_tier == "EMERGENCY":
+            emergency_msg = (
+                "🚨 **طوارئ: اطلب الرعاية الطبية الفورية**\n\n"
+                "**اتصل بالإسعاف (123 / 911) أو توجه بالطفل إلى أقرب قسم طوارئ فوراً.** زرقة الشفتين والصعوبة الشديدة في التنفس أعراض مهددة للحياة.\n\n"
+                "**إجراءات مؤقتة حتى وصول المساعدة:**\n"
+                "- **وضعية الطفل:** أجلس الطفل في وضع قائم ومريح، ولا تدعه يستلقي فلات.\n"
+                "- **بخاخ الإنقاذ (الفنتولين/سالبيوتامول):** أعطِ **بخة واحدة عبر الحجرة الاستنشاقية (المباعد) كل 30-60 ثانية، حتى 10 بخات**.\n"
+                "- **الهدوء وتخفيف الملابس:** ابقَ بجانب الطفل وقم بتخفيف الملابس الضيقة حول الرقبة والصدر.\n"
+                "- **تجنب الأكل والشرب:** لا تعطِ الطفل أي أطعمة أو سوائل عن طريق الفم لتجنب خطر الاختناق."
+                if is_ar else
+                "🚨 **EMERGENCY: Seek Immediate Medical Care**\n\n"
+                "**Call your local emergency services (123, 911, 999) or transport the child to the nearest emergency department immediately.** Cyanosis (turning blue) and severe respiratory distress are life-threatening signs.\n\n"
+                "**Immediate bridge actions while waiting for help:**\n"
+                "- **Positioning:** Sit the child comfortably upright. Do not allow them to lie flat.\n"
+                "- **Reliever Inhaler (if prescribed/available):** Administer **1 puff of Salbutamol (SABA) via spacer every 30–60 seconds, up to 10 puffs**, shaking the inhaler before each puff.\n"
+                "- **Keep Calm & Loosen Clothing:** Stay with the child; loosen any tight clothing around the neck and chest.\n"
+                "- **No Food or Drink:** Do not administer oral liquids or food due to high aspiration risk."
+            )
+            return IntentDecision(
+                category="emergency",
+                requires_clarification=False,
+                requires_emergency=True,
+                requires_refusal=True,
+                emergency_response=emergency_msg,
+                refusal_reason=emergency_msg,
+            )
 
         # 3. Out of Scope Detection
-        from .safety import is_out_of_scope
-        if is_out_of_scope(q_str):
-            is_ar = bool(re.search(r"[\u0600-\u06FF]", q_str))
+        if intent_tier == "OUT_OF_SCOPE":
             out_msg = (
-                "السؤال غير متعلق بإرشادات الربو المحمّلة."
+                "أنا مساعد دعم القرارات السريرية المتخصص في إدارة ربو الأطفال والتهاب الشعيبات الهوائية الحاد وفقاً لإرشادات منظمة الصحة العالمية وNICE NG245.\n\n"
+                "يمكنني فقط المساعدة في الأسئلة الطبية المتعلقة بالأعراض التنفسية للأطفال، وطرق التشخيص، وتدريج الأدوية، وبروتوكولات التفاقم الحاد. يرجى إدخال سؤال سريري."
                 if is_ar else
-                OUT_OF_SCOPE_RESPONSE
+                "I am a clinical decision support assistant specialized in pediatric asthma and acute bronchiolitis management based on WHO and NICE NG245 guidelines.\n\n"
+                "I can only assist with medical questions regarding pediatric respiratory symptoms, diagnostic pathways, medication stepping (MART/ICS), and acute exacerbation protocols. Please enter a clinical question."
             )
             return IntentDecision(
                 category="out_of_scope",
