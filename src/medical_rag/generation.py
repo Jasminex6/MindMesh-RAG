@@ -388,8 +388,11 @@ class GenerationService:
 
     def generate(self, query: str,
                  results: list[SearchResult],
-                 chat_history: list[dict[str, str]] | list[tuple[str, str]] | None = None,
-                 skip_llm: bool = False) -> GeneratedAnswer:
+                 skip_llm: bool = False,
+                 age_band: str | None = None,
+                 intent_category: str | None = None,
+                 slots: dict | None = None,
+                 chat_history: list[dict[str, str]] | list[tuple[str, str]] | None = None) -> GeneratedAnswer:
         """Full generation pipeline."""
         # 1. Evidence sufficiency check
         sufficiency_passed, sufficiency_reason = assess_evidence_sufficiency(query, results)

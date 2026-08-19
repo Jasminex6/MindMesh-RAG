@@ -1,4 +1,5 @@
 """Interactive Clinical Decision Support RAG CLI."""
+
 from __future__ import annotations
 
 import re
@@ -13,6 +14,9 @@ from medical_rag.pipeline import CorpusPipeline
 from medical_rag.vector_repository import ChromaVectorRepository
 from medical_rag.hybrid_retrieval import UnifiedRetriever
 from medical_rag.generation import GenerationService, GeneratedAnswer
+from medical_rag.query_rewriter import ConversationalQueryRewriter
+from medical_rag.intent_classifier import IntentClassifier, AGE_MANDATORY_INTENTS, AGE_BAND_OPTIONS, summarize_for_retrieval
+from medical_rag.router import route_query
 from langchain_ollama import OllamaEmbeddings
 
 
@@ -90,14 +94,14 @@ def setup_pipeline():
     print("\n[Initializing pipeline...]")
     config = default_config(ROOT)
     build = CorpusPipeline(config).build()
-    
+
     emb_fn = OllamaEmbeddings(model=config.embedding_model)
     collection_name = f"demo_collection_{build.corpus_fingerprint}"
     repo = ChromaVectorRepository(config.chroma_dir, collection_name, emb_fn)
     repo.upsert(build.chunks, batch_size=32)
     retriever = UnifiedRetriever(repo, build.chunks)
     gen_service = GenerationService(model="llama3.2", temperature=0.1)
-    
+
     print(f"[Pipeline Ready - {len(build.chunks)} chunks loaded from WHO & NICE guidelines]\n")
     return retriever, gen_service
 
@@ -137,30 +141,139 @@ def ask_question(
     chat_history: list[dict[str, str]] | list[tuple[str, str]] | None = None,
     skip_llm_rewriter: bool = False,
     interactive: bool = True,
-):
-    sub_questions = split_into_questions(query)
+) -> object:
+    """Classify query, enforce mandatory slots, run retrieval and generation."""
+    if slots is None:
+        slots = {}
+
+    processed_query = query
+    if chat_history:
+        rewriter = ConversationalQueryRewriter(model=getattr(gen_service, "model", "llama3.2"))
+        processed_query = rewriter.rewrite(query, chat_history=chat_history, skip_llm=skip_llm_rewriter)
+        if processed_query != query:
+            print(f"[Query Rewriter] Rewrote query into standalone query:\n  Original: '{query}'\n  Rewritten: '{processed_query}'")
+
+    # 1. Sub-millisecond Pre-Flight Safety Gate & Router
+    routing = route_query(processed_query)
+    if routing.status == "BLOCKED":
+        refusal_reason = routing.safety_message_en
+        refused_answer = GeneratedAnswer(
+            query=query,
+            recommendation=f"Refused ({routing.category} Guardrail Triggered)",
+            supporting_evidence="(RAG retrieval bypassed - safety refusal triggered)",
+            citations=[],
+            confidence="Insufficient Evidence",
+            safety_note=refusal_reason,
+            refused=True,
+            refusal_reason=refusal_reason,
+        )
+        display_answer(refused_answer)
+        if chat_history is not None and isinstance(chat_history, list):
+            chat_history.append({"role": "user", "content": query})
+            chat_history.append({"role": "assistant", "content": refusal_reason})
+        return refused_answer
+
+    # 2. Intent Classifier & Hard Refusal
+    classifier = IntentClassifier()
+    intent = classifier.classify(processed_query)
+
+    if intent.requires_refusal or intent.requires_emergency:
+        refusal_reason = intent.refusal_reason or intent.emergency_response or "Request refused per safety policy."
+        refused_answer = GeneratedAnswer(
+            query=query,
+            recommendation="Refused (Safety Protocol Triggered)",
+            supporting_evidence="(RAG retrieval bypassed - safety refusal triggered)",
+            citations=[],
+            confidence="Insufficient Evidence",
+            safety_note=refusal_reason,
+            refused=True,
+            refusal_reason=refusal_reason,
+        )
+        display_answer(refused_answer)
+        if chat_history is not None and isinstance(chat_history, list):
+            chat_history.append({"role": "user", "content": query})
+            chat_history.append({"role": "assistant", "content": refusal_reason})
+        return refused_answer
+
+    # 3. Mandatory Age Slot Guard (deterministic, not LLM-controlled)
+    if intent.category in AGE_MANDATORY_INTENTS and not slots.get("age_band"):
+        print(f"\n[Intent: '{intent.category}' — age is required for this query]")
+        print("  What is the age group of the person this question is about?")
+        print("    1. Under 6 years old")
+        print("    2. 6–11 years old")
+        print("    3. 12 years and older (adolescent/adult)")
+        if interactive and sys.stdin.isatty():
+            try:
+                raw = input("  Enter 1, 2, or 3 > ").strip()
+            except (EOFError, KeyboardInterrupt, OSError):
+                raw = ""
+            age_band = AGE_BAND_OPTIONS.get(raw.lower(), None)
+            if age_band:
+                slots["age_band"] = age_band
+                print(f"  [Age band recorded: {age_band}]\n")
+            else:
+                print("  [Age band not recognised — proceeding without age filter]\n")
+
+    # 4. Adaptive Clarification Prompting (non-age slots)
+    if intent.requires_clarification:
+        non_age_qs = [q for q in intent.adaptive_questions if q.id != "age_group"]
+        if non_age_qs:
+            print(f"[Intent: '{intent.category}' — adaptive clinical context / clarification]")
+            for q in non_age_qs:
+                if slots.get(q.id):
+                    continue
+                print(f"  • {q.question}")
+                for idx, opt in enumerate(q.options, 1):
+                    print(f"    {idx}. {opt}")
+                if interactive and sys.stdin.isatty():
+                    try:
+                        ans = input("  Select option number (or press Enter to skip) > ").strip()
+                        if ans.isdigit() and 1 <= int(ans) <= len(q.options):
+                            chosen = q.options[int(ans) - 1]
+                            slots[q.id] = chosen
+                            print(f"  [Selected: {chosen}]\n")
+                    except (EOFError, KeyboardInterrupt, OSError):
+                        print()
+
+    # 5. Build enriched query string for retrieval
+    extra_context = []
+    for k, v in slots.items():
+        if k != "age_band" and v:
+            extra_context.append(f"{k}: {v}")
+    if extra_context:
+        processed_query = f"{processed_query} [{', '.join(extra_context)}]"
+
+    enriched_query = summarize_for_retrieval(processed_query, slots, intent.category)
+    age_band = slots.get("age_band")
+
+    # 6. Sub-question decomposition → retrieval → generation
+    sub_questions = split_into_questions(enriched_query)
     answers = []
-    
+
     if len(sub_questions) > 1:
         print(f"\n[Detected multi-question query: processing {len(sub_questions)} sub-questions...]\n")
-    
+
     for sub_q in sub_questions:
-        from medical_rag.query_rewriter import rewrite_conversational_query
-        processed_query = rewrite_conversational_query(
-            sub_q, chat_history=chat_history, skip_llm=skip_llm_rewriter
+        print(f"[Searching guidelines for: '{sub_q}'...]")
+        results = retriever.search(sub_q, strategy="hybrid_rerank", top_k=5)
+        answer = gen_service.generate(
+            sub_q, results, age_band=age_band, intent_category=intent.category, slots=slots, chat_history=chat_history
         )
-        print(f"[Searching guidelines for: '{processed_query}'...]")
-        results = retriever.search(processed_query, strategy="hybrid_rerank", top_k=5)
-        answer = gen_service.generate(processed_query, results, chat_history=chat_history)
         display_answer(answer)
         answers.append(answer)
 
-        if chat_history is not None and isinstance(chat_history, list):
-            chat_history.append({"role": "user", "content": sub_q})
-            rec_text = answer.recommendation if not answer.refused else answer.refusal_reason
-            chat_history.append({"role": "assistant", "content": rec_text})
-        
-    return answers if len(answers) > 1 else (answers[0] if answers else None)
+    final_result = answers if len(answers) > 1 else (answers[0] if answers else None)
+
+    if chat_history is not None and isinstance(chat_history, list):
+        chat_history.append({"role": "user", "content": query})
+        rec_text = ""
+        if isinstance(final_result, GeneratedAnswer):
+            rec_text = final_result.recommendation
+        elif isinstance(final_result, list):
+            rec_text = "\n".join(a.recommendation for a in final_result if isinstance(a, GeneratedAnswer))
+        chat_history.append({"role": "assistant", "content": rec_text})
+
+    return final_result
 
 
 def main():
@@ -194,8 +307,9 @@ def main():
         except (KeyboardInterrupt, EOFError):
             print("\nExiting demo.")
             break
+        except Exception as e:
+            print(f"\n[Error: {e}] Please try another question.\n")
 
 
 if __name__ == "__main__":
     main()
-
