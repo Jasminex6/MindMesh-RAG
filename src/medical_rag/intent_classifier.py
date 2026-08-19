@@ -239,15 +239,21 @@ class IntentClassifier:
                 )
 
         # 3. Out of Scope Detection
-        for pat in _OUT_OF_SCOPE_PATTERNS:
-            if re.search(pat, q_str, re.IGNORECASE):
-                return IntentDecision(
-                    category="out_of_scope",
-                    requires_clarification=False,
-                    requires_emergency=False,
-                    requires_refusal=True,
-                    refusal_reason=OUT_OF_SCOPE_RESPONSE,
-                )
+        from .safety import is_out_of_scope
+        if is_out_of_scope(q_str):
+            is_ar = bool(re.search(r"[\u0600-\u06FF]", q_str))
+            out_msg = (
+                "السؤال غير متعلق بإرشادات الربو المحمّلة."
+                if is_ar else
+                OUT_OF_SCOPE_RESPONSE
+            )
+            return IntentDecision(
+                category="out_of_scope",
+                requires_clarification=False,
+                requires_emergency=False,
+                requires_refusal=True,
+                refusal_reason=out_msg,
+            )
 
         # 4. Personal Dosing Decision Detection
         # Requests asking for immediate personalized dosage decisions (e.g., "should I give a second puff right now")

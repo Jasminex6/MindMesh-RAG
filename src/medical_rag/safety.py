@@ -185,6 +185,7 @@ _ASTHMA_TOPIC_TERMS_EN = [
     "controller", "reliever", "steroid", "allerg", "respirat", "lung",
     "breath", "cough", "chest tight", "gina", "who guideline", "nice",
     "dose", "dosage", "treatment", "medication", "therapy", "management",
+    "symptom", "symptoms",
 ]
 _ASTHMA_TOPIC_TERMS_AR = [
     "ربو", "أزيز", "بخاخ", "شعب", "تنفس", "صدر", "كحه", "كحة", "حساسية",
@@ -193,7 +194,7 @@ _ASTHMA_TOPIC_TERMS_AR = [
 _ASTHMA_TOPIC_TERMS = _ASTHMA_TOPIC_TERMS_EN + _ASTHMA_TOPIC_TERMS_AR
 
 
-def is_out_of_scope(text: str, min_words: int = 3) -> bool:
+def is_out_of_scope(text: str, min_words: int = 1) -> bool:
     """Detect queries clearly outside the scope of pediatric asthma guidelines."""
     if not text:
         return False
@@ -202,12 +203,10 @@ def is_out_of_scope(text: str, min_words: int = 3) -> bool:
     if _OUT_OF_SCOPE_EXPLICIT_REGEX.search(text):
         return True
     
-    # 2. General keyword check if text is long enough
-    word_count = len(re.findall(r"\w+", text, re.UNICODE))
-    if word_count >= min_words:
-        lowered = text.lower()
-        if not any(term in lowered for term in _ASTHMA_TOPIC_TERMS):
-            return True
+    # 2. General keyword check: if query contains no asthma-related topic terms, flag as out of scope
+    lowered = text.lower()
+    if not any(term in lowered for term in _ASTHMA_TOPIC_TERMS):
+        return True
             
     return False
 
