@@ -21,13 +21,13 @@ FRONTEND_DIR = ROOT / "frontend"
 
 def main():
     print("======================================================================")
-    print("  Pediatric Asthma Clinical Decision Support System — Dev Launcher")
+    print("  Pediatric Asthma Clinical Decision Support System -- Dev Launcher")
     print("======================================================================")
 
     # 1. Spawn FastAPI Backend Subprocess
     print("[1/2] Launching FastAPI REST Backend Server on http://127.0.0.1:8000 ...")
     python_exe = sys.executable
-    backend_cmd = [python_exe, "-m", "uvicorn", "api:app", "--host", "127.0.0.1", "--port", "8000", "--reload"]
+    backend_cmd = [python_exe, "-m", "uvicorn", "api:app", "--host", "127.0.0.1", "--port", "8000"]
     backend_process = subprocess.Popen(
         backend_cmd,
         cwd=str(ROOT),
@@ -44,9 +44,9 @@ def main():
     )
 
     print("\n----------------------------------------------------------------------")
-    print("  ✅ All services launched successfully!")
-    print("  🌐 React Frontend Web UI:  http://localhost:5173")
-    print("  ⚡ FastAPI Backend API:    http://localhost:8000")
+    print("  [SUCCESS] All services launched successfully!")
+    print("  React Frontend Web UI:  http://localhost:5173")
+    print("  FastAPI Backend API:    http://127.0.0.1:8000")
     print("  (Press Ctrl+C to stop all dev servers)")
     print("----------------------------------------------------------------------\n")
 

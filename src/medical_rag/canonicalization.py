@@ -3,15 +3,24 @@
 from __future__ import annotations
 
 import re
+from .query_rewriter import rewrite_conversational_query
 
 
 def canonicalize_query(query: str, chat_history: list[dict] | None = None) -> str:
     """Map terse noun-phrase queries or contextualize follow-up questions."""
     q_str = query.strip()
+    if not q_str:
+        return ""
+
     q_lower = q_str.lower()
 
-    # 1. Multi-turn follow-up question resolution
+    # 1. Multi-turn follow-up question resolution via ConversationalQueryRewriter
     if chat_history and len(chat_history) > 0:
+        rewritten = rewrite_conversational_query(q_str, chat_history, skip_llm=False)
+        if rewritten and rewritten != q_str:
+            return rewritten
+
+        # Terse follow-up pattern fallback
         follow_up_patterns = [
             r"\bhow is it\b", r"\bwhat are its\b", r"\bhow to treat it\b",
             r"\bwhat about children\b", r"\bhow do you treat it\b", r"\bwhat about\b"

@@ -181,6 +181,7 @@ RULES:
 2. Supporting Evidence: Bullet points containing short excerpts from the exact retrieved chunks used.
 3. Citations: Map each claim to its exact chunk_id from the evidence.
 4. If the retrieved evidence chunks do not directly answer the specific question asked, set "recommendation": "Insufficient Evidence".
+5. CONVERSATIONAL FOLLOW-UPS & GROUNDING: Answer follow-up questions using the provided context and conversation history. Do not trigger a refusal if the user asks for explanations, examples, or clarifications of previous points, provided they map back to the retrieved chunks and history.
 
 Respond ONLY in the following JSON structure (no markdown fences, no extra text):
 {
@@ -226,8 +227,26 @@ def build_evidence_block(results: list[SearchResult], query: str = "", min_chunk
     return "\n".join(lines)
 
 
-def build_user_prompt(query: str, evidence_block: str) -> str:
+def build_user_prompt(
+    query: str,
+    evidence_block: str,
+    chat_history: list[dict[str, str]] | list[tuple[str, str]] | None = None,
+) -> str:
+    history_str = ""
+    if chat_history:
+        turns = []
+        for msg in chat_history[-6:]:
+            if isinstance(msg, dict):
+                role = "User" if msg.get("role") == "user" else "Assistant"
+                turns.append(f"{role}: {msg.get('content', '').strip()}")
+            elif isinstance(msg, (tuple, list)) and len(msg) >= 2:
+                turns.append(f"User: {msg[0]}")
+                turns.append(f"Assistant: {msg[1]}")
+        if turns:
+            history_str = "RECENT CONVERSATION HISTORY:\n" + "\n".join(turns) + "\n\n"
+
     return (
+        f"{history_str}"
         f"EVIDENCE CHUNKS:\n{evidence_block}\n\n"
         f"CLINICAL QUESTION:\n{query}\n\n"
         "Answer using ONLY the evidence above. Follow the JSON structure exactly."
@@ -369,6 +388,7 @@ class GenerationService:
 
     def generate(self, query: str,
                  results: list[SearchResult],
+                 chat_history: list[dict[str, str]] | list[tuple[str, str]] | None = None,
                  skip_llm: bool = False) -> GeneratedAnswer:
         """Full generation pipeline."""
         # 1. Evidence sufficiency check
@@ -404,7 +424,7 @@ class GenerationService:
 
         # 4. Build prompt
         evidence_block = build_evidence_block(results, query=query)
-        user_prompt = build_user_prompt(query, evidence_block)
+        user_prompt = build_user_prompt(query, evidence_block, chat_history=chat_history)
 
         if skip_llm:
             return GeneratedAnswer(

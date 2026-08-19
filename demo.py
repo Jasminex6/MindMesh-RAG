@@ -129,7 +129,15 @@ def split_into_questions(query: str) -> list[str]:
     return [q_str]
 
 
-def ask_question(query: str, retriever: UnifiedRetriever, gen_service: GenerationService):
+def ask_question(
+    query: str,
+    retriever: UnifiedRetriever,
+    gen_service: GenerationService,
+    slots: dict | None = None,
+    chat_history: list[dict[str, str]] | list[tuple[str, str]] | None = None,
+    skip_llm_rewriter: bool = False,
+    interactive: bool = True,
+):
     sub_questions = split_into_questions(query)
     answers = []
     
@@ -137,21 +145,31 @@ def ask_question(query: str, retriever: UnifiedRetriever, gen_service: Generatio
         print(f"\n[Detected multi-question query: processing {len(sub_questions)} sub-questions...]\n")
     
     for sub_q in sub_questions:
-        print(f"[Searching guidelines for: '{sub_q}'...]")
-        results = retriever.search(sub_q, strategy="hybrid_rerank", top_k=5)
-        answer = gen_service.generate(sub_q, results)
+        from medical_rag.query_rewriter import rewrite_conversational_query
+        processed_query = rewrite_conversational_query(
+            sub_q, chat_history=chat_history, skip_llm=skip_llm_rewriter
+        )
+        print(f"[Searching guidelines for: '{processed_query}'...]")
+        results = retriever.search(processed_query, strategy="hybrid_rerank", top_k=5)
+        answer = gen_service.generate(processed_query, results, chat_history=chat_history)
         display_answer(answer)
         answers.append(answer)
+
+        if chat_history is not None and isinstance(chat_history, list):
+            chat_history.append({"role": "user", "content": sub_q})
+            rec_text = answer.recommendation if not answer.refused else answer.refusal_reason
+            chat_history.append({"role": "assistant", "content": rec_text})
         
     return answers if len(answers) > 1 else (answers[0] if answers else None)
 
 
 def main():
     retriever, gen_service = setup_pipeline()
+    chat_history: list[dict[str, str]] = []
 
     if len(sys.argv) > 1 and not sys.argv[1].startswith("-"):
         query = " ".join(sys.argv[1:])
-        ask_question(query, retriever, gen_service)
+        ask_question(query, retriever, gen_service, chat_history=chat_history)
         return
 
     print("Interactive Demo Mode. Type a clinical question or 'exit'/'quit' to stop.\n")
@@ -172,7 +190,7 @@ def main():
             if not user_input or user_input.lower() in ("exit", "quit", "q"):
                 print("Exiting demo.")
                 break
-            ask_question(user_input, retriever, gen_service)
+            ask_question(user_input, retriever, gen_service, chat_history=chat_history)
         except (KeyboardInterrupt, EOFError):
             print("\nExiting demo.")
             break

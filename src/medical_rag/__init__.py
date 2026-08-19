@@ -7,10 +7,12 @@ from .app_service import RagApplicationService
 from .generation import Citation, GeneratedAnswer, GenerationService
 from .ingestion import IngestionService
 from .models import Chunk, ParsedGuideline, SourceSpec
+from .query_rewriter import ConversationalQueryRewriter, rewrite_conversational_query
 
 __all__ = [
     "Citation",
     "CitationContract",
+    "ConversationalQueryRewriter",
     "EvidenceContract",
     "RAGResponse",
     "RagApplicationService",
@@ -23,4 +25,5 @@ __all__ = [
     "SectionAwareChunker",
     "SourceSpec",
     "default_config",
+    "rewrite_conversational_query",
 ]
