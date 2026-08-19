@@ -73,7 +73,6 @@ class RagApplicationService:
             if video_trig:
                 v_url = str(video_trig.video_path)
                 v_title = str(video_trig.title)
-            print(f"[DEBUG_ASK] q_raw={q_raw} canonical_q={canonical_q} v_url={v_url}")
         except Exception as e:
             print(f"[app_service] Video trigger notice: {e}")
 
