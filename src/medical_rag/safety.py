@@ -130,23 +130,15 @@ _INJECTION_PATTERNS_AR = [
     r"system\s*prompt",
     r"وريني\s+ال?تعليمات\s+بتاعتك",
     r"اظهر\s+ال?system\s*prompt",
-    r"متلتزمش\s+بال?قواعد",
-    r"تجاوز\s+ال?قيود",
-    r"من\s+دلوقتي\s+هتبقى\b",
+    r"من\s+دلوقتي\s+هتبقى",
 ]
 
 _INJECTION_PATTERNS = _INJECTION_PATTERNS_EN + _INJECTION_PATTERNS_AR
+
 _INJECTION_REGEX = re.compile("|".join(_INJECTION_PATTERNS), re.IGNORECASE)
 
-INJECTION_MESSAGE_EN = (
-    "This request appears to attempt to override the system's safety "
-    "instructions. I can only answer clinical questions about asthma "
-    "guidelines based on the retrieved evidence."
-)
-INJECTION_MESSAGE_AR = (
-    "الطلب ده بيبدو إنه بيحاول يتجاوز تعليمات الأمان بتاعة النظام. أقدر بس "
-    "أجاوب على أسئلة طبية عن إرشادات الربو بناءً على الأدلة المسترجعة."
-)
+INJECTION_MESSAGE_EN = "Safety Policy Violation: Request refused (Prompt Injection Attempt Detected)."
+INJECTION_MESSAGE_AR = "تم رفض الطلب لاختراقه سياسات الأمان."
 
 
 def is_prompt_injection(text: str) -> bool:

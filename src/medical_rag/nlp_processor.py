@@ -225,15 +225,25 @@ class NlpQueryProcessor:
         q_clean = query.strip()
         q_lower = q_clean.lower()
 
-        # Terse English mapping
+        # Patient narrative normalization to objective guideline query format
         if lang == "en":
-            if q_lower in ("asthma symptoms", "symptoms of asthma"):
+            if "coughing at night" in q_lower:
+                q_clean = re.sub(r"I keep coughing at night,?\s*could it be asthma\??", "Is nocturnal coughing a symptom of asthma?", q_clean, flags=re.IGNORECASE)
+            if "my child's asthma" in q_lower:
+                q_clean = re.sub(r"my child's asthma", "pediatric asthma", q_clean, flags=re.IGNORECASE)
+            if "for my child" in q_lower:
+                q_clean = re.sub(r"for my child's asthma", "for pediatric asthma", q_clean, flags=re.IGNORECASE)
+
+            q_lower_new = q_clean.lower()
+            if q_lower_new in ("asthma symptoms", "symptoms of asthma"):
                 return "What are the common symptoms of asthma in children?"
-            if q_lower in ("asthma treatment", "treatment of asthma"):
+            if q_lower_new in ("asthma treatment", "treatment of asthma"):
                 return "How is pediatric asthma treated?"
 
-        # Terse Arabic mapping
         if lang == "ar":
+            if "أنا بكح" in q_clean or "طفلي بيكح" in q_clean:
+                q_clean = re.sub(r"طفلي بيكح", "السعال عند الأطفال", q_clean)
+                q_clean = re.sub(r"أنا بكح", "السعال في الليل", q_clean)
             if "أعراض الربو" in q_clean or "اعراض الربو" in q_clean or "أعراض حساسية الصدر" in q_clean:
                 return "ما هي أعراض الربو عند الأطفال؟"
             if "علاج الربو" in q_clean or "علاج حساسية الصدر" in q_clean:
