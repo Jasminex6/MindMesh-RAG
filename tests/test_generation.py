@@ -335,6 +335,23 @@ class TestGenerationServiceWithMockedLLM(unittest.TestCase):
         self.assertEqual(answer.citations[0].document, "WHO asthma.pdf")
 
     @patch("medical_rag.generation.call_llm")
+    def test_unwraps_nested_json_recommendation(self, mock_llm):
+        raw_nested = json.dumps({
+            "recommendation": json.dumps({
+                "recommendation": "Wheezing, shortness of breath, chest tightness, and cough",
+                "supporting_evidence": ["history of respiratory symptoms"],
+            })
+        })
+        mock_llm.return_value = raw_nested
+
+        high = _high_quality_results()
+        svc = GenerationService(model="test")
+        answer = svc.generate("asthma symptoms", high)
+
+        self.assertFalse(answer.recommendation.startswith("{"))
+        self.assertEqual(answer.recommendation, "Wheezing, shortness of breath, chest tightness, and cough")
+
+    @patch("medical_rag.generation.call_llm")
     def test_hallucinated_citation_detected(self, mock_llm):
         mock_llm.return_value = json.dumps({
             "recommendation": "Use advanced biologic therapy.",

@@ -477,12 +477,33 @@ class GenerationService:
 
         # 9. Format recommendation & supporting evidence
         rec = parsed.get("recommendation", "")
+        if isinstance(rec, str) and rec.strip().startswith("{"):
+            try:
+                inner = json.loads(rec.strip())
+                if isinstance(inner, dict):
+                    if "recommendation" in inner:
+                        rec = inner["recommendation"]
+                    if "supporting_evidence" in inner and not parsed.get("supporting_evidence"):
+                        parsed["supporting_evidence"] = inner["supporting_evidence"]
+            except json.JSONDecodeError:
+                pass
+
         if isinstance(rec, (dict, list)):
             rec = json.dumps(rec)
         elif not isinstance(rec, str):
             rec = str(rec)
 
         supp_ev = parsed.get("supporting_evidence", "")
+        if isinstance(supp_ev, str) and supp_ev.strip().startswith("{"):
+            try:
+                inner_ev = json.loads(supp_ev.strip())
+                if isinstance(inner_ev, dict):
+                    supp_ev = inner_ev.get("supporting_evidence", inner_ev.get("text", str(inner_ev)))
+                elif isinstance(inner_ev, list):
+                    supp_ev = "\n".join(f"• {str(x).strip()}" for x in inner_ev if str(x).strip())
+            except json.JSONDecodeError:
+                pass
+
         if isinstance(supp_ev, list):
             supp_ev = "\n".join(f"• {str(x).strip()}" for x in supp_ev if str(x).strip())
         elif isinstance(supp_ev, dict):
