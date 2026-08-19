@@ -36,6 +36,8 @@ htmlcov/
 artifacts/
 tmp/
 *.log
+*.db
+data/*.db
 
 # OS Noise
 .DS_Store

@@ -46,6 +46,17 @@ def normalize_medical_typos(query: str) -> str:
     return " ".join(normalized)
 
 
+def expand_medical_query(query: str) -> str:
+    """Expand medical acronyms and normalize common typos in clinical query string."""
+    normalized = normalize_medical_typos(query)
+    tokens = tokenize(normalized)
+    extra_terms = [ACRONYM_MAP[t] for t in tokens if t in ACRONYM_MAP]
+    if extra_terms:
+        return f"{normalized} {' '.join(extra_terms)}"
+    return normalized
+
+
+
 class BM25Retriever:
     """Okapi BM25 lexical retriever over a collection of Chunks."""
 
