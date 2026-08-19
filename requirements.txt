@@ -1,0 +1,7 @@
+pymupdf>=1.24
+tiktoken>=0.7
+langchain-core>=0.3
+langchain-chroma>=0.2
+langchain-ollama>=0.3
+chromadb>=0.6
+pandas>=2.2

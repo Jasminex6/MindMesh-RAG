@@ -1,0 +1,323 @@
+{
+  "timestamp": "2026-08-19 11:57:21",
+  "phase": "2_post_optimization",
+  "baseline_comparison": {
+    "frozen_baseline": {
+      "avg_p3": 0.4889,
+      "avg_p5": 0.5067,
+      "strategy": "dense"
+    },
+    "best_pre_opt_strategy": {
+      "strategy": "hybrid_rerank",
+      "avg_p3": 0.6444,
+      "avg_p5": 0.5867,
+      "avg_latency_ms": 86.64,
+      "per_query": [
+        {
+          "id": "eval-001",
+          "category": "direct",
+          "latency_ms": 61.34,
+          "p3": 0.6667,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-002",
+          "category": "direct",
+          "latency_ms": 62.91,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-003",
+          "category": "direct",
+          "latency_ms": 76.85,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-004",
+          "category": "direct",
+          "latency_ms": 74.59,
+          "p3": 0.3333,
+          "p5": 0.2
+        },
+        {
+          "id": "eval-005",
+          "category": "paraphrase",
+          "latency_ms": 65.33,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-006",
+          "category": "paraphrase",
+          "latency_ms": 88.48,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-007",
+          "category": "paraphrase",
+          "latency_ms": 83.84,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-008",
+          "category": "paraphrase",
+          "latency_ms": 94.17,
+          "p3": 0.6667,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-009",
+          "category": "abbreviation_terminology",
+          "latency_ms": 92.22,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-010",
+          "category": "abbreviation_terminology",
+          "latency_ms": 92.36,
+          "p3": 0.3333,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-011",
+          "category": "abbreviation_terminology",
+          "latency_ms": 112.67,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-012",
+          "category": "threshold_value",
+          "latency_ms": 109.12,
+          "p3": 0.6667,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-013",
+          "category": "threshold_value",
+          "latency_ms": 107.21,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-014",
+          "category": "threshold_value",
+          "latency_ms": 102.4,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-015",
+          "category": "threshold_value",
+          "latency_ms": 98.89,
+          "p3": 0.6667,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-016",
+          "category": "out_of_scope",
+          "latency_ms": 85.15,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-017",
+          "category": "out_of_scope",
+          "latency_ms": 83.08,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-018",
+          "category": "out_of_scope",
+          "latency_ms": 68.93,
+          "p3": null,
+          "p5": null
+        }
+      ]
+    },
+    "improvements_applied": [
+      "query_normalization: albuterol→salbutamol, Arabic diacritics, clinical term preservation",
+      "candidate_k: 15→20 for hybrid/rerank strategies",
+      "Arabic multilingual retrieval via semantic enhancement",
+      "query_decomposition: compound query splitting"
+    ]
+  },
+  "arabic_benchmark": {
+    "avg_arabic_p3": 0.6667,
+    "avg_arabic_p5": 0.625,
+    "per_case": [
+      {
+        "id": "ar-001",
+        "category": "direct",
+        "arabic_question": "ما هو أفضل علاج مسيطر للربو لدى الأطفال؟",
+        "english_equiv": "What is the recommended first-line controller treatment for children with asthma?",
+        "language_detected": "arabic",
+        "arabic_p3": 0.3333,
+        "arabic_p5": 0.4,
+        "english_p3": 1.0,
+        "english_p5": 1.0,
+        "delta_p3": -0.6667,
+        "latency_ms": 1016.42,
+        "top_retrieved_doc": "WHO childhood asthma guideline 2026"
+      },
+      {
+        "id": "ar-002",
+        "category": "direct",
+        "arabic_question": "متى يُستخدم سولفات المغنيسيوم الوريدي لأزمة الربو الحادة؟",
+        "english_equiv": "When is intravenous magnesium sulfate indicated for acute asthma exacerbation in children?",
+        "language_detected": "arabic",
+        "arabic_p3": 1.0,
+        "arabic_p5": 1.0,
+        "english_p3": 1.0,
+        "english_p5": 1.0,
+        "delta_p3": 0.0,
+        "latency_ms": 181.88,
+        "top_retrieved_doc": "WHO childhood asthma guideline 2026"
+      },
+      {
+        "id": "ar-003",
+        "category": "mixed",
+        "arabic_question": "ما دور الموجيات القصيرة SABA في علاج الربو؟",
+        "english_equiv": "What is the role of short-acting beta2-agonist SABA in asthma management?",
+        "language_detected": "mixed",
+        "arabic_p3": 1.0,
+        "arabic_p5": 1.0,
+        "english_p3": 1.0,
+        "english_p5": 1.0,
+        "delta_p3": 0.0,
+        "latency_ms": 183.08,
+        "top_retrieved_doc": "WHO childhood asthma guideline 2026"
+      },
+      {
+        "id": "ar-004",
+        "category": "direct",
+        "arabic_question": "كيف يتم تشخيص الربو عند الأطفال؟",
+        "english_equiv": "How is asthma diagnosed in children?",
+        "language_detected": "arabic",
+        "arabic_p3": 0.3333,
+        "arabic_p5": 0.2,
+        "english_p3": 0.0,
+        "english_p5": 0.0,
+        "delta_p3": 0.3333,
+        "latency_ms": 148.58,
+        "top_retrieved_doc": "NICE asthma guideline NG245"
+      },
+      {
+        "id": "ar-005",
+        "category": "mixed",
+        "arabic_question": "ما هي مستويات FeNO التي تشير إلى التهاب الشعب الهوائية؟",
+        "english_equiv": "What FeNO levels indicate airway inflammation in asthma?",
+        "language_detected": "mixed",
+        "arabic_p3": 1.0,
+        "arabic_p5": 1.0,
+        "english_p3": 1.0,
+        "english_p5": 1.0,
+        "delta_p3": 0.0,
+        "latency_ms": 79.62,
+        "top_retrieved_doc": "NICE asthma guideline NG245"
+      },
+      {
+        "id": "ar-006",
+        "category": "mixed",
+        "arabic_question": "متى يجب تصعيد العلاج عند طفل يستخدم SABA كثيراً؟",
+        "english_equiv": "When should treatment be escalated for a child using SABA frequently?",
+        "language_detected": "mixed",
+        "arabic_p3": 0.6667,
+        "arabic_p5": 0.4,
+        "english_p3": 0.3333,
+        "english_p5": 0.2,
+        "delta_p3": 0.3333,
+        "latency_ms": 100.37,
+        "top_retrieved_doc": "NICE asthma guideline NG245"
+      },
+      {
+        "id": "ar-007",
+        "category": "direct",
+        "arabic_question": "ما هي أعراض الربو الشديد الحاد عند المراهقين؟",
+        "english_equiv": "What are the symptoms of severe acute asthma in adolescents?",
+        "language_detected": "arabic",
+        "arabic_p3": 0.0,
+        "arabic_p5": 0.0,
+        "english_p3": 1.0,
+        "english_p5": 1.0,
+        "delta_p3": -1.0,
+        "latency_ms": 94.3,
+        "top_retrieved_doc": "WHO childhood asthma guideline 2026"
+      },
+      {
+        "id": "ar-008",
+        "category": "mixed",
+        "arabic_question": "ما مقدار جرعة الستيرويد المستنشق ICS الموصى بها للأطفال؟",
+        "english_equiv": "What is the recommended inhaled corticosteroid ICS dose for children?",
+        "language_detected": "mixed",
+        "arabic_p3": 1.0,
+        "arabic_p5": 1.0,
+        "english_p3": 1.0,
+        "english_p5": 1.0,
+        "delta_p3": 0.0,
+        "latency_ms": 116.5,
+        "top_retrieved_doc": "WHO childhood asthma guideline 2026"
+      }
+    ]
+  },
+  "latency_profile": {
+    "query_norm": {
+      "avg_ms": 0.09,
+      "min_ms": 0.08,
+      "max_ms": 0.13
+    },
+    "bm25": {
+      "avg_ms": 4.4,
+      "min_ms": 4.1,
+      "max_ms": 4.59
+    },
+    "dense": {
+      "avg_ms": 91.17,
+      "min_ms": 80.13,
+      "max_ms": 109.41
+    },
+    "rrf": {
+      "avg_ms": 0.08,
+      "min_ms": 0.08,
+      "max_ms": 0.09
+    },
+    "rerank": {
+      "avg_ms": 1.53,
+      "min_ms": 1.34,
+      "max_ms": 1.73
+    },
+    "total": {
+      "avg_ms": 97.29,
+      "min_ms": 86.07,
+      "max_ms": 115.42
+    }
+  },
+  "multi_question_benchmark": [
+    {
+      "id": "mq-001",
+      "question": "What symptoms suggest asthma, how is it diagnosed, and what first-line controller is recommended?",
+      "is_compound": true,
+      "sub_questions_found": 3,
+      "sub_questions_with_results": 3,
+      "completion_rate": 1.0,
+      "merged_results_count": 5,
+      "latency_ms": 380.53
+    },
+    {
+      "id": "mq-002",
+      "question": "When should ICS be started and how should treatment be stepped up for children with asthma?",
+      "is_compound": true,
+      "sub_questions_found": 2,
+      "sub_questions_with_results": 2,
+      "completion_rate": 1.0,
+      "merged_results_count": 5,
+      "latency_ms": 274.8
+    }
+  ]
+}

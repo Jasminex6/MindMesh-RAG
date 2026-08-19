@@ -1,0 +1,1275 @@
+{
+  "config": {
+    "chunk_size": 700,
+    "chunk_overlap": 100,
+    "embedding_model": "nomic-embed-text",
+    "min_score_threshold": 0.0,
+    "collection_name": "pediatric_asthma_guidelines_1db24c5975"
+  },
+  "metrics": {
+    "questions_evaluated": 18,
+    "in_scope_evaluated": 15,
+    "average_precision_at_3": 0.4889,
+    "average_precision_at_5": 0.5067,
+    "failures": {
+      "wrong_topic": 2,
+      "missing_context": 0,
+      "duplicate_chunks": 0,
+      "unrefused_out_of_scope": 3
+    }
+  },
+  "results": [
+    {
+      "id": "eval-001",
+      "category": "direct",
+      "question": "What is the recommended first-line controller treatment for children with asthma?",
+      "status": "PROCESSED",
+      "expected_source": "WHO asthma.pdf",
+      "expected_section": "p. 25-28, Controller therapy",
+      "precision_at_3": 0.6667,
+      "precision_at_5": 0.6,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0046-0765206760",
+          "score": 0.8027,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations for the management of asthma in children and adolescents > Recommendation 1a:",
+          "page": "31",
+          "text_excerpt": "Recommendations for the management of asthma in children and adolescents\nRecommendation 1a:\nNebulized ipratropium bromide should be added to standard first-line therapy with inhaled\nSABA and systemic corticosteroids for severe paediatric asthma exacerbations in health\nfacilities.\nStrong recommendati",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0016-b1e81bbd4a",
+          "score": 0.7958,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Summary of recommendations > Recommendations for the management of asthma in children and adolescents",
+          "page": "12",
+          "text_excerpt": "Summary of recommendations\nRecommendations for the management of asthma in children and adolescents\nAdditional treatment to standard first-line therapy for\npaediatric asthma exacerbations",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0048-753234db79",
+          "score": 0.7845,
+          "source": "NICE asthma guideline NG245",
+          "section": "1 Medicines for initial management",
+          "page": "36",
+          "text_excerpt": "1 Medicines for initial management\nWhat is the clinical and cost-effectiveness of regular 'fixed-dose' inhaled corticosteroid\n(ICS) regimens (using SABA [short-acting beta2 agonist] as a reliever) compared with 'asneeded' strategies (for example ICS/formoterol) as the initial standard treatment for\n",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0006-f8dce35912",
+          "score": 0.7782,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendation 4: ��������������������������������������������������������������������������������������������������������������������������25 > Recommendation 5: ��������������������������������������������������������������������������������������������������������������������������28 > Recommendation 6: ��������������������������������������������������������������������������������������������������������������������������33",
+          "page": "5",
+          "text_excerpt": "Recommendation 1a: ������������������������������������������������������������������������������������������������������������������������13\nRecommendation 1b: ������������������������������������������������������������������������������������������������������������������������13\n4.2 Second-line ",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0044-432153b864",
+          "score": 0.7772,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "recommendations on acute management relate to the emergency treatment of an asthma exacerbation",
+          "page": "28",
+          "text_excerpt": "recommendations on acute management relate to the emergency treatment of an asthma exacerbation\nin a health care facility, while the recommendations for long-term management relate to the ongoing\ntreatment of the chronic condition with inhaled medicines, aiming at controlling symptoms and avoiding\na",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: who-childhood-asthma-guideline-2026-0046-0765206760\nScore: 0.8027\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations for the management of asthma in children and adolescents > Recommendation 1a:\nPage: 31\n\nRecommendations for the management of asthma in children and adolescents\nRecommendation 1a:\nNebulized ipratropium bromide should be added to standard first-line therapy with inhaled\nSABA and systemic corticosteroids for severe paediatric asthma exacerbations in health\nfacilities.\nStrong recommendation, low-certainty evidence.\n------------------------------------------------------------\n\nChunk 2\nChunk ID: who-childhood-asthma-guideline-2026-0016-b1e81bbd4a\nScore: 0.7958\nSource: WHO childhood asthma guideline 2026\nSection: Summary of recommendations > Recommendations for the management of asthma in children and adolescents\nPage: 12\n\nSummary of recommendations\nRecommendations for the management of asthma in children and adolescents\nAdditional treatment to standard first-line therapy for\npaediatric asthma exacerbations\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0048-753234db79\nScore: 0.7845\nSource: NICE asthma guideline NG245\nSection: 1 Medicines for initial management\nPage: 36\n\n1 Medicines for initial management\nWhat is the clinical and cost-effectiveness of regular 'fixed-dose' inhaled corticosteroid\n(ICS) regimens (using SABA [short-acting beta2 agonist] as a reliever) compared with 'asneeded' strategies (for example ICS/formoterol) as the initial standard treatment for\nasthma in children aged 5 to 11 years? [BTS/NICE/SIGN 2024]\nFor a short explanation of why the commi...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: who-childhood-asthma-guideline-2026-0006-f8dce35912\nScore: 0.7782\nSource: WHO childhood asthma guideline 2026\nSection: Recommendation 4: ��������������������������������������������������������������������������������������������������������������������������25 > Recommendation 5: ��������������������������������������������������������������������������������������������������������������������������28 > Recommendation 6: ��������������������������������������������������������������������������������������������������������������������������33\nPage: 5\n\nRecommendation 1a: ������������������������������������������������������������������������������������������������������������������������13\nRecommendation 1b: ������������������������������������������������������������������������������������������������������������������������13\n4.2 Second-line therapy options for paediatric asthma exacerbations ��������������������������������������16\nRecomme...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: who-childhood-asthma-guideline-2026-0044-432153b864\nScore: 0.7772\nSource: WHO childhood asthma guideline 2026\nSection: recommendations on acute management relate to the emergency treatment of an asthma exacerbation\nPage: 28-29\n\nrecommendations on acute management relate to the emergency treatment of an asthma exacerbation\nin a health care facility, while the recommendations for long-term management relate to the ongoing\ntreatment of the chronic condition with inhaled medicines, aiming at controlling symptoms and avoiding\nacute exacerbations. Therefore, for this guideline, the recommendations encompass the following topic...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-002",
+      "category": "direct",
+      "question": "When is intravenous magnesium sulfate considered for a child with an acute asthma exacerbation?",
+      "status": "PROCESSED",
+      "expected_source": "WHO asthma.pdf",
+      "expected_section": "p. 27-28, Exacerbation management",
+      "precision_at_3": 1.0,
+      "precision_at_5": 1.0,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0052-c26f5ceb7a",
+          "score": 0.8689,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "4.2 Second-line therapy options for paediatric asthma exacerbations",
+          "page": "34",
+          "text_excerpt": "4.2 Second-line therapy options for paediatric asthma exacerbations\n4.2.1 IV magnesium sulfate\nBackground\nAsthma is a chronic lung disease characterized by airway inflammation and hyperresponsiveness of\nairway smooth muscles. There is growing evidence that magnesium sulfate (MgSO4) may have a role i",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0019-f4acf27a0c",
+          "score": 0.8544,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendation 2: Intravenous (IV) magnesium sulfate (as a single short infusion) should be used as",
+          "page": "12",
+          "text_excerpt": "Recommendation 2: Intravenous (IV) magnesium sulfate (as a single short infusion) should be used as\nsecond-line therapy for severe paediatric asthma exacerbations, and for moderate exacerbations not\nresponsive to standard first-line therapy with inhaled/nebulized medicines (SABA and ipratropium) and",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0053-a34dc5221f",
+          "score": 0.8523,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations for the management of asthma in children and adolescents > Recommendation 2:",
+          "page": "35",
+          "text_excerpt": "Recommendations for the management of asthma in children and adolescents\nRecommendation 2:\nIV magnesium sulfate (as a single short infusion) should be used as second-line therapy for\nsevere paediatric asthma exacerbations, and for moderate exacerbations not responsive to\nstandard first-line therapy ",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0138-5cc1d67bce",
+          "score": 0.8509,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "74. Gürkan F, Haspolat K, Boşnak M, Dikici B, Derman O, Ece A. Intravenous magnesium sulphate in the",
+          "page": "85",
+          "text_excerpt": "74. Gürkan F, Haspolat K, Boşnak M, Dikici B, Derman O, Ece A. Intravenous magnesium sulphate in the\nmanagement of moderate to severe acute asthmatic children nonresponding to conventional therapy.\nsulfate versus salbutamol in early management of severe acute asthma in children]. J Pediatr (Rio J).\n",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0056-11aeb730ae",
+          "score": 0.8326,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations for the management of asthma in children and adolescents",
+          "page": "37",
+          "text_excerpt": "Recommendations for the management of asthma in children and adolescents\nOther considerations\nPreferences, values and acceptability: The GDG agreed that most caregivers would value the avoidance\nof mechanical ventilation and PICU admission over the trivial risk of non-severe adverse effects attribut",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: who-childhood-asthma-guideline-2026-0052-c26f5ceb7a\nScore: 0.8689\nSource: WHO childhood asthma guideline 2026\nSection: 4.2 Second-line therapy options for paediatric asthma exacerbations\nPage: 34\n\n4.2 Second-line therapy options for paediatric asthma exacerbations\n4.2.1 IV magnesium sulfate\nBackground\nAsthma is a chronic lung disease characterized by airway inflammation and hyperresponsiveness of\nairway smooth muscles. There is growing evidence that magnesium sulfate (MgSO4) may have a role in\nmanaging asthma through its dual effect as an anti-inflammatory and bronchodilating agent (64, 65)...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: who-childhood-asthma-guideline-2026-0019-f4acf27a0c\nScore: 0.8544\nSource: WHO childhood asthma guideline 2026\nSection: Recommendation 2: Intravenous (IV) magnesium sulfate (as a single short infusion) should be used as\nPage: 12-13\n\nRecommendation 2: Intravenous (IV) magnesium sulfate (as a single short infusion) should be used as\nsecond-line therapy for severe paediatric asthma exacerbations, and for moderate exacerbations not\nresponsive to standard first-line therapy with inhaled/nebulized medicines (SABA and ipratropium) and\nsystemic corticosteroids in health care facilities.\nStrong recommendation, low-certainty evidence.\n...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: who-childhood-asthma-guideline-2026-0053-a34dc5221f\nScore: 0.8523\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations for the management of asthma in children and adolescents > Recommendation 2:\nPage: 35-36\n\nRecommendations for the management of asthma in children and adolescents\nRecommendation 2:\nIV magnesium sulfate (as a single short infusion) should be used as second-line therapy for\nsevere paediatric asthma exacerbations, and for moderate exacerbations not responsive to\nstandard first-line therapy with inhaled/nebulized medicines (SABA and ipratropium) and\nsystemic corticosteroids in health care ...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: who-childhood-asthma-guideline-2026-0138-5cc1d67bce\nScore: 0.8509\nSource: WHO childhood asthma guideline 2026\nSection: 74. Gürkan F, Haspolat K, Boşnak M, Dikici B, Derman O, Ece A. Intravenous magnesium sulphate in the\nPage: 85-86\n\n74. Gürkan F, Haspolat K, Boşnak M, Dikici B, Derman O, Ece A. Intravenous magnesium sulphate in the\nmanagement of moderate to severe acute asthmatic children nonresponding to conventional therapy.\nsulfate versus salbutamol in early management of severe acute asthma in children]. J Pediatr (Rio J).\n2001;77(4):279–87.\nas initial treatment of acute severe asthma in children, conducted in a tertiary-...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: who-childhood-asthma-guideline-2026-0056-11aeb730ae\nScore: 0.8326\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations for the management of asthma in children and adolescents\nPage: 37-38\n\nRecommendations for the management of asthma in children and adolescents\nOther considerations\nPreferences, values and acceptability: The GDG agreed that most caregivers would value the avoidance\nof mechanical ventilation and PICU admission over the trivial risk of non-severe adverse effects attributed to\nmagnesium sulfate administration. This view is supported by a qualitative study of parents and...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-003",
+      "category": "direct",
+      "question": "What second-line therapy options are recommended for paediatric asthma exacerbations?",
+      "status": "PROCESSED",
+      "expected_source": "WHO asthma.pdf",
+      "expected_section": "p. 27-28, Severe exacerbation therapy",
+      "precision_at_3": 1.0,
+      "precision_at_5": 0.8,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0006-f8dce35912",
+          "score": 0.9169,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendation 4: ��������������������������������������������������������������������������������������������������������������������������25 > Recommendation 5: ��������������������������������������������������������������������������������������������������������������������������28 > Recommendation 6: ��������������������������������������������������������������������������������������������������������������������������33",
+          "page": "5",
+          "text_excerpt": "Recommendation 1a: ������������������������������������������������������������������������������������������������������������������������13\nRecommendation 1b: ������������������������������������������������������������������������������������������������������������������������13\n4.2 Second-line ",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0044-432153b864",
+          "score": 0.8195,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "recommendations on acute management relate to the emergency treatment of an asthma exacerbation",
+          "page": "28",
+          "text_excerpt": "recommendations on acute management relate to the emergency treatment of an asthma exacerbation\nin a health care facility, while the recommendations for long-term management relate to the ongoing\ntreatment of the chronic condition with inhaled medicines, aiming at controlling symptoms and avoiding\na",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0018-79a68e3605",
+          "score": 0.8087,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendation 1b: Nebulized ipratropium bromide should be added for moderate paediatric asthma",
+          "page": "12",
+          "text_excerpt": "Recommendation 1b: Nebulized ipratropium bromide should be added for moderate paediatric asthma\nexacerbations not responsive to initial standard first-line therapy with inhaled SABA and systemic\ncorticosteroids in health facilities.\nStrong recommendation, low-certainty evidence.\nRemarks\n• Ipratropiu",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0016-b1e81bbd4a",
+          "score": 0.8034,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Summary of recommendations > Recommendations for the management of asthma in children and adolescents",
+          "page": "12",
+          "text_excerpt": "Summary of recommendations\nRecommendations for the management of asthma in children and adolescents\nAdditional treatment to standard first-line therapy for\npaediatric asthma exacerbations",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0046-0765206760",
+          "score": 0.7986,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations for the management of asthma in children and adolescents > Recommendation 1a:",
+          "page": "31",
+          "text_excerpt": "Recommendations for the management of asthma in children and adolescents\nRecommendation 1a:\nNebulized ipratropium bromide should be added to standard first-line therapy with inhaled\nSABA and systemic corticosteroids for severe paediatric asthma exacerbations in health\nfacilities.\nStrong recommendati",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: who-childhood-asthma-guideline-2026-0006-f8dce35912\nScore: 0.9169\nSource: WHO childhood asthma guideline 2026\nSection: Recommendation 4: ��������������������������������������������������������������������������������������������������������������������������25 > Recommendation 5: ��������������������������������������������������������������������������������������������������������������������������28 > Recommendation 6: ��������������������������������������������������������������������������������������������������������������������������33\nPage: 5\n\nRecommendation 1a: ������������������������������������������������������������������������������������������������������������������������13\nRecommendation 1b: ������������������������������������������������������������������������������������������������������������������������13\n4.2 Second-line therapy options for paediatric asthma exacerbations ��������������������������������������16\nRecomme...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: who-childhood-asthma-guideline-2026-0044-432153b864\nScore: 0.8195\nSource: WHO childhood asthma guideline 2026\nSection: recommendations on acute management relate to the emergency treatment of an asthma exacerbation\nPage: 28-29\n\nrecommendations on acute management relate to the emergency treatment of an asthma exacerbation\nin a health care facility, while the recommendations for long-term management relate to the ongoing\ntreatment of the chronic condition with inhaled medicines, aiming at controlling symptoms and avoiding\nacute exacerbations. Therefore, for this guideline, the recommendations encompass the following topic...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: who-childhood-asthma-guideline-2026-0018-79a68e3605\nScore: 0.8087\nSource: WHO childhood asthma guideline 2026\nSection: Recommendation 1b: Nebulized ipratropium bromide should be added for moderate paediatric asthma\nPage: 12\n\nRecommendation 1b: Nebulized ipratropium bromide should be added for moderate paediatric asthma\nexacerbations not responsive to initial standard first-line therapy with inhaled SABA and systemic\ncorticosteroids in health facilities.\nStrong recommendation, low-certainty evidence.\nRemarks\n• Ipratropium bromide should be given in addition to standard inhaled or nebulized SABA and systemic\ncorticoster...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: who-childhood-asthma-guideline-2026-0016-b1e81bbd4a\nScore: 0.8034\nSource: WHO childhood asthma guideline 2026\nSection: Summary of recommendations > Recommendations for the management of asthma in children and adolescents\nPage: 12\n\nSummary of recommendations\nRecommendations for the management of asthma in children and adolescents\nAdditional treatment to standard first-line therapy for\npaediatric asthma exacerbations\n------------------------------------------------------------\n\nChunk 5\nChunk ID: who-childhood-asthma-guideline-2026-0046-0765206760\nScore: 0.7986\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations for the management of asthma in children and adolescents > Recommendation 1a:\nPage: 31\n\nRecommendations for the management of asthma in children and adolescents\nRecommendation 1a:\nNebulized ipratropium bromide should be added to standard first-line therapy with inhaled\nSABA and systemic corticosteroids for severe paediatric asthma exacerbations in health\nfacilities.\nStrong recommendation, low-certainty evidence.\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-004",
+      "category": "direct",
+      "question": "What physical examination findings are typically observed in a patient during an acute asthma exacerbation?",
+      "status": "PROCESSED",
+      "expected_source": "GINA Asthma WMS.pdf",
+      "expected_section": "p. 180, Physical examination in exacerbations",
+      "precision_at_3": 0.3333,
+      "precision_at_5": 0.4,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "nice-asthma-guideline-ng245-0007-417fdc6bf8",
+          "score": 0.7498,
+          "source": "NICE asthma guideline NG245",
+          "section": "BTS/NICE/SIGN 2024]",
+          "page": "8",
+          "text_excerpt": "BTS/NICE/SIGN 2024]\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 8 of\nPhysical examination\n1.1.4 Examine people with suspected asthma to identify expiratory polyphonic wheeze\nand signs of other causes of respiratory symptoms but be aware that",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "nice-asthma-guideline-ng245-0008-20e9566427",
+          "score": 0.7429,
+          "source": "NICE asthma guideline NG245",
+          "section": "Initial treatment and objective tests for acute symptoms at",
+          "page": "9",
+          "text_excerpt": "Initial treatment and objective tests for acute symptoms at\npresentation\n1.1.5 Treat people immediately if they are acutely unwell or highly symptomatic at\npresentation, and perform objective tests that may help support a diagnosis of\nasthma (for example, eosinophil count, fractional exhaled nitric ",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0039-99fb21108e",
+          "score": 0.7201,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations were based on a balance of benefits and harms, the certainty of evidence, values and",
+          "page": "26",
+          "text_excerpt": "in the early morning, and are due to airway smooth\nmuscle constriction, also known as bronchoconstriction, and inflammation of the airway lining. These\nsymptoms are usually mild and may be controlled with medicine and avoidance of known allergens, but\nthey can result in potentially life-threatening ",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "nice-asthma-guideline-ng245-0006-165dd0ffe3",
+          "score": 0.7108,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.1 Initial clinical assessment",
+          "page": "8",
+          "text_excerpt": "1.1 Initial clinical assessment\nClinical history\n1.1.1 Obtain a structured clinical history in people with suspected asthma. Specifically,\ncheck for:\n• reported wheeze, noisy breathing, cough, breathlessness or chest tightness,\nand any variation (for example, worse during the night or early morning,",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0040-a6fddb5eb2",
+          "score": 0.6979,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "3.1 Acute management of asthma",
+          "page": "26",
+          "text_excerpt": "3.1 Acute management of asthma\nInhaled bronchodilators are the first step in treating an acute asthma exacerbation. Short-acting beta2\nagonists (SABA) should be started as initial therapy at the onset of acute symptoms (cough, wheeze,\ndifficulty breathing). Children with asthma should have access to",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: nice-asthma-guideline-ng245-0007-417fdc6bf8\nScore: 0.7498\nSource: NICE asthma guideline NG245\nSection: BTS/NICE/SIGN 2024]\nPage: 8-9\n\nBTS/NICE/SIGN 2024]\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 8 of\nPhysical examination\n1.1.4 Examine people with suspected asthma to identify expiratory polyphonic wheeze\nand signs of other causes of respiratory symptoms but be aware that even if\nexamination results are normal, the person may still have asthma. [NICE 2017]\n------------------------------------------------------------\n\nChunk 2\nChunk ID: nice-asthma-guideline-ng245-0008-20e9566427\nScore: 0.7429\nSource: NICE asthma guideline NG245\nSection: Initial treatment and objective tests for acute symptoms at\nPage: 9\n\nInitial treatment and objective tests for acute symptoms at\npresentation\n1.1.5 Treat people immediately if they are acutely unwell or highly symptomatic at\npresentation, and perform objective tests that may help support a diagnosis of\nasthma (for example, eosinophil count, fractional exhaled nitric oxide [FeNO],\nspirometry or peak expiratory flow [PEF] before and after bronchodilator) if the\nequip...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: who-childhood-asthma-guideline-2026-0039-99fb21108e\nScore: 0.7201\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations were based on a balance of benefits and harms, the certainty of evidence, values and\nPage: 26\n\nin the early morning, and are due to airway smooth\nmuscle constriction, also known as bronchoconstriction, and inflammation of the airway lining. These\nsymptoms are usually mild and may be controlled with medicine and avoidance of known allergens, but\nthey can result in potentially life-threatening exacerbations.\nChildren and adolescents with asthma may experience short-term worsening of their ast...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: nice-asthma-guideline-ng245-0006-165dd0ffe3\nScore: 0.7108\nSource: NICE asthma guideline NG245\nSection: 1.1 Initial clinical assessment\nPage: 8\n\n1.1 Initial clinical assessment\nClinical history\n1.1.1 Obtain a structured clinical history in people with suspected asthma. Specifically,\ncheck for:\n• reported wheeze, noisy breathing, cough, breathlessness or chest tightness,\nand any variation (for example, worse during the night or early morning, or\nseasonal) in these symptoms\n• any triggers that make symptoms worse\n• a personal or family histo...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: who-childhood-asthma-guideline-2026-0040-a6fddb5eb2\nScore: 0.6979\nSource: WHO childhood asthma guideline 2026\nSection: 3.1 Acute management of asthma\nPage: 26\n\n3.1 Acute management of asthma\nInhaled bronchodilators are the first step in treating an acute asthma exacerbation. Short-acting beta2\nagonists (SABA) should be started as initial therapy at the onset of acute symptoms (cough, wheeze,\ndifficulty breathing). Children with asthma should have access to a SABA inhaler and a plan of how to use\nit when an exacerbation occurs. A mild exacerbation can usu...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-005",
+      "category": "paraphrase",
+      "question": "What does the guideline recommend for long-term asthma management in children and adolescents?",
+      "status": "PROCESSED",
+      "expected_source": "WHO asthma.pdf",
+      "expected_section": "p. 25-29, Chronic asthma management",
+      "precision_at_3": 0.6667,
+      "precision_at_5": 0.6,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0042-17e973b466",
+          "score": 0.8575,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "3.2 Long-term management of asthma",
+          "page": "28",
+          "text_excerpt": "3.2 Long-term management of asthma\nThe long-term management of asthma with inhaled bronchodilators and ICS has been standard practice\nfor decades. However, evidence from large multi-centred RCTs, including mostly adults and older children,\nsuggest that there should be changes in the way that these m",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0043-3faa6c32ae",
+          "score": 0.8484,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "3.3 Scope and target audience",
+          "page": "28",
+          "text_excerpt": "3.3 Scope and target audience\nThis guideline reviews the current evidence to inform the recommendations for children and adolescents\naged <19 years diagnosed with asthma. It is not intended to encompass all aspects of the acute\nmanagement and the long-term management of asthma, but builds on existin",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0016-b1e81bbd4a",
+          "score": 0.8229,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Summary of recommendations > Recommendations for the management of asthma in children and adolescents",
+          "page": "12",
+          "text_excerpt": "Summary of recommendations\nRecommendations for the management of asthma in children and adolescents\nAdditional treatment to standard first-line therapy for\npaediatric asthma exacerbations",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0002-d82a334358",
+          "score": 0.812,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Management of asthma in children",
+          "page": "1",
+          "text_excerpt": "Management of asthma in children\nand adolescents and bronchiolitis\nin infants and young children\nWHO consolidated guidelines\nfor the management of common\nchildhood illness",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0046-0765206760",
+          "score": 0.8065,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations for the management of asthma in children and adolescents > Recommendation 1a:",
+          "page": "31",
+          "text_excerpt": "Recommendations for the management of asthma in children and adolescents\nRecommendation 1a:\nNebulized ipratropium bromide should be added to standard first-line therapy with inhaled\nSABA and systemic corticosteroids for severe paediatric asthma exacerbations in health\nfacilities.\nStrong recommendati",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: who-childhood-asthma-guideline-2026-0042-17e973b466\nScore: 0.8575\nSource: WHO childhood asthma guideline 2026\nSection: 3.2 Long-term management of asthma\nPage: 28\n\n3.2 Long-term management of asthma\nThe long-term management of asthma with inhaled bronchodilators and ICS has been standard practice\nfor decades. However, evidence from large multi-centred RCTs, including mostly adults and older children,\nsuggest that there should be changes in the way that these medicines are used (22); hence, the need to\nreview the available evidence for children and adolescent...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: who-childhood-asthma-guideline-2026-0043-3faa6c32ae\nScore: 0.8484\nSource: WHO childhood asthma guideline 2026\nSection: 3.3 Scope and target audience\nPage: 28\n\n3.3 Scope and target audience\nThis guideline reviews the current evidence to inform the recommendations for children and adolescents\naged <19 years diagnosed with asthma. It is not intended to encompass all aspects of the acute\nmanagement and the long-term management of asthma, but builds on existing recommendations. The\n------------------------------------------------------------\n\nChunk 3\nChunk ID: who-childhood-asthma-guideline-2026-0016-b1e81bbd4a\nScore: 0.8229\nSource: WHO childhood asthma guideline 2026\nSection: Summary of recommendations > Recommendations for the management of asthma in children and adolescents\nPage: 12\n\nSummary of recommendations\nRecommendations for the management of asthma in children and adolescents\nAdditional treatment to standard first-line therapy for\npaediatric asthma exacerbations\n------------------------------------------------------------\n\nChunk 4\nChunk ID: who-childhood-asthma-guideline-2026-0002-d82a334358\nScore: 0.8120\nSource: WHO childhood asthma guideline 2026\nSection: Management of asthma in children\nPage: 1-3\n\nManagement of asthma in children\nand adolescents and bronchiolitis\nin infants and young children\nWHO consolidated guidelines\nfor the management of common\nchildhood illness\n------------------------------------------------------------\n\nChunk 5\nChunk ID: who-childhood-asthma-guideline-2026-0046-0765206760\nScore: 0.8065\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations for the management of asthma in children and adolescents > Recommendation 1a:\nPage: 31\n\nRecommendations for the management of asthma in children and adolescents\nRecommendation 1a:\nNebulized ipratropium bromide should be added to standard first-line therapy with inhaled\nSABA and systemic corticosteroids for severe paediatric asthma exacerbations in health\nfacilities.\nStrong recommendation, low-certainty evidence.\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-006",
+      "category": "paraphrase",
+      "question": "Which objective tests are used to confirm a diagnosis of asthma in children and young people?",
+      "status": "PROCESSED",
+      "expected_source": "GINA Asthma WMS.pdf",
+      "expected_section": "p. 28-30, Objective diagnostic criteria",
+      "precision_at_3": 0.3333,
+      "precision_at_5": 0.4,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "nice-asthma-guideline-ng245-0009-574b723e96",
+          "score": 0.8322,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.2 Objective tests for diagnosing asthma in adults,",
+          "page": "9",
+          "text_excerpt": "1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE ",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "nice-asthma-guideline-ng245-0003-0282c26f82",
+          "score": 0.8277,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.2 Objective tests for diagnosing asthma in adults, young people and children aged 5 to 16",
+          "page": "3",
+          "text_excerpt": "1.2 Objective tests for diagnosing asthma in adults, young people and children aged 5 to 16\nObjective tests for diagnosing asthma in adults, young people and children aged 5 to 16 with a\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 3 of\n© NIC",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0056-79b365c6b4",
+          "score": 0.8115,
+          "source": "NICE asthma guideline NG245",
+          "section": "Rationale and impact",
+          "page": "41",
+          "text_excerpt": "Rationale and impact\nThese sections briefly explain why the committee made the recommendations and how\nthey might affect practice.\nAs this guideline applies to England and Scotland, the perspective was for both England\nand Scotland.\nObjective tests for diagnosing asthma in adults,\nyoung people and c",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "nice-asthma-guideline-ng245-0015-cb15f55134",
+          "score": 0.7959,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.3 Diagnosing asthma in children under 5",
+          "page": "13",
+          "text_excerpt": "1.3 Diagnosing asthma in children under 5\nDiagnosis is hard in this age group because it is difficult to do the tests and there are no\ngood reference standards.\n1.3.1 For children under 5 with suspected asthma, treat with inhaled corticosteroids in\nline with the recommendations on medicines for init",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "nice-asthma-guideline-ng245-0058-65377462cb",
+          "score": 0.7903,
+          "source": "NICE asthma guideline NG245",
+          "section": "recommendations for diagnostic testing should only be applied when the history and",
+          "page": "41",
+          "text_excerpt": "recommendations for diagnostic testing should only be applied when the history and\nexamination findings support a diagnosis of asthma. The committee also noted that,\ndepending on the mode of presentation, other diagnoses might be considered, but they\nconfined their recommendations to confirmation or",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: nice-asthma-guideline-ng245-0009-574b723e96\nScore: 0.8322\nSource: NICE asthma guideline NG245\nSection: 1.2 Objective tests for diagnosing asthma in adults,\nPage: 9-10\n\n1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 9 of...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: nice-asthma-guideline-ng245-0003-0282c26f82\nScore: 0.8277\nSource: NICE asthma guideline NG245\nSection: 1.2 Objective tests for diagnosing asthma in adults, young people and children aged 5 to 16\nPage: 3-5\n\n1.2 Objective tests for diagnosing asthma in adults, young people and children aged 5 to 16\nObjective tests for diagnosing asthma in adults, young people and children aged 5 to 16 with a\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 3 of\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 4 ...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0056-79b365c6b4\nScore: 0.8115\nSource: NICE asthma guideline NG245\nSection: Rationale and impact\nPage: 41\n\nRationale and impact\nThese sections briefly explain why the committee made the recommendations and how\nthey might affect practice.\nAs this guideline applies to England and Scotland, the perspective was for both England\nand Scotland.\nObjective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\n------------------------------------------------------------\n\nChunk 4\nChunk ID: nice-asthma-guideline-ng245-0015-cb15f55134\nScore: 0.7959\nSource: NICE asthma guideline NG245\nSection: 1.3 Diagnosing asthma in children under 5\nPage: 13\n\n1.3 Diagnosing asthma in children under 5\nDiagnosis is hard in this age group because it is difficult to do the tests and there are no\ngood reference standards.\n1.3.1 For children under 5 with suspected asthma, treat with inhaled corticosteroids in\nline with the recommendations on medicines for initial management in children\nunder 5, and review the child on a regular basis. If they still have symp...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: nice-asthma-guideline-ng245-0058-65377462cb\nScore: 0.7903\nSource: NICE asthma guideline NG245\nSection: recommendations for diagnostic testing should only be applied when the history and\nPage: 41-42\n\nrecommendations for diagnostic testing should only be applied when the history and\nexamination findings support a diagnosis of asthma. The committee also noted that,\ndepending on the mode of presentation, other diagnoses might be considered, but they\nconfined their recommendations to confirmation or exclusion of asthma.\nThe committee reviewed evidence on tests of variation in airflow obstruction a...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-007",
+      "category": "paraphrase",
+      "question": "How should asthma control and symptom frequency be monitored during follow-up visits?",
+      "status": "PROCESSED",
+      "expected_source": "GINA Asthma WMS.pdf",
+      "expected_section": "p. 40-42, Assessing asthma control",
+      "precision_at_3": 0.6667,
+      "precision_at_5": 0.8,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "nice-asthma-guideline-ng245-0017-2f755f4840",
+          "score": 0.818,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.5 Monitoring asthma control",
+          "page": "14",
+          "text_excerpt": "1.5 Monitoring asthma control\n1.5.1 Monitor asthma control at every review. In addition to asking about symptoms,\ncheck:\n• time off work or school due to asthma\n• amount of reliever inhaler used, including a check of the prescription record\n• number of courses of oral corticosteroids\n• any admission",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "nice-asthma-guideline-ng245-0063-f38a96df9e",
+          "score": 0.7775,
+          "source": "NICE asthma guideline NG245",
+          "section": "Monitoring asthma control > Recommendations 1.5.1 to 1.5.4",
+          "page": "46",
+          "text_excerpt": "Monitoring asthma control\nRecommendations 1.5.1 to 1.5.4\nWhy the committee made the recommendations\nThe committee agreed that there is some information that should always be obtained at a\nroutine monitoring review, for example whether any courses of oral corticosteroid have\nbeen needed since the las",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0052-3432f7985c",
+          "score": 0.7578,
+          "source": "NICE asthma guideline NG245",
+          "section": "5 Monitoring inhaler technique",
+          "page": "39",
+          "text_excerpt": "5 Monitoring inhaler technique\nWhat is the current frequency and the current method being used to check the inhaler\ntechnique of people with asthma? What is the optimal frequency and the best method of\nchecking inhaler technique to improve clinical outcomes for people with asthma? [NICE\n2017]",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "nice-asthma-guideline-ng245-0065-36583a6277",
+          "score": 0.7412,
+          "source": "NICE asthma guideline NG245",
+          "section": "How the recommendations might affect practice",
+          "page": "48",
+          "text_excerpt": "How the recommendations might affect practice\nAsthma control questionnaires are already recommended as part of an annual review.\nTherefore, no change to practice is anticipated. The recommendations on pulmonary\nfunction are expected to reduce the use of PEF monitoring.\nMeasurement of FeNO is increas",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "nice-asthma-guideline-ng245-0018-4a4ecce73d",
+          "score": 0.7283,
+          "source": "NICE asthma guideline NG245",
+          "section": "SIGN 2024]",
+          "page": "14",
+          "text_excerpt": "SIGN 2024]\n1.5.4 Consider fractional exhaled nitric oxide (FeNO) monitoring for adults with asthma:\n• at their regular review, and\n• before and after changing their asthma therapy. [BTS/NICE/SIGN 2024]\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- ",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: nice-asthma-guideline-ng245-0017-2f755f4840\nScore: 0.8180\nSource: NICE asthma guideline NG245\nSection: 1.5 Monitoring asthma control\nPage: 14\n\n1.5 Monitoring asthma control\n1.5.1 Monitor asthma control at every review. In addition to asking about symptoms,\ncheck:\n• time off work or school due to asthma\n• amount of reliever inhaler used, including a check of the prescription record\n• number of courses of oral corticosteroids\n• any admissions to hospital or attendance at an emergency department due\nto asthma.\nIf control is suboptimal, see ...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: nice-asthma-guideline-ng245-0063-f38a96df9e\nScore: 0.7775\nSource: NICE asthma guideline NG245\nSection: Monitoring asthma control > Recommendations 1.5.1 to 1.5.4\nPage: 46-48\n\nMonitoring asthma control\nRecommendations 1.5.1 to 1.5.4\nWhy the committee made the recommendations\nThe committee agreed that there is some information that should always be obtained at a\nroutine monitoring review, for example whether any courses of oral corticosteroid have\nbeen needed since the last review.\nSymptom questionnaires and diaries\nThe committee looked at evidence on the effects of moni...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0052-3432f7985c\nScore: 0.7578\nSource: NICE asthma guideline NG245\nSection: 5 Monitoring inhaler technique\nPage: 39\n\n5 Monitoring inhaler technique\nWhat is the current frequency and the current method being used to check the inhaler\ntechnique of people with asthma? What is the optimal frequency and the best method of\nchecking inhaler technique to improve clinical outcomes for people with asthma? [NICE\n2017]\n------------------------------------------------------------\n\nChunk 4\nChunk ID: nice-asthma-guideline-ng245-0065-36583a6277\nScore: 0.7412\nSource: NICE asthma guideline NG245\nSection: How the recommendations might affect practice\nPage: 48-49\n\nHow the recommendations might affect practice\nAsthma control questionnaires are already recommended as part of an annual review.\nTherefore, no change to practice is anticipated. The recommendations on pulmonary\nfunction are expected to reduce the use of PEF monitoring.\nMeasurement of FeNO is increasingly used in secondary care asthma clinics, but in\nprimary care only a minority of GP practices hav...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: nice-asthma-guideline-ng245-0018-4a4ecce73d\nScore: 0.7283\nSource: NICE asthma guideline NG245\nSection: SIGN 2024]\nPage: 14-15\n\nSIGN 2024]\n1.5.4 Consider fractional exhaled nitric oxide (FeNO) monitoring for adults with asthma:\n• at their regular review, and\n• before and after changing their asthma therapy. [BTS/NICE/SIGN 2024]\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 14 of\nFor a short explanation of why the committee made these recommendations and how\nthey migh...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-008",
+      "category": "paraphrase",
+      "question": "How is asthma diagnosed in young children aged 5 years and under when spirometry cannot be performed?",
+      "status": "PROCESSED",
+      "expected_source": "GINA Asthma WMS.pdf",
+      "expected_section": "p. 193-195, Diagnosis in children <= 5 years",
+      "precision_at_3": 0.0,
+      "precision_at_5": 0.2,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "nice-asthma-guideline-ng245-0015-cb15f55134",
+          "score": 0.8607,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.3 Diagnosing asthma in children under 5",
+          "page": "13",
+          "text_excerpt": "1.3 Diagnosing asthma in children under 5\nDiagnosis is hard in this age group because it is difficult to do the tests and there are no\ngood reference standards.\n1.3.1 For children under 5 with suspected asthma, treat with inhaled corticosteroids in\nline with the recommendations on medicines for init",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "nice-asthma-guideline-ng245-0033-d21a42482b",
+          "score": 0.7562,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.9 Pharmacological management in children under",
+          "page": "24",
+          "text_excerpt": "1.9 Pharmacological management in children under\n5\nThese recommendations are for children under 5 with newly suspected or confirmed\nasthma, or with asthma symptoms that are uncontrolled on their current treatment.\nSee also algorithm E for a summary of the pharmacological management of asthma in\nchil",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0034-5154689a44",
+          "score": 0.7525,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.9 Pharmacological management in children under",
+          "page": "25",
+          "text_excerpt": ".9.6 If suspected asthma is uncontrolled in children under 5 on a paediatric moderate\ndose of ICS as maintenance therapy and a trial of an LTRA has been unsuccessful\nor not tolerated, stop the LTRA and refer the child to a specialist in asthma care\nfor further investigation and management. [BTS/NICE",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0084-c80ebd89ef",
+          "score": 0.7484,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations for the management of asthma in children and adolescents",
+          "page": "54",
+          "text_excerpt": "was approved by the United States Food and Drug Administration\nfor maintenance treatment of asthma in children aged 6–12 years, having previously been approved for\npatients aged 12 years and older in 2006 (153).\nImplementation considerations\n• The importance of ensuring that all asthma medicines, wh",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "nice-asthma-guideline-ng245-0011-485c2556f4",
+          "score": 0.7468,
+          "source": "NICE asthma guideline NG245",
+          "section": "SIGN 2024]",
+          "page": "10",
+          "text_excerpt": "SIGN 2024]\nChildren aged 5 to 16\nSee also algorithm B for a summary of objective tests for diagnosing asthma in children\naged 5 to 16 with a history suggesting asthma.\n1.2.5 Measure the FeNO level in children with a history suggestive of asthma. Diagnose\nasthma if the FeNO level is 35 ppb or more. [",
+          "relevant": false,
+          "human_relevance_label": "no"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: nice-asthma-guideline-ng245-0015-cb15f55134\nScore: 0.8607\nSource: NICE asthma guideline NG245\nSection: 1.3 Diagnosing asthma in children under 5\nPage: 13\n\n1.3 Diagnosing asthma in children under 5\nDiagnosis is hard in this age group because it is difficult to do the tests and there are no\ngood reference standards.\n1.3.1 For children under 5 with suspected asthma, treat with inhaled corticosteroids in\nline with the recommendations on medicines for initial management in children\nunder 5, and review the child on a regular basis. If they still have symp...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: nice-asthma-guideline-ng245-0033-d21a42482b\nScore: 0.7562\nSource: NICE asthma guideline NG245\nSection: 1.9 Pharmacological management in children under\nPage: 24-25\n\n1.9 Pharmacological management in children under\n5\nThese recommendations are for children under 5 with newly suspected or confirmed\nasthma, or with asthma symptoms that are uncontrolled on their current treatment.\nSee also algorithm E for a summary of the pharmacological management of asthma in\nchildren under 5.\n1.9.1 Consider an 8 to12 week trial of twice-daily paediatric low-dose inhaled\ncortico...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0034-5154689a44\nScore: 0.7525\nSource: NICE asthma guideline NG245\nSection: 1.9 Pharmacological management in children under\nPage: 25\n\n.9.6 If suspected asthma is uncontrolled in children under 5 on a paediatric moderate\ndose of ICS as maintenance therapy and a trial of an LTRA has been unsuccessful\nor not tolerated, stop the LTRA and refer the child to a specialist in asthma care\nfor further investigation and management. [BTS/NICE/SIGN 2024]\nFor a short explanation of why the committee made these recommendations and how\nthey mig...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: who-childhood-asthma-guideline-2026-0084-c80ebd89ef\nScore: 0.7484\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations for the management of asthma in children and adolescents\nPage: 54-56\n\nwas approved by the United States Food and Drug Administration\nfor maintenance treatment of asthma in children aged 6–12 years, having previously been approved for\npatients aged 12 years and older in 2006 (153).\nImplementation considerations\n• The importance of ensuring that all asthma medicines, whether for reliever or maintenance therapy,\nare delivered by an appropriate inhaler device, consideri...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: nice-asthma-guideline-ng245-0011-485c2556f4\nScore: 0.7468\nSource: NICE asthma guideline NG245\nSection: SIGN 2024]\nPage: 10\n\nSIGN 2024]\nChildren aged 5 to 16\nSee also algorithm B for a summary of objective tests for diagnosing asthma in children\naged 5 to 16 with a history suggesting asthma.\n1.2.5 Measure the FeNO level in children with a history suggestive of asthma. Diagnose\nasthma if the FeNO level is 35 ppb or more. [BTS/NICE/SIGN 2024]\n1.2.6 If the FeNO level is not raised, or if FeNO testing is not available, meas...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-009",
+      "category": "abbreviation_terminology",
+      "question": "How are FeNO and FEV1 spirometry parameters used when assessing asthma?",
+      "status": "PROCESSED",
+      "expected_source": "GINA Asthma WMS.pdf",
+      "expected_section": "p. 29-30, Diagnostic biomarkers and spirometry",
+      "precision_at_3": 0.6667,
+      "precision_at_5": 0.8,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "nice-asthma-guideline-ng245-0010-9b8362710e",
+          "score": 0.7636,
+          "source": "NICE asthma guideline NG245",
+          "section": "FEV1). [BTS/NICE/SIGN 2024]",
+          "page": "10",
+          "text_excerpt": "FEV1). [BTS/NICE/SIGN 2024]\n1.2.3 If spirometry is not available or it is delayed, measure peak expiratory flow (PEF)\ntwice daily for 2 weeks. Diagnose asthma if PEF variability (expressed as\namplitude percentage mean) is 20% or more. [BTS/NICE/SIGN 2024]\n1.2.4 If asthma is not confirmed by eosinoph",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "nice-asthma-guideline-ng245-0065-36583a6277",
+          "score": 0.7558,
+          "source": "NICE asthma guideline NG245",
+          "section": "How the recommendations might affect practice",
+          "page": "48",
+          "text_excerpt": "How the recommendations might affect practice\nAsthma control questionnaires are already recommended as part of an annual review.\nTherefore, no change to practice is anticipated. The recommendations on pulmonary\nfunction are expected to reduce the use of PEF monitoring.\nMeasurement of FeNO is increas",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0009-574b723e96",
+          "score": 0.7543,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.2 Objective tests for diagnosing asthma in adults,",
+          "page": "9",
+          "text_excerpt": "1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE ",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "nice-asthma-guideline-ng245-0018-4a4ecce73d",
+          "score": 0.7528,
+          "source": "NICE asthma guideline NG245",
+          "section": "SIGN 2024]",
+          "page": "14",
+          "text_excerpt": "SIGN 2024]\n1.5.4 Consider fractional exhaled nitric oxide (FeNO) monitoring for adults with asthma:\n• at their regular review, and\n• before and after changing their asthma therapy. [BTS/NICE/SIGN 2024]\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- ",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "nice-asthma-guideline-ng245-0011-485c2556f4",
+          "score": 0.7433,
+          "source": "NICE asthma guideline NG245",
+          "section": "SIGN 2024]",
+          "page": "10",
+          "text_excerpt": "SIGN 2024]\nChildren aged 5 to 16\nSee also algorithm B for a summary of objective tests for diagnosing asthma in children\naged 5 to 16 with a history suggesting asthma.\n1.2.5 Measure the FeNO level in children with a history suggestive of asthma. Diagnose\nasthma if the FeNO level is 35 ppb or more. [",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: nice-asthma-guideline-ng245-0010-9b8362710e\nScore: 0.7636\nSource: NICE asthma guideline NG245\nSection: FEV1). [BTS/NICE/SIGN 2024]\nPage: 10\n\nFEV1). [BTS/NICE/SIGN 2024]\n1.2.3 If spirometry is not available or it is delayed, measure peak expiratory flow (PEF)\ntwice daily for 2 weeks. Diagnose asthma if PEF variability (expressed as\namplitude percentage mean) is 20% or more. [BTS/NICE/SIGN 2024]\n1.2.4 If asthma is not confirmed by eosinophil count, FeNO, BDR or PEF variability but\nstill suspected on clinical grounds, refer for considerat...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: nice-asthma-guideline-ng245-0065-36583a6277\nScore: 0.7558\nSource: NICE asthma guideline NG245\nSection: How the recommendations might affect practice\nPage: 48-49\n\nHow the recommendations might affect practice\nAsthma control questionnaires are already recommended as part of an annual review.\nTherefore, no change to practice is anticipated. The recommendations on pulmonary\nfunction are expected to reduce the use of PEF monitoring.\nMeasurement of FeNO is increasingly used in secondary care asthma clinics, but in\nprimary care only a minority of GP practices hav...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0009-574b723e96\nScore: 0.7543\nSource: NICE asthma guideline NG245\nSection: 1.2 Objective tests for diagnosing asthma in adults,\nPage: 9-10\n\n1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 9 of...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: nice-asthma-guideline-ng245-0018-4a4ecce73d\nScore: 0.7528\nSource: NICE asthma guideline NG245\nSection: SIGN 2024]\nPage: 14-15\n\nSIGN 2024]\n1.5.4 Consider fractional exhaled nitric oxide (FeNO) monitoring for adults with asthma:\n• at their regular review, and\n• before and after changing their asthma therapy. [BTS/NICE/SIGN 2024]\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 14 of\nFor a short explanation of why the committee made these recommendations and how\nthey migh...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: nice-asthma-guideline-ng245-0011-485c2556f4\nScore: 0.7433\nSource: NICE asthma guideline NG245\nSection: SIGN 2024]\nPage: 10\n\nSIGN 2024]\nChildren aged 5 to 16\nSee also algorithm B for a summary of objective tests for diagnosing asthma in children\naged 5 to 16 with a history suggesting asthma.\n1.2.5 Measure the FeNO level in children with a history suggestive of asthma. Diagnose\nasthma if the FeNO level is 35 ppb or more. [BTS/NICE/SIGN 2024]\n1.2.6 If the FeNO level is not raised, or if FeNO testing is not available, meas...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-010",
+      "category": "abbreviation_terminology",
+      "question": "What is EIB (exercise-induced bronchoconstriction) and how should exercise-related symptoms be managed?",
+      "status": "PROCESSED",
+      "expected_source": "GINA Asthma WMS.pdf",
+      "expected_section": "p. 67, Managing exercise-related symptoms",
+      "precision_at_3": 0.3333,
+      "precision_at_5": 0.2,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0039-99fb21108e",
+          "score": 0.6929,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations were based on a balance of benefits and harms, the certainty of evidence, values and",
+          "page": "26",
+          "text_excerpt": "in the early morning, and are due to airway smooth\nmuscle constriction, also known as bronchoconstriction, and inflammation of the airway lining. These\nsymptoms are usually mild and may be controlled with medicine and avoidance of known allergens, but\nthey can result in potentially life-threatening ",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0040-a6fddb5eb2",
+          "score": 0.6796,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "3.1 Acute management of asthma",
+          "page": "26",
+          "text_excerpt": "3.1 Acute management of asthma\nInhaled bronchodilators are the first step in treating an acute asthma exacerbation. Short-acting beta2\nagonists (SABA) should be started as initial therapy at the onset of acute symptoms (cough, wheeze,\ndifficulty breathing). Children with asthma should have access to",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0010-9b8362710e",
+          "score": 0.6594,
+          "source": "NICE asthma guideline NG245",
+          "section": "FEV1). [BTS/NICE/SIGN 2024]",
+          "page": "10",
+          "text_excerpt": "FEV1). [BTS/NICE/SIGN 2024]\n1.2.3 If spirometry is not available or it is delayed, measure peak expiratory flow (PEF)\ntwice daily for 2 weeks. Diagnose asthma if PEF variability (expressed as\namplitude percentage mean) is 20% or more. [BTS/NICE/SIGN 2024]\n1.2.4 If asthma is not confirmed by eosinoph",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0160-8c8bc16cea",
+          "score": 0.656,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Annex 2. Prioritized PICO questions on the clinical management of asthma in children and adolescents",
+          "page": "100",
+          "text_excerpt": "events\nabsence) • Mortality due to exacerbation\n• Escalation of care (ventilation/PICU • Lung function (change in FEV1, PEF) – less\nadmission) important\n• Length of stay (in emergency department or\nhospital)\nFEV1: forced expiratory volume in 1 second; IV: intravenous; PEF: peak expiratory flow; PICU",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0093-beb6149383",
+          "score": 0.6558,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "5 The IMCI general danger signs are: inability to drink or breastfeed, vomiting everything, experiencing convulsions and being lethargic",
+          "page": "61",
+          "text_excerpt": "5 The IMCI general danger signs are: inability to drink or breastfeed, vomiting everything, experiencing convulsions and being lethargic\nor unconscious.\nIntroduction Process and Management of asthma in Recommendations for the Management of Recommendations for the Monitoring Dissemination References ",
+          "relevant": false,
+          "human_relevance_label": "no"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: who-childhood-asthma-guideline-2026-0039-99fb21108e\nScore: 0.6929\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations were based on a balance of benefits and harms, the certainty of evidence, values and\nPage: 26\n\nin the early morning, and are due to airway smooth\nmuscle constriction, also known as bronchoconstriction, and inflammation of the airway lining. These\nsymptoms are usually mild and may be controlled with medicine and avoidance of known allergens, but\nthey can result in potentially life-threatening exacerbations.\nChildren and adolescents with asthma may experience short-term worsening of their ast...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: who-childhood-asthma-guideline-2026-0040-a6fddb5eb2\nScore: 0.6796\nSource: WHO childhood asthma guideline 2026\nSection: 3.1 Acute management of asthma\nPage: 26\n\n3.1 Acute management of asthma\nInhaled bronchodilators are the first step in treating an acute asthma exacerbation. Short-acting beta2\nagonists (SABA) should be started as initial therapy at the onset of acute symptoms (cough, wheeze,\ndifficulty breathing). Children with asthma should have access to a SABA inhaler and a plan of how to use\nit when an exacerbation occurs. A mild exacerbation can usu...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0010-9b8362710e\nScore: 0.6594\nSource: NICE asthma guideline NG245\nSection: FEV1). [BTS/NICE/SIGN 2024]\nPage: 10\n\nFEV1). [BTS/NICE/SIGN 2024]\n1.2.3 If spirometry is not available or it is delayed, measure peak expiratory flow (PEF)\ntwice daily for 2 weeks. Diagnose asthma if PEF variability (expressed as\namplitude percentage mean) is 20% or more. [BTS/NICE/SIGN 2024]\n1.2.4 If asthma is not confirmed by eosinophil count, FeNO, BDR or PEF variability but\nstill suspected on clinical grounds, refer for considerat...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: who-childhood-asthma-guideline-2026-0160-8c8bc16cea\nScore: 0.6560\nSource: WHO childhood asthma guideline 2026\nSection: Annex 2. Prioritized PICO questions on the clinical management of asthma in children and adolescents\nPage: 100\n\nevents\nabsence) • Mortality due to exacerbation\n• Escalation of care (ventilation/PICU • Lung function (change in FEV1, PEF) – less\nadmission) important\n• Length of stay (in emergency department or\nhospital)\nFEV1: forced expiratory volume in 1 second; IV: intravenous; PEF: peak expiratory flow; PICU: paediatric intensive care unit; SABA: shortacting beta2 agonist.\n82 Introduction Process and Manag...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: who-childhood-asthma-guideline-2026-0093-beb6149383\nScore: 0.6558\nSource: WHO childhood asthma guideline 2026\nSection: 5 The IMCI general danger signs are: inability to drink or breastfeed, vomiting everything, experiencing convulsions and being lethargic\nPage: 61\n\n5 The IMCI general danger signs are: inability to drink or breastfeed, vomiting everything, experiencing convulsions and being lethargic\nor unconscious.\nIntroduction Process and Management of asthma in Recommendations for the Management of Recommendations for the Monitoring Dissemination References 43and context methods children and adolescents management of asthma in bronchiolitis in children man...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-011",
+      "category": "abbreviation_terminology",
+      "question": "What is AERD (aspirin-exacerbated respiratory disease) and which medications trigger severe attacks?",
+      "status": "PROCESSED",
+      "expected_source": "GINA Asthma WMS.pdf",
+      "expected_section": "p. 65, Medication avoidance in asthma",
+      "precision_at_3": 0.0,
+      "precision_at_5": 0.0,
+      "detected_failures": [
+        "wrong_topic"
+      ],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "nice-asthma-guideline-ng245-0046-aa6fc89d87",
+          "score": 0.6694,
+          "source": "NICE asthma guideline NG245",
+          "section": "FEV1",
+          "page": "33",
+          "text_excerpt": "FEV1\nThe amount of air that can be forcibly exhaled from the lungs in one second (forced\nexpiratory volume in one second).\nLeukotriene receptor antagonist\nA type of oral medicine that blocks cysteinyl leukotrienes, used in the treatment of asthma\nand seasonal allergies. Also known as leukotriene mod",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0039-99fb21108e",
+          "score": 0.6576,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations were based on a balance of benefits and harms, the certainty of evidence, values and",
+          "page": "26",
+          "text_excerpt": "in the early morning, and are due to airway smooth\nmuscle constriction, also known as bronchoconstriction, and inflammation of the airway lining. These\nsymptoms are usually mild and may be controlled with medicine and avoidance of known allergens, but\nthey can result in potentially life-threatening ",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0062-c99b5cc76e",
+          "score": 0.629,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations for the management of asthma in children and adolescents",
+          "page": "40",
+          "text_excerpt": "ophylline may be the only available agent for the\nmanagement of acute asthma exacerbations.\n• If the decision is made to use aminophylline, adequate monitoring and anti-emetics should be used\nto mitigate the risk of side-effects.\n• Children receiving aminophylline require clinical monitoring includi",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0140-ef8beb191f",
+          "score": 0.6279,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "101. D’Avila RS, Piva JP, Marostica PJ, Amantea SL. Early administration of two intravenous bolus of",
+          "page": "87",
+          "text_excerpt": "101. D’Avila RS, Piva JP, Marostica PJ, Amantea SL. Early administration of two intravenous bolus of\naminophylline added to the standard treatment of children with acute asthma. Respir Med.\n2008;102(1):156–61. (https://doi.org/10.1016/j.rmed.2007.07.030).\nasthmaticus. A prospective, randomized, doub",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0061-e5c8e84cf3",
+          "score": 0.6221,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations for the management of asthma in children and adolescents",
+          "page": "39",
+          "text_excerpt": "methods children and adolescents management of asthma in bronchiolitis in children management of bronchiolitis in and evaluation\nHarms and undesirable effects\nAn increase in both nausea (relative risk increase (RRI): 23.1%) and vomiting (RRI: 8.3%) in the groups\nreceiving aminophylline were judged b",
+          "relevant": false,
+          "human_relevance_label": "no"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: nice-asthma-guideline-ng245-0046-aa6fc89d87\nScore: 0.6694\nSource: NICE asthma guideline NG245\nSection: FEV1\nPage: 33-35\n\nFEV1\nThe amount of air that can be forcibly exhaled from the lungs in one second (forced\nexpiratory volume in one second).\nLeukotriene receptor antagonist\nA type of oral medicine that blocks cysteinyl leukotrienes, used in the treatment of asthma\nand seasonal allergies. Also known as leukotriene modifiers.\nLong-acting beta2 agonist\nA long-acting medicine that acts on beta-receptors in the airway t...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: who-childhood-asthma-guideline-2026-0039-99fb21108e\nScore: 0.6576\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations were based on a balance of benefits and harms, the certainty of evidence, values and\nPage: 26\n\nin the early morning, and are due to airway smooth\nmuscle constriction, also known as bronchoconstriction, and inflammation of the airway lining. These\nsymptoms are usually mild and may be controlled with medicine and avoidance of known allergens, but\nthey can result in potentially life-threatening exacerbations.\nChildren and adolescents with asthma may experience short-term worsening of their ast...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: who-childhood-asthma-guideline-2026-0062-c99b5cc76e\nScore: 0.6290\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations for the management of asthma in children and adolescents\nPage: 40\n\nophylline may be the only available agent for the\nmanagement of acute asthma exacerbations.\n• If the decision is made to use aminophylline, adequate monitoring and anti-emetics should be used\nto mitigate the risk of side-effects.\n• Children receiving aminophylline require clinical monitoring including heart rate, respiratory rate,\nelectrocardiogram (ECG) and neurological observations.\n• Where avai...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: who-childhood-asthma-guideline-2026-0140-ef8beb191f\nScore: 0.6279\nSource: WHO childhood asthma guideline 2026\nSection: 101. D’Avila RS, Piva JP, Marostica PJ, Amantea SL. Early administration of two intravenous bolus of\nPage: 87\n\n101. D’Avila RS, Piva JP, Marostica PJ, Amantea SL. Early administration of two intravenous bolus of\naminophylline added to the standard treatment of children with acute asthma. Respir Med.\n2008;102(1):156–61. (https://doi.org/10.1016/j.rmed.2007.07.030).\nasthmaticus. A prospective, randomized, double-blind, placebo-controlled trial. Clin Pediatr (Phila).\n1995;34(9):475–81. (https://doi.org/10.117...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: who-childhood-asthma-guideline-2026-0061-e5c8e84cf3\nScore: 0.6221\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations for the management of asthma in children and adolescents\nPage: 39-40\n\nmethods children and adolescents management of asthma in bronchiolitis in children management of bronchiolitis in and evaluation\nHarms and undesirable effects\nAn increase in both nausea (relative risk increase (RRI): 23.1%) and vomiting (RRI: 8.3%) in the groups\nreceiving aminophylline were judged by the GDG as moderate undesirable effects that are best avoided in\nchildren with acute asthma exacer...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-012",
+      "category": "threshold_value",
+      "question": "What specific bronchodilator reversibility criteria indicate a positive diagnostic test for asthma in adults and children?",
+      "status": "PROCESSED",
+      "expected_source": "GINA Asthma WMS.pdf",
+      "expected_section": "p. 29-30, Bronchodilator responsiveness criteria",
+      "precision_at_3": 0.6667,
+      "precision_at_5": 0.6,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "nice-asthma-guideline-ng245-0009-574b723e96",
+          "score": 0.8027,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.2 Objective tests for diagnosing asthma in adults,",
+          "page": "9",
+          "text_excerpt": "1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE ",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "nice-asthma-guideline-ng245-0058-65377462cb",
+          "score": 0.7768,
+          "source": "NICE asthma guideline NG245",
+          "section": "recommendations for diagnostic testing should only be applied when the history and",
+          "page": "41",
+          "text_excerpt": "recommendations for diagnostic testing should only be applied when the history and\nexamination findings support a diagnosis of asthma. The committee also noted that,\ndepending on the mode of presentation, other diagnoses might be considered, but they\nconfined their recommendations to confirmation or",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0003-0282c26f82",
+          "score": 0.764,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.2 Objective tests for diagnosing asthma in adults, young people and children aged 5 to 16",
+          "page": "3",
+          "text_excerpt": "1.2 Objective tests for diagnosing asthma in adults, young people and children aged 5 to 16\nObjective tests for diagnosing asthma in adults, young people and children aged 5 to 16 with a\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 3 of\n© NIC",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "nice-asthma-guideline-ng245-0050-c796e03ba9",
+          "score": 0.7638,
+          "source": "NICE asthma guideline NG245",
+          "section": "3 Diagnostic pathways",
+          "page": "37",
+          "text_excerpt": "3 Diagnostic pathways\nWhat is the cost-effectiveness and feasibility of the proposed BTS/NICE/SIGN diagnostic\npathways for asthma in children and young people aged 5 and over and in adults aged 17\nand over? [BTS/NICE/SIGN 2024]\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://w",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "nice-asthma-guideline-ng245-0059-970c571445",
+          "score": 0.7616,
+          "source": "NICE asthma guideline NG245",
+          "section": "recommendations for diagnostic testing should only be applied when the history and",
+          "page": "42",
+          "text_excerpt": "In\nadults, the change should also be 200 ml or more. The committee agreed to include both\nways of measuring reversibility in its recommendations.\nAn optimal cut-off value is also difficult to give for FeNO (fractional exhaled nitric oxide).\nThere is good evidence that FeNO levels increase with age a",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: nice-asthma-guideline-ng245-0009-574b723e96\nScore: 0.8027\nSource: NICE asthma guideline NG245\nSection: 1.2 Objective tests for diagnosing asthma in adults,\nPage: 9-10\n\n1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 9 of...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: nice-asthma-guideline-ng245-0058-65377462cb\nScore: 0.7768\nSource: NICE asthma guideline NG245\nSection: recommendations for diagnostic testing should only be applied when the history and\nPage: 41-42\n\nrecommendations for diagnostic testing should only be applied when the history and\nexamination findings support a diagnosis of asthma. The committee also noted that,\ndepending on the mode of presentation, other diagnoses might be considered, but they\nconfined their recommendations to confirmation or exclusion of asthma.\nThe committee reviewed evidence on tests of variation in airflow obstruction a...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0003-0282c26f82\nScore: 0.7640\nSource: NICE asthma guideline NG245\nSection: 1.2 Objective tests for diagnosing asthma in adults, young people and children aged 5 to 16\nPage: 3-5\n\n1.2 Objective tests for diagnosing asthma in adults, young people and children aged 5 to 16\nObjective tests for diagnosing asthma in adults, young people and children aged 5 to 16 with a\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 3 of\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 4 ...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: nice-asthma-guideline-ng245-0050-c796e03ba9\nScore: 0.7638\nSource: NICE asthma guideline NG245\nSection: 3 Diagnostic pathways\nPage: 37-38\n\n3 Diagnostic pathways\nWhat is the cost-effectiveness and feasibility of the proposed BTS/NICE/SIGN diagnostic\npathways for asthma in children and young people aged 5 and over and in adults aged 17\nand over? [BTS/NICE/SIGN 2024]\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 37 of\nFor a short explanation of why the committee made this recommen...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: nice-asthma-guideline-ng245-0059-970c571445\nScore: 0.7616\nSource: NICE asthma guideline NG245\nSection: recommendations for diagnostic testing should only be applied when the history and\nPage: 42-43\n\nIn\nadults, the change should also be 200 ml or more. The committee agreed to include both\nways of measuring reversibility in its recommendations.\nAn optimal cut-off value is also difficult to give for FeNO (fractional exhaled nitric oxide).\nThere is good evidence that FeNO levels increase with age and with height, and ideally\nnormal ranges would be available which correct for these factors. Howeve...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-013",
+      "category": "threshold_value",
+      "question": "What peak expiratory flow (PEF) variability percentage supports a diagnosis of asthma?",
+      "status": "PROCESSED",
+      "expected_source": "GINA Asthma WMS.pdf",
+      "expected_section": "p. 29-30, PEF variability criteria",
+      "precision_at_3": 0.6667,
+      "precision_at_5": 0.6,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "nice-asthma-guideline-ng245-0010-9b8362710e",
+          "score": 0.8558,
+          "source": "NICE asthma guideline NG245",
+          "section": "FEV1). [BTS/NICE/SIGN 2024]",
+          "page": "10",
+          "text_excerpt": "FEV1). [BTS/NICE/SIGN 2024]\n1.2.3 If spirometry is not available or it is delayed, measure peak expiratory flow (PEF)\ntwice daily for 2 weeks. Diagnose asthma if PEF variability (expressed as\namplitude percentage mean) is 20% or more. [BTS/NICE/SIGN 2024]\n1.2.4 If asthma is not confirmed by eosinoph",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "nice-asthma-guideline-ng245-0012-b8224d7d17",
+          "score": 0.8037,
+          "source": "NICE asthma guideline NG245",
+          "section": "[BTS/NICE/SIGN 2024]",
+          "page": "10",
+          "text_excerpt": "[BTS/NICE/SIGN 2024]\n1.2.7 If spirometry is not available or it is delayed, measure PEF twice daily for 2 weeks.\nDiagnose asthma if PEF variability (expressed as amplitude percentage mean) is\n20% or more. [BTS/NICE/SIGN 2024]\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0017-2f755f4840",
+          "score": 0.7374,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.5 Monitoring asthma control",
+          "page": "14",
+          "text_excerpt": "1.5 Monitoring asthma control\n1.5.1 Monitor asthma control at every review. In addition to asking about symptoms,\ncheck:\n• time off work or school due to asthma\n• amount of reliever inhaler used, including a check of the prescription record\n• number of courses of oral corticosteroids\n• any admission",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "nice-asthma-guideline-ng245-0009-574b723e96",
+          "score": 0.7219,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.2 Objective tests for diagnosing asthma in adults,",
+          "page": "9",
+          "text_excerpt": "1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE ",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "nice-asthma-guideline-ng245-0046-aa6fc89d87",
+          "score": 0.7172,
+          "source": "NICE asthma guideline NG245",
+          "section": "FEV1",
+          "page": "33",
+          "text_excerpt": "FEV1\nThe amount of air that can be forcibly exhaled from the lungs in one second (forced\nexpiratory volume in one second).\nLeukotriene receptor antagonist\nA type of oral medicine that blocks cysteinyl leukotrienes, used in the treatment of asthma\nand seasonal allergies. Also known as leukotriene mod",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: nice-asthma-guideline-ng245-0010-9b8362710e\nScore: 0.8558\nSource: NICE asthma guideline NG245\nSection: FEV1). [BTS/NICE/SIGN 2024]\nPage: 10\n\nFEV1). [BTS/NICE/SIGN 2024]\n1.2.3 If spirometry is not available or it is delayed, measure peak expiratory flow (PEF)\ntwice daily for 2 weeks. Diagnose asthma if PEF variability (expressed as\namplitude percentage mean) is 20% or more. [BTS/NICE/SIGN 2024]\n1.2.4 If asthma is not confirmed by eosinophil count, FeNO, BDR or PEF variability but\nstill suspected on clinical grounds, refer for considerat...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: nice-asthma-guideline-ng245-0012-b8224d7d17\nScore: 0.8037\nSource: NICE asthma guideline NG245\nSection: [BTS/NICE/SIGN 2024]\nPage: 10-11\n\n[BTS/NICE/SIGN 2024]\n1.2.7 If spirometry is not available or it is delayed, measure PEF twice daily for 2 weeks.\nDiagnose asthma if PEF variability (expressed as amplitude percentage mean) is\n20% or more. [BTS/NICE/SIGN 2024]\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 10 of\n1.2.8 If asthma is not confirmed by FeNO, BDR or PEF variability ...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0017-2f755f4840\nScore: 0.7374\nSource: NICE asthma guideline NG245\nSection: 1.5 Monitoring asthma control\nPage: 14\n\n1.5 Monitoring asthma control\n1.5.1 Monitor asthma control at every review. In addition to asking about symptoms,\ncheck:\n• time off work or school due to asthma\n• amount of reliever inhaler used, including a check of the prescription record\n• number of courses of oral corticosteroids\n• any admissions to hospital or attendance at an emergency department due\nto asthma.\nIf control is suboptimal, see ...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: nice-asthma-guideline-ng245-0009-574b723e96\nScore: 0.7219\nSource: NICE asthma guideline NG245\nSection: 1.2 Objective tests for diagnosing asthma in adults,\nPage: 9-10\n\n1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 9 of...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: nice-asthma-guideline-ng245-0046-aa6fc89d87\nScore: 0.7172\nSource: NICE asthma guideline NG245\nSection: FEV1\nPage: 33-35\n\nFEV1\nThe amount of air that can be forcibly exhaled from the lungs in one second (forced\nexpiratory volume in one second).\nLeukotriene receptor antagonist\nA type of oral medicine that blocks cysteinyl leukotrienes, used in the treatment of asthma\nand seasonal allergies. Also known as leukotriene modifiers.\nLong-acting beta2 agonist\nA long-acting medicine that acts on beta-receptors in the airway t...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-014",
+      "category": "threshold_value",
+      "question": "What are the 4-week clinical criteria and scores used to evaluate asthma symptom control?",
+      "status": "PROCESSED",
+      "expected_source": "GINA Asthma WMS.pdf",
+      "expected_section": "p. 42, GINA symptom control assessment tool",
+      "precision_at_3": 0.0,
+      "precision_at_5": 0.0,
+      "detected_failures": [
+        "wrong_topic"
+      ],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "nice-asthma-guideline-ng245-0017-2f755f4840",
+          "score": 0.7668,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.5 Monitoring asthma control",
+          "page": "14",
+          "text_excerpt": "1.5 Monitoring asthma control\n1.5.1 Monitor asthma control at every review. In addition to asking about symptoms,\ncheck:\n• time off work or school due to asthma\n• amount of reliever inhaler used, including a check of the prescription record\n• number of courses of oral corticosteroids\n• any admission",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "nice-asthma-guideline-ng245-0063-f38a96df9e",
+          "score": 0.7389,
+          "source": "NICE asthma guideline NG245",
+          "section": "Monitoring asthma control > Recommendations 1.5.1 to 1.5.4",
+          "page": "46",
+          "text_excerpt": "Monitoring asthma control\nRecommendations 1.5.1 to 1.5.4\nWhy the committee made the recommendations\nThe committee agreed that there is some information that should always be obtained at a\nroutine monitoring review, for example whether any courses of oral corticosteroid have\nbeen needed since the las",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0006-165dd0ffe3",
+          "score": 0.7358,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.1 Initial clinical assessment",
+          "page": "8",
+          "text_excerpt": "1.1 Initial clinical assessment\nClinical history\n1.1.1 Obtain a structured clinical history in people with suspected asthma. Specifically,\ncheck for:\n• reported wheeze, noisy breathing, cough, breathlessness or chest tightness,\nand any variation (for example, worse during the night or early morning,",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "nice-asthma-guideline-ng245-0009-574b723e96",
+          "score": 0.7334,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.2 Objective tests for diagnosing asthma in adults,",
+          "page": "9",
+          "text_excerpt": "1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE ",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "nice-asthma-guideline-ng245-0058-65377462cb",
+          "score": 0.7255,
+          "source": "NICE asthma guideline NG245",
+          "section": "recommendations for diagnostic testing should only be applied when the history and",
+          "page": "41",
+          "text_excerpt": "recommendations for diagnostic testing should only be applied when the history and\nexamination findings support a diagnosis of asthma. The committee also noted that,\ndepending on the mode of presentation, other diagnoses might be considered, but they\nconfined their recommendations to confirmation or",
+          "relevant": false,
+          "human_relevance_label": "no"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: nice-asthma-guideline-ng245-0017-2f755f4840\nScore: 0.7668\nSource: NICE asthma guideline NG245\nSection: 1.5 Monitoring asthma control\nPage: 14\n\n1.5 Monitoring asthma control\n1.5.1 Monitor asthma control at every review. In addition to asking about symptoms,\ncheck:\n• time off work or school due to asthma\n• amount of reliever inhaler used, including a check of the prescription record\n• number of courses of oral corticosteroids\n• any admissions to hospital or attendance at an emergency department due\nto asthma.\nIf control is suboptimal, see ...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: nice-asthma-guideline-ng245-0063-f38a96df9e\nScore: 0.7389\nSource: NICE asthma guideline NG245\nSection: Monitoring asthma control > Recommendations 1.5.1 to 1.5.4\nPage: 46-48\n\nMonitoring asthma control\nRecommendations 1.5.1 to 1.5.4\nWhy the committee made the recommendations\nThe committee agreed that there is some information that should always be obtained at a\nroutine monitoring review, for example whether any courses of oral corticosteroid have\nbeen needed since the last review.\nSymptom questionnaires and diaries\nThe committee looked at evidence on the effects of moni...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0006-165dd0ffe3\nScore: 0.7358\nSource: NICE asthma guideline NG245\nSection: 1.1 Initial clinical assessment\nPage: 8\n\n1.1 Initial clinical assessment\nClinical history\n1.1.1 Obtain a structured clinical history in people with suspected asthma. Specifically,\ncheck for:\n• reported wheeze, noisy breathing, cough, breathlessness or chest tightness,\nand any variation (for example, worse during the night or early morning, or\nseasonal) in these symptoms\n• any triggers that make symptoms worse\n• a personal or family histo...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: nice-asthma-guideline-ng245-0009-574b723e96\nScore: 0.7334\nSource: NICE asthma guideline NG245\nSection: 1.2 Objective tests for diagnosing asthma in adults,\nPage: 9-10\n\n1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 9 of...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: nice-asthma-guideline-ng245-0058-65377462cb\nScore: 0.7255\nSource: NICE asthma guideline NG245\nSection: recommendations for diagnostic testing should only be applied when the history and\nPage: 41-42\n\nrecommendations for diagnostic testing should only be applied when the history and\nexamination findings support a diagnosis of asthma. The committee also noted that,\ndepending on the mode of presentation, other diagnoses might be considered, but they\nconfined their recommendations to confirmation or exclusion of asthma.\nThe committee reviewed evidence on tests of variation in airflow obstruction a...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-015",
+      "category": "threshold_value",
+      "question": "What SABA canister usage per year indicates high risk of severe exacerbations?",
+      "status": "PROCESSED",
+      "expected_source": "GINA Asthma WMS.pdf",
+      "expected_section": "p. 88, SABA over-use risk threshold",
+      "precision_at_3": 0.3333,
+      "precision_at_5": 0.6,
+      "detected_failures": [],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0021-4cc510c4b6",
+          "score": 0.7301,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendation 4: IV SABA should be used as a potential second-line therapy for severe paediatric",
+          "page": "13",
+          "text_excerpt": "Recommendation 4: IV SABA should be used as a potential second-line therapy for severe paediatric\nasthma exacerbations in addition to standard first-line therapy with inhaled/nebulized medicines (SABA\nand ipratropium) and systemic corticosteroids in health care facilities.\nStrong recommendation, hig",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0162-1686fab75a",
+          "score": 0.7281,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "+ IV SABA",
+          "page": "101",
+          "text_excerpt": "+ IV SABA\nOutcomes\n• Morbidity (symptoms, hospitalization, school • Adverse events\nabsence) • Mortality due to exacerbation\n• Escalation of care (ventilation/PICU • Lung function (change in FEV1, PEF) – less\nadmission) important\n• Length of stay (in emergency department or\nhospital)\nFEV1: forced exp",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0066-e5d046f6f5",
+          "score": 0.7194,
+          "source": "NICE asthma guideline NG245",
+          "section": "Recommendations 1.6.2 and 1.6.3",
+          "page": "49",
+          "text_excerpt": "Recommendations 1.6.2 and 1.6.3\nWhy the committee made the recommendations\nThe evidence review showed that clinical outcomes were poorest in all age groups with\nasthma when using SABA (short-acting beta2 agonist) alone. The committee also took into\naccount other evidence from several sources, includ",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0068-e6076e8dab",
+          "score": 0.711,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendations for the management of asthma in children and adolescents > Recommendation 4:",
+          "page": "44",
+          "text_excerpt": "reported\nadditional benefits such as a reduction in oxygen requirements (75, 121) and an improvement in clinical\nseverity score in those with persistent moderate to severe asthma (P < 0.002) and persistent severe asthma\n(P = 0.02) (117).\nHarms and undesirable effects\nThe reports on adverse effects a",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "nice-asthma-guideline-ng245-0067-4d84dd285e",
+          "score": 0.711,
+          "source": "NICE asthma guideline NG245",
+          "section": "How the recommendations might affect practice",
+          "page": "49",
+          "text_excerpt": "How the recommendations might affect practice\nThe prescription of SABA alone has been commonplace, although this is becoming less so\nbecause of the publicity around asthma deaths. The recommendation will reduce its use\nfurther. The replacement therapies in adults and children are more expensive, but",
+          "relevant": true,
+          "human_relevance_label": "yes"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: who-childhood-asthma-guideline-2026-0021-4cc510c4b6\nScore: 0.7301\nSource: WHO childhood asthma guideline 2026\nSection: Recommendation 4: IV SABA should be used as a potential second-line therapy for severe paediatric\nPage: 13-14\n\nRecommendation 4: IV SABA should be used as a potential second-line therapy for severe paediatric\nasthma exacerbations in addition to standard first-line therapy with inhaled/nebulized medicines (SABA\nand ipratropium) and systemic corticosteroids in health care facilities.\nStrong recommendation, high-certainty evidence.\nxi\nRemarks\n• IV SABA can be used as a potential second-line therapy, depending...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: who-childhood-asthma-guideline-2026-0162-1686fab75a\nScore: 0.7281\nSource: WHO childhood asthma guideline 2026\nSection: + IV SABA\nPage: 101-102\n\n+ IV SABA\nOutcomes\n• Morbidity (symptoms, hospitalization, school • Adverse events\nabsence) • Mortality due to exacerbation\n• Escalation of care (ventilation/PICU • Lung function (change in FEV1, PEF) – less\nadmission) important\n• Length of stay (in emergency department or\nhospital)\nFEV1: forced expiratory volume in 1 second; IV: intravenous; PEF: peak expiratory flow; PICU: paediatric intensive c...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0066-e5d046f6f5\nScore: 0.7194\nSource: NICE asthma guideline NG245\nSection: Recommendations 1.6.2 and 1.6.3\nPage: 49\n\nRecommendations 1.6.2 and 1.6.3\nWhy the committee made the recommendations\nThe evidence review showed that clinical outcomes were poorest in all age groups with\nasthma when using SABA (short-acting beta2 agonist) alone. The committee also took into\naccount other evidence from several sources, including national reviews of asthma deaths\nin both adults and children, which highlighted the dangers of ...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: who-childhood-asthma-guideline-2026-0068-e6076e8dab\nScore: 0.7110\nSource: WHO childhood asthma guideline 2026\nSection: Recommendations for the management of asthma in children and adolescents > Recommendation 4:\nPage: 44\n\nreported\nadditional benefits such as a reduction in oxygen requirements (75, 121) and an improvement in clinical\nseverity score in those with persistent moderate to severe asthma (P < 0.002) and persistent severe asthma\n(P = 0.02) (117).\nHarms and undesirable effects\nThe reports on adverse effects associated with IV SABA use were heterogeneous with very low-certainty\nevidence from single studies r...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: nice-asthma-guideline-ng245-0067-4d84dd285e\nScore: 0.7110\nSource: NICE asthma guideline NG245\nSection: How the recommendations might affect practice\nPage: 49\n\nHow the recommendations might affect practice\nThe prescription of SABA alone has been commonplace, although this is becoming less so\nbecause of the publicity around asthma deaths. The recommendation will reduce its use\nfurther. The replacement therapies in adults and children are more expensive, but they\nshould produce clinical benefits and cost savings through a reduction in exacerbations.\nDigita...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-016",
+      "category": "out_of_scope",
+      "question": "What is the first-line drug treatment for type 2 diabetes in adults?",
+      "status": "PROCESSED",
+      "expected_source": "None",
+      "expected_section": "Out of scope",
+      "precision_at_3": 0.0,
+      "precision_at_5": 0.0,
+      "detected_failures": [
+        "unrefused_out_of_scope"
+      ],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "nice-asthma-guideline-ng245-0049-a56596c9b8",
+          "score": 0.5996,
+          "source": "NICE asthma guideline NG245",
+          "section": "2 Medicine combination and sequencing",
+          "page": "36",
+          "text_excerpt": "2 Medicine combination and sequencing\nWhat is the best step-up treatment for people whose asthma is not controlled on a\ncombination inhaler of ICS plus formoterol used as needed? [BTS/NICE/SIGN 2024]\nFor a short explanation of why the committee made this recommendation for\nresearch, see the rational",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "nice-asthma-guideline-ng245-0070-71002255bd",
+          "score": 0.5927,
+          "source": "NICE asthma guideline NG245",
+          "section": "Recommendations 1.7.1 and 1.7.2",
+          "page": "50",
+          "text_excerpt": "Recommendations 1.7.1 and 1.7.2\nWhy the committee made the recommendations\nThe committee looked at evidence comparing 3 treatment options in people aged 12 and\nover with a new diagnosis of asthma. These were SABA as needed with no ICS; regular\nlow-dose ICS plus SABA as needed; and a combination inha",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0048-753234db79",
+          "score": 0.5884,
+          "source": "NICE asthma guideline NG245",
+          "section": "1 Medicines for initial management",
+          "page": "36",
+          "text_excerpt": "1 Medicines for initial management\nWhat is the clinical and cost-effectiveness of regular 'fixed-dose' inhaled corticosteroid\n(ICS) regimens (using SABA [short-acting beta2 agonist] as a reliever) compared with 'asneeded' strategies (for example ICS/formoterol) as the initial standard treatment for\n",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0017-76da00b5ee",
+          "score": 0.5869,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendation 1a: Nebulized ipratropium bromide should be added to standard first-line therapy",
+          "page": "12",
+          "text_excerpt": "Recommendation 1a: Nebulized ipratropium bromide should be added to standard first-line therapy\nwith inhaled short-acting beta2 agonists (SABA) and systemic corticosteroids for severe paediatric asthma\nexacerbations in health facilities.",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "nice-asthma-guideline-ng245-0030-1c9dda4a15",
+          "score": 0.581,
+          "source": "NICE asthma guideline NG245",
+          "section": "Initial management in children aged 5 to 11",
+          "page": "22",
+          "text_excerpt": "Initial management in children aged 5 to 11\n1.8.1 Offer a twice-daily paediatric low-dose inhaled corticosteroid (ICS), with a shortacting beta2 agonist (SABA) as needed, as initial treatment for children aged 5 to",
+          "relevant": false,
+          "human_relevance_label": "no"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: nice-asthma-guideline-ng245-0049-a56596c9b8\nScore: 0.5996\nSource: NICE asthma guideline NG245\nSection: 2 Medicine combination and sequencing\nPage: 36\n\n2 Medicine combination and sequencing\nWhat is the best step-up treatment for people whose asthma is not controlled on a\ncombination inhaler of ICS plus formoterol used as needed? [BTS/NICE/SIGN 2024]\nFor a short explanation of why the committee made this recommendation for\nresearch, see the rationale and impact section on medicine combination and\nsequencing in people aged 12 and over.\nFull details...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: nice-asthma-guideline-ng245-0070-71002255bd\nScore: 0.5927\nSource: NICE asthma guideline NG245\nSection: Recommendations 1.7.1 and 1.7.2\nPage: 50-51\n\nRecommendations 1.7.1 and 1.7.2\nWhy the committee made the recommendations\nThe committee looked at evidence comparing 3 treatment options in people aged 12 and\nover with a new diagnosis of asthma. These were SABA as needed with no ICS; regular\nlow-dose ICS plus SABA as needed; and a combination inhaler of an ICS (budesonide) plus\nformoterol, a fast onset long-acting beta2 agonist (LABA), used as n...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0048-753234db79\nScore: 0.5884\nSource: NICE asthma guideline NG245\nSection: 1 Medicines for initial management\nPage: 36\n\n1 Medicines for initial management\nWhat is the clinical and cost-effectiveness of regular 'fixed-dose' inhaled corticosteroid\n(ICS) regimens (using SABA [short-acting beta2 agonist] as a reliever) compared with 'asneeded' strategies (for example ICS/formoterol) as the initial standard treatment for\nasthma in children aged 5 to 11 years? [BTS/NICE/SIGN 2024]\nFor a short explanation of why the commi...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: who-childhood-asthma-guideline-2026-0017-76da00b5ee\nScore: 0.5869\nSource: WHO childhood asthma guideline 2026\nSection: Recommendation 1a: Nebulized ipratropium bromide should be added to standard first-line therapy\nPage: 12\n\nRecommendation 1a: Nebulized ipratropium bromide should be added to standard first-line therapy\nwith inhaled short-acting beta2 agonists (SABA) and systemic corticosteroids for severe paediatric asthma\nexacerbations in health facilities.\n------------------------------------------------------------\n\nChunk 5\nChunk ID: nice-asthma-guideline-ng245-0030-1c9dda4a15\nScore: 0.5810\nSource: NICE asthma guideline NG245\nSection: Initial management in children aged 5 to 11\nPage: 22\n\nInitial management in children aged 5 to 11\n1.8.1 Offer a twice-daily paediatric low-dose inhaled corticosteroid (ICS), with a shortacting beta2 agonist (SABA) as needed, as initial treatment for children aged 5 to\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-017",
+      "category": "out_of_scope",
+      "question": "What is the recommended surgical management for acute appendicitis in adolescents?",
+      "status": "PROCESSED",
+      "expected_source": "None",
+      "expected_section": "Out of scope",
+      "precision_at_3": 0.0,
+      "precision_at_5": 0.0,
+      "detected_failures": [
+        "unrefused_out_of_scope"
+      ],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0044-432153b864",
+          "score": 0.602,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "recommendations on acute management relate to the emergency treatment of an asthma exacerbation",
+          "page": "28",
+          "text_excerpt": "recommendations on acute management relate to the emergency treatment of an asthma exacerbation\nin a health care facility, while the recommendations for long-term management relate to the ongoing\ntreatment of the chronic condition with inhaled medicines, aiming at controlling symptoms and avoiding\na",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0086-58fc59d565",
+          "score": 0.6015,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "5.2 Diagnosis and management",
+          "page": "56",
+          "text_excerpt": "5.2 Diagnosis and management\nThe diagnosis and assessment of acute bronchiolitis is based on history and clinical examination.\nLaboratory investigations, chest radiographs and virological studies are not routinely indicated (13, 164).\nThe majority of children can be managed at home with supportive c",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0002-d82a334358",
+          "score": 0.5983,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Management of asthma in children",
+          "page": "1",
+          "text_excerpt": "Management of asthma in children\nand adolescents and bronchiolitis\nin infants and young children\nWHO consolidated guidelines\nfor the management of common\nchildhood illness",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0133-3781f4c963",
+          "score": 0.5897,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "9. (https://doi.org/10.1136/thx.52.4.380).",
+          "page": "82",
+          "text_excerpt": "9. (https://doi.org/10.1136/thx.52.4.380).\ntreatment of acute asthma. Cochrane Database Syst Rev. 2013;2013(9):Cd000052. (https://doi.\norg/10.1002/14651858.CD000052.pub3).\nin children. Cochrane Database Syst Rev. 2012;2012(4):Cd003797. (https://doi.org/10.1002/14651858.\nCD003797.pub2).\ninitial treat",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0141-068ffc9b1d",
+          "score": 0.5896,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "101. D’Avila RS, Piva JP, Marostica PJ, Amantea SL. Early administration of two intravenous bolus of",
+          "page": "87",
+          "text_excerpt": "ist in adults or children with acute asthma: a systematic review and\nmeta-analysis. Thorax. 2022;77(6):563–72. (https://doi.org/10.1136/thoraxjnl-2021-217124).\nIntroduction Process and Management of asthma in Recommendations for the Management of Recommendations for the Monitoring Dissemination Refe",
+          "relevant": false,
+          "human_relevance_label": "no"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: who-childhood-asthma-guideline-2026-0044-432153b864\nScore: 0.6020\nSource: WHO childhood asthma guideline 2026\nSection: recommendations on acute management relate to the emergency treatment of an asthma exacerbation\nPage: 28-29\n\nrecommendations on acute management relate to the emergency treatment of an asthma exacerbation\nin a health care facility, while the recommendations for long-term management relate to the ongoing\ntreatment of the chronic condition with inhaled medicines, aiming at controlling symptoms and avoiding\nacute exacerbations. Therefore, for this guideline, the recommendations encompass the following topic...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: who-childhood-asthma-guideline-2026-0086-58fc59d565\nScore: 0.6015\nSource: WHO childhood asthma guideline 2026\nSection: 5.2 Diagnosis and management\nPage: 56\n\n5.2 Diagnosis and management\nThe diagnosis and assessment of acute bronchiolitis is based on history and clinical examination.\nLaboratory investigations, chest radiographs and virological studies are not routinely indicated (13, 164).\nThe majority of children can be managed at home with supportive care on an ambulatory basis. Home\ncare includes parental education about adequate feeding, nasal sali...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: who-childhood-asthma-guideline-2026-0002-d82a334358\nScore: 0.5983\nSource: WHO childhood asthma guideline 2026\nSection: Management of asthma in children\nPage: 1-3\n\nManagement of asthma in children\nand adolescents and bronchiolitis\nin infants and young children\nWHO consolidated guidelines\nfor the management of common\nchildhood illness\n------------------------------------------------------------\n\nChunk 4\nChunk ID: who-childhood-asthma-guideline-2026-0133-3781f4c963\nScore: 0.5897\nSource: WHO childhood asthma guideline 2026\nSection: 9. (https://doi.org/10.1136/thx.52.4.380).\nPage: 82-83\n\n9. (https://doi.org/10.1136/thx.52.4.380).\ntreatment of acute asthma. Cochrane Database Syst Rev. 2013;2013(9):Cd000052. (https://doi.\norg/10.1002/14651858.CD000052.pub3).\nin children. Cochrane Database Syst Rev. 2012;2012(4):Cd003797. (https://doi.org/10.1002/14651858.\nCD003797.pub2).\ninitial treatment of acute asthma in children. Cochrane Database Syst Rev. 2013;2013(8):Cd000060.\n(https://doi.or...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: who-childhood-asthma-guideline-2026-0141-068ffc9b1d\nScore: 0.5896\nSource: WHO childhood asthma guideline 2026\nSection: 101. D’Avila RS, Piva JP, Marostica PJ, Amantea SL. Early administration of two intravenous bolus of\nPage: 87-88\n\nist in adults or children with acute asthma: a systematic review and\nmeta-analysis. Thorax. 2022;77(6):563–72. (https://doi.org/10.1136/thoraxjnl-2021-217124).\nIntroduction Process and Management of asthma in Recommendations for the Management of Recommendations for the Monitoring Dissemination References 69and context methods children and adolescents management of asthma in bronchiolitis in child...\n------------------------------------------------------------"
+    },
+    {
+      "id": "eval-018",
+      "category": "out_of_scope",
+      "question": "What are the diagnostic criteria for essential hypertension in elderly patients?",
+      "status": "PROCESSED",
+      "expected_source": "None",
+      "expected_section": "Out of scope",
+      "precision_at_3": 0.0,
+      "precision_at_5": 0.0,
+      "detected_failures": [
+        "unrefused_out_of_scope"
+      ],
+      "retrieved_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "nice-asthma-guideline-ng245-0009-574b723e96",
+          "score": 0.6213,
+          "source": "NICE asthma guideline NG245",
+          "section": "1.2 Objective tests for diagnosing asthma in adults,",
+          "page": "9",
+          "text_excerpt": "1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE ",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0008-0c3fc7d6fb",
+          "score": 0.5974,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "Recommendation 2: ��������������������������������������������������������������������������������������������������������������������������51 > 6.6 Nebulized hypertonic (3%) saline versus no hypertonic saline ��������������������������������������������54 > Recommendation 3: ��������������������������������������������������������������������������������������������������������������������������54",
+          "page": "6",
+          "text_excerpt": "6.1 Clinical signs and symptoms for the diagnosis of bronchiolitis ��������������������������������������������41\n6.2 Clinical criteria for hospital admissions of patients with bronchiolitis ��������������������������������44\n6.3 Use of chest X-ray in the clinical management of bronchiolitis �������",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "nice-asthma-guideline-ng245-0058-65377462cb",
+          "score": 0.5918,
+          "source": "NICE asthma guideline NG245",
+          "section": "recommendations for diagnostic testing should only be applied when the history and",
+          "page": "41",
+          "text_excerpt": "recommendations for diagnostic testing should only be applied when the history and\nexamination findings support a diagnosis of asthma. The committee also noted that,\ndepending on the mode of presentation, other diagnoses might be considered, but they\nconfined their recommendations to confirmation or",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "nice-asthma-guideline-ng245-0059-970c571445",
+          "score": 0.5876,
+          "source": "NICE asthma guideline NG245",
+          "section": "recommendations for diagnostic testing should only be applied when the history and",
+          "page": "42",
+          "text_excerpt": "In\nadults, the change should also be 200 ml or more. The committee agreed to include both\nways of measuring reversibility in its recommendations.\nAn optimal cut-off value is also difficult to give for FeNO (fractional exhaled nitric oxide).\nThere is good evidence that FeNO levels increase with age a",
+          "relevant": false,
+          "human_relevance_label": "no"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "who-childhood-asthma-guideline-2026-0028-070926cc35",
+          "score": 0.5816,
+          "source": "WHO childhood asthma guideline 2026",
+          "section": "3 The IMCI general danger signs are: inability to drink or breastfeed, vomiting everything, experiencing convulsions and being lethargic",
+          "page": "16",
+          "text_excerpt": "3 The IMCI general danger signs are: inability to drink or breastfeed, vomiting everything, experiencing convulsions and being lethargic\nor unconscious.\nxiv\nRemarks\n• Chest X-ray for hospitalized infants and children with suspected bronchiolitis should only be considered\non a case-by-case basis; for",
+          "relevant": false,
+          "human_relevance_label": "no"
+        }
+      ],
+      "evidence_panel": "=== EVIDENCE PANEL (Top-K Retrieved Passages) ===\n\nChunk 1\nChunk ID: nice-asthma-guideline-ng245-0009-574b723e96\nScore: 0.6213\nSource: NICE asthma guideline NG245\nSection: 1.2 Objective tests for diagnosing asthma in adults,\nPage: 9-10\n\n1.2 Objective tests for diagnosing asthma in adults,\nyoung people and children aged 5 to 16 with a\nhistory suggestive of asthma\nAdults\nSee also algorithm A for a summary of objective tests for diagnosing asthma in adults and\nyoung people (aged over 16 years) with a history suggesting asthma.\n© NICE 2026. All rights reserved. Subject to Notice of rights (https://www.nice.org.uk/terms-and- Page 9 of...\n------------------------------------------------------------\n\nChunk 2\nChunk ID: who-childhood-asthma-guideline-2026-0008-0c3fc7d6fb\nScore: 0.5974\nSource: WHO childhood asthma guideline 2026\nSection: Recommendation 2: ��������������������������������������������������������������������������������������������������������������������������51 > 6.6 Nebulized hypertonic (3%) saline versus no hypertonic saline ��������������������������������������������54 > Recommendation 3: ��������������������������������������������������������������������������������������������������������������������������54\nPage: 6\n\n6.1 Clinical signs and symptoms for the diagnosis of bronchiolitis ��������������������������������������������41\n6.2 Clinical criteria for hospital admissions of patients with bronchiolitis ��������������������������������44\n6.3 Use of chest X-ray in the clinical management of bronchiolitis ��������������������������������������������47\nRecommendation 1 �������������������������������������������...\n------------------------------------------------------------\n\nChunk 3\nChunk ID: nice-asthma-guideline-ng245-0058-65377462cb\nScore: 0.5918\nSource: NICE asthma guideline NG245\nSection: recommendations for diagnostic testing should only be applied when the history and\nPage: 41-42\n\nrecommendations for diagnostic testing should only be applied when the history and\nexamination findings support a diagnosis of asthma. The committee also noted that,\ndepending on the mode of presentation, other diagnoses might be considered, but they\nconfined their recommendations to confirmation or exclusion of asthma.\nThe committee reviewed evidence on tests of variation in airflow obstruction a...\n------------------------------------------------------------\n\nChunk 4\nChunk ID: nice-asthma-guideline-ng245-0059-970c571445\nScore: 0.5876\nSource: NICE asthma guideline NG245\nSection: recommendations for diagnostic testing should only be applied when the history and\nPage: 42-43\n\nIn\nadults, the change should also be 200 ml or more. The committee agreed to include both\nways of measuring reversibility in its recommendations.\nAn optimal cut-off value is also difficult to give for FeNO (fractional exhaled nitric oxide).\nThere is good evidence that FeNO levels increase with age and with height, and ideally\nnormal ranges would be available which correct for these factors. Howeve...\n------------------------------------------------------------\n\nChunk 5\nChunk ID: who-childhood-asthma-guideline-2026-0028-070926cc35\nScore: 0.5816\nSource: WHO childhood asthma guideline 2026\nSection: 3 The IMCI general danger signs are: inability to drink or breastfeed, vomiting everything, experiencing convulsions and being lethargic\nPage: 16-17\n\n3 The IMCI general danger signs are: inability to drink or breastfeed, vomiting everything, experiencing convulsions and being lethargic\nor unconscious.\nxiv\nRemarks\n• Chest X-ray for hospitalized infants and children with suspected bronchiolitis should only be considered\non a case-by-case basis; for example, in the following clinical situations:\n• if there is high suspicion for other alternate dia...\n------------------------------------------------------------"
+    }
+  ]
+}

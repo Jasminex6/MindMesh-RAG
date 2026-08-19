@@ -1,0 +1,682 @@
+{
+  "timestamp": "2026-08-19 12:05:27",
+  "phase": "2_pre_optimization_baseline",
+  "frozen_baseline": {
+    "avg_p3": 0.4889,
+    "avg_p5": 0.5067,
+    "avg_latency_ms": 72.79,
+    "strategy": "dense"
+  },
+  "strategy_comparison": {
+    "dense": {
+      "strategy": "dense",
+      "avg_p3": 0.5111,
+      "avg_p5": 0.4933,
+      "avg_latency_ms": 342.73,
+      "per_query": [
+        {
+          "id": "eval-001",
+          "category": "direct",
+          "latency_ms": 4065.39,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-002",
+          "category": "direct",
+          "latency_ms": 198.63,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-003",
+          "category": "direct",
+          "latency_ms": 108.67,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-004",
+          "category": "direct",
+          "latency_ms": 134.05,
+          "p3": 0.3333,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-005",
+          "category": "paraphrase",
+          "latency_ms": 117.21,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-006",
+          "category": "paraphrase",
+          "latency_ms": 120.58,
+          "p3": 0.3333,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-007",
+          "category": "paraphrase",
+          "latency_ms": 109.29,
+          "p3": 0.6667,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-008",
+          "category": "paraphrase",
+          "latency_ms": 114.05,
+          "p3": 0.0,
+          "p5": 0.2
+        },
+        {
+          "id": "eval-009",
+          "category": "abbreviation_terminology",
+          "latency_ms": 170.34,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-010",
+          "category": "abbreviation_terminology",
+          "latency_ms": 120.27,
+          "p3": 0.3333,
+          "p5": 0.2
+        },
+        {
+          "id": "eval-011",
+          "category": "abbreviation_terminology",
+          "latency_ms": 113.42,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-012",
+          "category": "threshold_value",
+          "latency_ms": 109.25,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-013",
+          "category": "threshold_value",
+          "latency_ms": 113.9,
+          "p3": 0.6667,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-014",
+          "category": "threshold_value",
+          "latency_ms": 130.8,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-015",
+          "category": "threshold_value",
+          "latency_ms": 101.12,
+          "p3": 0.3333,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-016",
+          "category": "out_of_scope",
+          "latency_ms": 109.41,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-017",
+          "category": "out_of_scope",
+          "latency_ms": 101.45,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-018",
+          "category": "out_of_scope",
+          "latency_ms": 131.31,
+          "p3": null,
+          "p5": null
+        }
+      ]
+    },
+    "bm25": {
+      "strategy": "bm25",
+      "avg_p3": 0.6,
+      "avg_p5": 0.5467,
+      "avg_latency_ms": 7.23,
+      "per_query": [
+        {
+          "id": "eval-001",
+          "category": "direct",
+          "latency_ms": 8.57,
+          "p3": 0.6667,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-002",
+          "category": "direct",
+          "latency_ms": 8.11,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-003",
+          "category": "direct",
+          "latency_ms": 6.39,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-004",
+          "category": "direct",
+          "latency_ms": 7.66,
+          "p3": 0.3333,
+          "p5": 0.2
+        },
+        {
+          "id": "eval-005",
+          "category": "paraphrase",
+          "latency_ms": 8.31,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-006",
+          "category": "paraphrase",
+          "latency_ms": 7.13,
+          "p3": 0.3333,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-007",
+          "category": "paraphrase",
+          "latency_ms": 6.79,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-008",
+          "category": "paraphrase",
+          "latency_ms": 6.92,
+          "p3": 0.3333,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-009",
+          "category": "abbreviation_terminology",
+          "latency_ms": 6.9,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-010",
+          "category": "abbreviation_terminology",
+          "latency_ms": 8.09,
+          "p3": 0.6667,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-011",
+          "category": "abbreviation_terminology",
+          "latency_ms": 8.13,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-012",
+          "category": "threshold_value",
+          "latency_ms": 6.67,
+          "p3": 0.3333,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-013",
+          "category": "threshold_value",
+          "latency_ms": 6.07,
+          "p3": 0.6667,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-014",
+          "category": "threshold_value",
+          "latency_ms": 7.12,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-015",
+          "category": "threshold_value",
+          "latency_ms": 6.14,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-016",
+          "category": "out_of_scope",
+          "latency_ms": 7.94,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-017",
+          "category": "out_of_scope",
+          "latency_ms": 7.04,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-018",
+          "category": "out_of_scope",
+          "latency_ms": 6.25,
+          "p3": null,
+          "p5": null
+        }
+      ]
+    },
+    "hybrid": {
+      "strategy": "hybrid",
+      "avg_p3": 0.6222,
+      "avg_p5": 0.56,
+      "avg_latency_ms": 116.7,
+      "per_query": [
+        {
+          "id": "eval-001",
+          "category": "direct",
+          "latency_ms": 117.98,
+          "p3": 0.6667,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-002",
+          "category": "direct",
+          "latency_ms": 120.1,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-003",
+          "category": "direct",
+          "latency_ms": 120.16,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-004",
+          "category": "direct",
+          "latency_ms": 112.9,
+          "p3": 0.6667,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-005",
+          "category": "paraphrase",
+          "latency_ms": 104.82,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-006",
+          "category": "paraphrase",
+          "latency_ms": 104.08,
+          "p3": 0.3333,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-007",
+          "category": "paraphrase",
+          "latency_ms": 103.44,
+          "p3": 0.6667,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-008",
+          "category": "paraphrase",
+          "latency_ms": 130.19,
+          "p3": 0.3333,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-009",
+          "category": "abbreviation_terminology",
+          "latency_ms": 125.92,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-010",
+          "category": "abbreviation_terminology",
+          "latency_ms": 114.42,
+          "p3": 0.3333,
+          "p5": 0.2
+        },
+        {
+          "id": "eval-011",
+          "category": "abbreviation_terminology",
+          "latency_ms": 145.31,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-012",
+          "category": "threshold_value",
+          "latency_ms": 128.64,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-013",
+          "category": "threshold_value",
+          "latency_ms": 103.97,
+          "p3": 1.0,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-014",
+          "category": "threshold_value",
+          "latency_ms": 112.27,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-015",
+          "category": "threshold_value",
+          "latency_ms": 113.43,
+          "p3": 0.6667,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-016",
+          "category": "out_of_scope",
+          "latency_ms": 112.34,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-017",
+          "category": "out_of_scope",
+          "latency_ms": 101.94,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-018",
+          "category": "out_of_scope",
+          "latency_ms": 128.7,
+          "p3": null,
+          "p5": null
+        }
+      ]
+    },
+    "rerank": {
+      "strategy": "rerank",
+      "avg_p3": 0.6889,
+      "avg_p5": 0.56,
+      "avg_latency_ms": 107.02,
+      "per_query": [
+        {
+          "id": "eval-001",
+          "category": "direct",
+          "latency_ms": 112.16,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-002",
+          "category": "direct",
+          "latency_ms": 115.72,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-003",
+          "category": "direct",
+          "latency_ms": 121.52,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-004",
+          "category": "direct",
+          "latency_ms": 113.42,
+          "p3": 0.3333,
+          "p5": 0.2
+        },
+        {
+          "id": "eval-005",
+          "category": "paraphrase",
+          "latency_ms": 98.79,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-006",
+          "category": "paraphrase",
+          "latency_ms": 99.84,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-007",
+          "category": "paraphrase",
+          "latency_ms": 100.07,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-008",
+          "category": "paraphrase",
+          "latency_ms": 101.02,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-009",
+          "category": "abbreviation_terminology",
+          "latency_ms": 97.76,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-010",
+          "category": "abbreviation_terminology",
+          "latency_ms": 116.09,
+          "p3": 0.3333,
+          "p5": 0.2
+        },
+        {
+          "id": "eval-011",
+          "category": "abbreviation_terminology",
+          "latency_ms": 123.28,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-012",
+          "category": "threshold_value",
+          "latency_ms": 116.69,
+          "p3": 0.6667,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-013",
+          "category": "threshold_value",
+          "latency_ms": 109.86,
+          "p3": 1.0,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-014",
+          "category": "threshold_value",
+          "latency_ms": 101.64,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-015",
+          "category": "threshold_value",
+          "latency_ms": 101.51,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-016",
+          "category": "out_of_scope",
+          "latency_ms": 95.33,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-017",
+          "category": "out_of_scope",
+          "latency_ms": 104.6,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-018",
+          "category": "out_of_scope",
+          "latency_ms": 97.05,
+          "p3": null,
+          "p5": null
+        }
+      ]
+    },
+    "hybrid_rerank": {
+      "strategy": "hybrid_rerank",
+      "avg_p3": 0.6444,
+      "avg_p5": 0.5867,
+      "avg_latency_ms": 117.73,
+      "per_query": [
+        {
+          "id": "eval-001",
+          "category": "direct",
+          "latency_ms": 110.74,
+          "p3": 0.6667,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-002",
+          "category": "direct",
+          "latency_ms": 111.14,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-003",
+          "category": "direct",
+          "latency_ms": 129.35,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-004",
+          "category": "direct",
+          "latency_ms": 134.02,
+          "p3": 0.3333,
+          "p5": 0.2
+        },
+        {
+          "id": "eval-005",
+          "category": "paraphrase",
+          "latency_ms": 108.45,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-006",
+          "category": "paraphrase",
+          "latency_ms": 109.68,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-007",
+          "category": "paraphrase",
+          "latency_ms": 126.09,
+          "p3": 1.0,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-008",
+          "category": "paraphrase",
+          "latency_ms": 125.17,
+          "p3": 0.6667,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-009",
+          "category": "abbreviation_terminology",
+          "latency_ms": 107.38,
+          "p3": 1.0,
+          "p5": 1.0
+        },
+        {
+          "id": "eval-010",
+          "category": "abbreviation_terminology",
+          "latency_ms": 109.53,
+          "p3": 0.3333,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-011",
+          "category": "abbreviation_terminology",
+          "latency_ms": 105.92,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-012",
+          "category": "threshold_value",
+          "latency_ms": 114.06,
+          "p3": 0.6667,
+          "p5": 0.4
+        },
+        {
+          "id": "eval-013",
+          "category": "threshold_value",
+          "latency_ms": 126.21,
+          "p3": 0.6667,
+          "p5": 0.6
+        },
+        {
+          "id": "eval-014",
+          "category": "threshold_value",
+          "latency_ms": 114.85,
+          "p3": 0.0,
+          "p5": 0.0
+        },
+        {
+          "id": "eval-015",
+          "category": "threshold_value",
+          "latency_ms": 113.61,
+          "p3": 0.6667,
+          "p5": 0.8
+        },
+        {
+          "id": "eval-016",
+          "category": "out_of_scope",
+          "latency_ms": 131.08,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-017",
+          "category": "out_of_scope",
+          "latency_ms": 114.31,
+          "p3": null,
+          "p5": null
+        },
+        {
+          "id": "eval-018",
+          "category": "out_of_scope",
+          "latency_ms": 127.59,
+          "p3": null,
+          "p5": null
+        }
+      ]
+    }
+  }
+}
