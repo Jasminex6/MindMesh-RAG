@@ -1,13 +1,3 @@
----
-title: Pediatric Asthma CDS
-emoji: 🫁
-colorFrom: blue
-colorTo: purple
-sdk: docker
-app_port: 8000
-pinned: false
----
-
 # Clinical Guideline RAG System — Pediatric Asthma Decision Support
 
 An evidence-grounded Clinical Decision Support (CDS) Retrieval-Augmented Generation (RAG) system built for pediatric and adolescent asthma management guidelines (WHO & NICE NG245).
