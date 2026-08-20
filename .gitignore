@@ -42,3 +42,9 @@ data/*.db
 # OS Noise
 .DS_Store
 Thumbs.db
+
+# Heavy Binaries & Reference PDFs
+*.pdf
+Docs/Sources/
+Docs/Papers/
+Docs/Team/Menna/Vids/*.mp4

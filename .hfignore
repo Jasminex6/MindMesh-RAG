@@ -1,0 +1,5 @@
+*.pdf
+Docs/Sources/
+.venv/
+__pycache__/
+*.pyc
