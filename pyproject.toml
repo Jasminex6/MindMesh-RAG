@@ -23,6 +23,3 @@ venvPath = "."
 venv = ".venv"
 extraPaths = ["src", "RAG/evaluation", ".venv/Lib/site-packages"]
 typeCheckingMode = "basic"
-
-[tool.vercel]
-entrypoint = "api:app"
