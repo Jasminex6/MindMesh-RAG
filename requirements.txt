@@ -5,3 +5,6 @@ langchain-chroma>=0.2
 langchain-ollama>=0.3
 chromadb>=0.6
 pandas>=2.2
+fastapi>=0.110.0
+uvicorn>=0.28.0
+python-multipart>=0.0.9

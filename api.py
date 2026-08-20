@@ -47,6 +47,10 @@ static_path = ROOT / "static"
 static_path.mkdir(exist_ok=True)
 app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
 
+dist_path = ROOT / "frontend" / "dist"
+if dist_path.exists():
+    app.mount("/", StaticFiles(directory=str(dist_path), html=True), name="frontend")
+
 # Singleton Service Instances
 _store = SQLiteStore()
 _config = default_config(ROOT)
